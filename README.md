@@ -181,5 +181,5 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 - [Vercel](https://vercel.com) por el hosting gratuito
 
 ---
-
+ 
 <div align="center">Hecho con ❤️ por <a href="https://eduardoprofe666.github.io" target="_blank">EduardoProfe666🎩</a></div>
