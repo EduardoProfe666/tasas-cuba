@@ -8,7 +8,6 @@ export const size = {
 };
 export const contentType = "image/png";
 
-
 export default async function Image() {
     return new ImageResponse(
         <div
@@ -39,7 +38,7 @@ export default async function Image() {
             >
                 <span style={{ fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Dinero en efectivo">💵</span>
                 <span style={{ fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Euro">💶</span>
-                <span style={{ fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Tarjeta de crédito">💳</span>
+                <span style={{ fontSize: 127, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Tarjeta de crédito">💳</span>
             </div>
 
             {/* TÍTULO */}
@@ -50,33 +49,29 @@ export default async function Image() {
                     margin: 0,
                     marginBottom: 18,
                     textAlign: "center",
-                    background: "linear-gradient(90deg, #f0fdff 0%, #67e8f9 40%, #38bdf8 100%)",
-                    backgroundClip: "text",
-                    WebkitBackgroundClip: "text",
-                    color: "transparent",
+                    color: "#fff",
                     textShadow: "0 4px 16px rgba(0,0,0,0.25)",
                     letterSpacing: "-1px",
                     userSelect: "none",
                     fontFamily: '"Poppins", "Inter", sans-serif',
                 }}
             >
-                Tasas de Cambio
-                <br />
+                Tasas de Cambio{" "}
                 <span style={{
+                    marginLeft: 18,
                     fontWeight: 700,
-                    fontSize: 50,
-                    color: "#fff",
-                    background: "none",
+                    fontSize: 70,
+                    color: "#6bdef1",
                     textShadow: "0 2px 8px rgba(0,0,0,0.30)"
                 }}>
-                    Peso Cubano
+                    {" "}CUP
                 </span>
             </h1>
 
             {/* DESCRIPCIÓN */}
             <p
                 style={{
-                    fontSize: 32,
+                    fontSize: 30,
                     maxWidth: 800,
                     textAlign: "center",
                     color: "#e0e7ef",
@@ -88,8 +83,8 @@ export default async function Image() {
                     textShadow: "0 2px 8px rgba(0,0,0,0.20)",
                 }}
             >
-                Consulta las tasas de cambio actualizadas del peso cubano en tiempo real,
-                con datos confiables y precisos.
+                Consulta en tiempo real las tasas de cambio del peso cubano y accede al análisis
+                de datos históricos para tomar mejores decisiones financieras.
             </p>
 
             {/* AUTOR */}
@@ -97,31 +92,49 @@ export default async function Image() {
                 style={{
                     position: "absolute",
                     bottom: 32,
-                    right: 40,
+                    left: 40,
                     fontSize: 22,
-                    color: "rgba(255,255,255,0.75)",
+                    color: "#dcfaff",
                     fontWeight: 600,
                     fontStyle: "italic",
                     userSelect: "none",
+                    fontFamily: '"Fira Mono", "Courier New", Courier, monospace',
+                    textShadow: "0 2px 8px rgba(0,0,0,0.13)",
+                    letterSpacing: "0.5px",
+                    background: "rgba(0,0,0,0.10)",
+                    padding: "6px 18px",
+                    borderRadius: 12,
                     display: "flex",
                     alignItems: "center",
-                    gap: 8,
-                    fontFamily: '"Fira Mono", "Courier New", Courier, monospace',
-                    textShadow: "0 2px 8px rgba(0,0,0,0.20)"
                 }}
                 aria-label="Autor"
             >
-                <span>Creado por</span>
-                <span style={{
-                    background: "linear-gradient(45deg, #67e8f9, #38bdf8, #0ea5e9)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    fontWeight: "bold",
-                }}>
-                    EduardoProfe666
-                </span>
-                <span role="img" aria-label="Sombrero de copa">🎩</span>
+                Creado por <span style={{ marginLeft: 8, color: "#a0edfa", fontWeight: 700 }}>EduardoProfe666🎩</span>
+            </div>
+
+            {/* POWERED BY ELTOQUE */}
+            <div
+                style={{
+                    position: "absolute",
+                    bottom: 32,
+                    right: 40,
+                    fontSize: 22,
+                    color: "#dcfaff",
+                    fontWeight: 600,
+                    fontStyle: "italic",
+                    userSelect: "none",
+                    fontFamily: '"Fira Mono", "Courier New", Courier, monospace',
+                    textShadow: "0 2px 8px rgba(0,0,0,0.13)",
+                    letterSpacing: "0.5px",
+                    background: "rgba(0,0,0,0.10)",
+                    padding: "6px 18px",
+                    borderRadius: 12,
+                    display: "flex",
+                    alignItems: "center",
+                }}
+                aria-label="Powered by elToque"
+            >
+                Powered by <span style={{ marginLeft: 8, color: "#a0edfa", fontWeight: 700 }}>elToque</span>
             </div>
         </div>,
         { ...size }
