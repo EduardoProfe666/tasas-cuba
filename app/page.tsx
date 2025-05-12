@@ -7,8 +7,41 @@ import Link from "next/link"
 import { LineChartIcon as ChartLineUp, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import {useRef, useState} from "react";
+import {SyncModal, SyncStatus} from "@/components/sync-modal";
 
 export default function Home() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<SyncStatus>("idle");
+  const lastTap = useRef(0);
+
+  function handleHatClick() {
+    const now = Date.now();
+    if (now - lastTap.current < 400) {
+      setModalOpen(true);
+    }
+    lastTap.current = now;
+  }
+
+  async function handleSync() {
+    setSyncStatus("loading");
+    try {
+      const resp = await fetch("/api/sync");
+      const data = await resp.json();
+      if (data.success) {
+        setSyncStatus("success");
+      } else {
+        setSyncStatus("error");
+      }
+    } catch {
+      setSyncStatus("error");
+    }
+    setTimeout(() => {
+      setModalOpen(false);
+      setSyncStatus("idle");
+    }, 1000);
+  }
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       <div className="container mx-auto px-4 py-8">
@@ -46,17 +79,35 @@ export default function Home() {
           <p>
             Desarrollado por{" "}
             <a
-              href="https://eduardoprofe666.github.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
+                href="https://eduardoprofe666.github.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
             >
-              EduardoProfe666🎩
+              EduardoProfe666
             </a>
+            <span
+                className="ml-1 cursor-pointer transition-transform hover:scale-125"
+                onClick={handleHatClick}
+                onTouchEnd={handleHatClick}
+                title="Sincronizar tasas"
+                style={{userSelect: "none"}}
+            >
+                🎩
+              </span>
           </p>
         </footer>
       </div>
-      <PWAInstallPrompt />
+      <SyncModal
+          open={modalOpen}
+          onClose={() => {
+            setModalOpen(false);
+            setSyncStatus("idle");
+          }}
+          onSync={handleSync}
+          status={syncStatus}
+      />
+      <PWAInstallPrompt/>
     </main>
   )
 }
