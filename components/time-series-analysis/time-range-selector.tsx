@@ -107,11 +107,11 @@ export function TimeRangeSelector({ startDate, endDate, onSelectStartDate, onSel
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className="block text-sm font-medium text-slate-300 mb-1">Fecha de inicio</label>
-                    <DatePicker date={startDate} onSelect={onSelectStartDate} locale={es} />
+                    <DatePicker minDate={new Date(2021,1,1)} maxDate={endDate} date={startDate} onSelect={onSelectStartDate} locale={es} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-slate-300 mb-1">Fecha de fin</label>
-                    <DatePicker date={endDate} onSelect={onSelectEndDate} locale={es} />
+                    <DatePicker minDate={startDate} maxDate={new Date()} date={endDate} onSelect={onSelectEndDate} locale={es} />
                 </div>
             </div>
         </motion.div>

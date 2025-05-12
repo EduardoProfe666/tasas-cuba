@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
-import { format, subDays, eachDayOfInterval } from "date-fns"
+import {format, subDays, eachDayOfInterval, differenceInDays} from "date-fns"
 import { es } from "date-fns/locale"
 import { InfoDisclaimer } from "@/components/info-disclaimer"
 import { motion } from "framer-motion"
@@ -13,43 +13,113 @@ import { ChartSummaryDialog } from "./chart-summary-dialog"
 import { CurrencySelector } from "./currency-selector"
 import { TimeRangeSelector } from "./time-range-selector"
 import {
-    getCurrencyBaseValue,
-    getCurrencyVolatility,
     calculateSMA,
     calculateEMA,
     calculateBollingerBands,
     calculateRSI,
     calculateMACD,
-    calculateStochastic,
+    calculateStochastic, calculateCurrencyMetricsAdvanced, calculateTrend, findNextRealDateIndex, interpolateValue,
 } from "./chart-utils"
+import {CurrencyData} from "@/types/currency-data";
+import {HistoricalData} from "@/types/historical-data";
+import {ExchangeRateData} from "@/types/exchange-rate";
 
-// Datos mockeados para el gráfico
-const generateMockData = (startDate: Date, endDate: Date, currency: string) => {
+const saveToLocalStorage = (key: string, data: any) => {
+    try {
+        localStorage.setItem(key, JSON.stringify(data))
+    } catch (error) {
+        console.error("Error saving to localStorage:", error)
+    }
+}
+
+const getFromLocalStorage = (key: string) => {
+    try {
+        const item = localStorage.getItem(key)
+        return item ? JSON.parse(item) : null
+    } catch (error) {
+        console.error("Error getting from localStorage:", error)
+        return null
+    }
+}
+
+const generateHistoricalData = (startDate: Date, endDate: Date, currency: string, historicalDemand: ExchangeRateData[]) => {
     const days = eachDayOfInterval({ start: startDate, end: endDate })
-    const baseValue = getCurrencyBaseValue(currency)
-    const volatility = getCurrencyVolatility(currency)
-    const trend = Math.random() > 0.5 ? 0.2 : -0.2 // Tendencia alcista o bajista
+    const { baseValue, volatility } = calculateCurrencyMetricsAdvanced(historicalDemand, currency);
+    const trend = calculateTrend(historicalDemand, currency);
 
-    let previousValue = baseValue
+
+    const dataByDate = new Map();
+    historicalDemand.forEach(item => {
+        if(item.currency.code === currency){
+            const dateStr = format(item.date, "yyyy-MM-dd");
+            dataByDate.set(dateStr, item.value);
+        }
+    });
+
+    console.log(historicalDemand)
+
+    let previousValue = baseValue;
+    let lastKnownRealValue = baseValue;
+    let lastKnownRealDate: any = null;
 
     return days.map((day, index) => {
-        // Generar un valor aleatorio con tendencia y volatilidad
-        const randomFactor = (Math.random() - 0.5) * volatility
-        const trendFactor = (trend * index) / days.length
-        let value = previousValue * (1 + randomFactor + trendFactor)
+        const dateStr = format(day, "yyyy-MM-dd");
 
-        // Asegurar que el valor no sea negativo y tenga 2 decimales
-        value = Math.max(value, baseValue * 0.7)
-        value = Number.parseFloat(value.toFixed(2))
+        if (dataByDate.has(dateStr)) {
+            const realValue = dataByDate.get(dateStr);
+            previousValue = realValue;
+            lastKnownRealValue = realValue;
+            lastKnownRealDate = day;
 
-        previousValue = value
-
-        return {
-            date: format(day, "yyyy-MM-dd"),
-            [currency]: value,
-            formattedDate: format(day, "dd MMM", { locale: es }),
+            return {
+                date: dateStr,
+                [currency]: realValue,
+                formattedDate: format(day, "dd/MM/yyyy", { locale: es }),
+                displayDate: format(day, "dd 'de' MMMM 'de' yyyy", {locale: es}),
+                isReal: true
+            };
         }
-    })
+        else {
+            let estimatedValue;
+
+            const nextRealDateIndex = findNextRealDateIndex(day, days, dataByDate);
+
+            if (lastKnownRealDate && nextRealDateIndex !== -1) {
+                const nextRealDate = days[nextRealDateIndex];
+                const nextRealValue = dataByDate.get(format(nextRealDate, "yyyy-MM-dd"));
+
+                estimatedValue = interpolateValue(
+                    day,
+                    lastKnownRealDate,
+                    nextRealDate,
+                    lastKnownRealValue,
+                    nextRealValue
+                );
+            }
+            else {
+                const daysSinceLastReal = lastKnownRealDate
+                    ? differenceInDays(day, lastKnownRealDate)
+                    : index;
+
+                const randomFactor = (Math.random() - 0.5) * volatility;
+                const trendFactor = (trend * daysSinceLastReal) / days.length;
+
+                estimatedValue = previousValue * (1 + randomFactor + trendFactor);
+                estimatedValue = Math.max(estimatedValue, baseValue * 0.7);
+            }
+
+            estimatedValue = Number.parseFloat(estimatedValue.toFixed(0));
+            previousValue = estimatedValue;
+
+            return {
+                date: dateStr,
+                [currency]: estimatedValue,
+                formattedDate: format(day, "dd/MM/yyyy", { locale: es }),
+                displayDate: format(day, "dd 'de' MMMM 'de' yyyy", {locale: es}),
+                isReal: false
+            };
+        }
+    });
 }
 
 export function TimeSeriesAnalysis() {
@@ -63,45 +133,84 @@ export function TimeSeriesAnalysis() {
     const [showSMA, setShowSMA] = useState(false)
     const [showEMA, setShowEMA] = useState(false)
     const [showBollinger, setShowBollinger] = useState(false)
-    const [showRSI, setShowRSI] = useState(false)
-    const [showMACD, setShowMACD] = useState(false)
-    const [showStochastic, setShowStochastic] = useState(false)
     const [summaryOpen, setSummaryOpen] = useState(false)
 
     const [smaData, setSmaData] = useState<any[]>([])
     const [emaData, setEmaData] = useState<any[]>([])
     const [bollingerData, setBollingerData] = useState<any[]>([])
-    const [rsiData, setRsiData] = useState<any[]>([])
-    const [macdData, setMacdData] = useState<any[]>([])
-    const [stochasticData, setStochasticData] = useState<any[]>([])
 
     const chartRef = useRef<HTMLDivElement>(null)
 
+    const [currencies, setCurrencies] = useState<CurrencyData[]>([])
+    const [historicalData, setHistoricalData] = useState<ExchangeRateData[]>([])
+
     useEffect(() => {
         setLoading(true)
+        const fetchCurrencies = async() => {
+            if(currencies.length === 0){
+                const currencyResponse = await fetch(`/api/currencies`)
+                if (!currencyResponse.ok) {
+                    const cachedCurrencies: CurrencyData[] = getFromLocalStorage('currency')
+                    if(cachedCurrencies){
+                        setCurrencies(cachedCurrencies)
+                        return 1
+                    } else{
+                        throw new Error("Error al obtener las monedas")
+                    }
+                }
+                else{
+                    const data: CurrencyData[] = await currencyResponse.json()
+                    setCurrencies(data)
+                    saveToLocalStorage('currency', data)
+                    return 1
+                }
+            }
+        }
 
-        // Simular carga de datos
-        setTimeout(() => {
-            const data = generateMockData(startDate, endDate, selectedCurrency)
-            setChartData(data)
+        const fetchHistoricalData = async() => {
+            if(historicalData.length === 0){
+                const historicalDataResponse = await fetch(`api/historical-data`)
+                if(!historicalDataResponse.ok){
+                    const cachedHistoricalData: ExchangeRateData[] = getFromLocalStorage('historical')
+                    if(cachedHistoricalData){
+                        setHistoricalData(cachedHistoricalData)
+                        return 1
+                    } else{
+                        throw new Error("Error al obtener los datos históricos")
+                    }
+                }else{
+                    const data: HistoricalData = await historicalDataResponse.json()
+                    setHistoricalData(data.data)
+                    saveToLocalStorage('historical', data)
+                    return 1
+                }
+            }
+        }
 
-            const smaResult = calculateSMA(data, selectedCurrency, 14)
-            const emaResult = calculateEMA(data, selectedCurrency, 14)
-            const bollingerResult = calculateBollingerBands(data, selectedCurrency, 20, 2)
-            const rsiResult = calculateRSI(data, selectedCurrency, 14)
-            const macdResult = calculateMACD(data, selectedCurrency, 12, 26, 9)
-            const stochasticResult = calculateStochastic(data, selectedCurrency, 14, 3)
+        const loadData = async() => {
+            const a = await fetchCurrencies()
+            const b = await fetchHistoricalData()
 
-            setSmaData(smaResult)
-            setEmaData(emaResult)
-            setBollingerData(bollingerResult)
-            setRsiData(rsiResult)
-            setMacdData(macdResult)
-            setStochasticData(stochasticResult)
+            if(currencies.length > 0 && historicalData.length > 0 ){
+                const data = generateHistoricalData(startDate, endDate, selectedCurrency, historicalData)
+                setChartData(data)
+
+                const smaResult = calculateSMA(data, selectedCurrency, 14)
+                const emaResult = calculateEMA(data, selectedCurrency, 14)
+                const bollingerResult = calculateBollingerBands(data, selectedCurrency, 20, 2)
+
+                setSmaData(smaResult)
+                setEmaData(emaResult)
+                setBollingerData(bollingerResult)
+            }
 
             setLoading(false)
-        }, 800)
-    }, [startDate, endDate, selectedCurrency])
+        }
+
+        loadData();
+
+
+    }, [startDate, endDate, selectedCurrency, currencies, historicalData])
 
     const calculateAverage = () => {
         if (chartData.length === 0) return 0
@@ -149,7 +258,7 @@ export function TimeSeriesAnalysis() {
                             onSelectEndDate={(date) => date && setEndDate(date)}
                         />
 
-                        <CurrencySelector selectedCurrency={selectedCurrency} onSelectCurrency={setSelectedCurrency} />
+                        <CurrencySelector currencies={currencies} selectedCurrency={selectedCurrency} onSelectCurrency={setSelectedCurrency} />
 
                         <ChartControls
                             chartType={chartType}
@@ -162,12 +271,6 @@ export function TimeSeriesAnalysis() {
                             setShowEMA={setShowEMA}
                             showBollinger={showBollinger}
                             setShowBollinger={setShowBollinger}
-                            showRSI={showRSI}
-                            setShowRSI={setShowRSI}
-                            showMACD={showMACD}
-                            setShowMACD={setShowMACD}
-                            showStochastic={showStochastic}
-                            setShowStochastic={setShowStochastic}
                             onShowSummary={() => setSummaryOpen(true)}
                             chartRef={chartRef}
                             currency={selectedCurrency}
@@ -203,7 +306,7 @@ export function TimeSeriesAnalysis() {
                                         <CardContent className="p-4">
                                             <div className="text-sm text-slate-400">Variación</div>
                                             <div
-                                                className={`text-2xl font-bold ${percentChange >= 0 ? "text-emerald-400" : "text-rose-400"}`}
+                                                className={`text-2xl font-bold ${percentChange > 0 ? "text-rose-400" : percentChange < 0 ? "text-emerald-400" : "text-slate-400"}`}
                                             >
                                                 {percentChange.toFixed(2)}%
                                             </div>
@@ -219,16 +322,10 @@ export function TimeSeriesAnalysis() {
                                     showSMA={showSMA}
                                     showEMA={showEMA}
                                     showBollinger={showBollinger}
-                                    showRSI={showRSI}
-                                    showMACD={showMACD}
-                                    showStochastic={showStochastic}
                                     average={average}
                                     smaData={smaData}
                                     emaData={emaData}
                                     bollingerData={bollingerData}
-                                    rsiData={rsiData}
-                                    macdData={macdData}
-                                    stochasticData={stochasticData}
                                     chartRef={chartRef}
                                 />
 
@@ -239,6 +336,7 @@ export function TimeSeriesAnalysis() {
                                     currency={selectedCurrency}
                                     startDate={startDate}
                                     endDate={endDate}
+                                    currencies={currencies}
                                 />
 
                                 <div className="bg-slate-800/50 rounded-lg p-4 mt-6">
@@ -263,18 +361,6 @@ export function TimeSeriesAnalysis() {
                                         <li>
                                             <span className="text-blue-400 font-medium">Bandas de Bollinger:</span> Muestran la volatilidad
                                             del precio y posibles zonas de sobrecompra o sobreventa.
-                                        </li>
-                                        <li>
-                                            <span className="text-purple-400 font-medium">RSI (14):</span> Índice de Fuerza Relativa, mide la
-                                            velocidad y magnitud de los movimientos direccionales de los precios.
-                                        </li>
-                                        <li>
-                                            <span className="text-blue-400 font-medium">MACD:</span> Convergencia/Divergencia de Medias
-                                            Móviles, muestra la relación entre dos medias móviles del precio.
-                                        </li>
-                                        <li>
-                                            <span className="text-orange-400 font-medium">Estocástico:</span> Compara el precio de cierre con
-                                            el rango de precios durante un período determinado.
                                         </li>
                                     </ul>
                                 </div>

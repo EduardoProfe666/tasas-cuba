@@ -1,35 +1,122 @@
-export const getCurrencyBaseValue = (currency: string): number => {
-    const baseValues: Record<string, number> = {
-        USD: 370,
-        ECU: 385,
-        MLC: 260,
-        TRX: 115,
-        USDT_TRC20: 395,
-        BTC: 390,
-    }
-    return baseValues[currency] || 100
-}
+import {ExchangeRateData} from "@/types/exchange-rate";
+import {differenceInDays, format} from "date-fns";
 
-export const getCurrencyVolatility = (currency: string): number => {
-    const volatilities: Record<string, number> = {
-        USD: 0.01,
-        ECU: 0.015,
-        MLC: 0.008,
-        TRX: 0.025,
-        USDT_TRC20: 0.02,
-        BTC: 0.03,
-    }
-    return volatilities[currency] || 0.01
-}
+export const calculateCurrencyMetricsAdvanced = (historicalData: ExchangeRateData[], currency: string) => {
+    const dataPoints = historicalData
+        .filter(x => x.currency.code === currency)
+        .map(item => ({
+            date: new Date(item.date),
+            value: item.value
+        }))
+        .sort((a, b) => a.date.getTime() - b.date.getTime());
 
-export const currencyNames: Record<string, string> = {
-    USD: "Dólar Estadounidense",
-    TRX: "Tron",
-    MLC: "Moneda Libremente Convertible",
-    ECU: "Euro",
-    USDT_TRC20: "Tether (USDT)",
-    BTC: "Bitcoin",
-}
+    if (dataPoints.length < 2) {
+        console.log(1)
+        return {
+            baseValue: dataPoints.length ? dataPoints[0].value : 100,
+            volatility: 0.01
+        };
+    }
+
+    const baseValue = dataPoints[dataPoints.length - 1].value;
+
+    const returns = [];
+    for (let i = 1; i < dataPoints.length; i++) {
+        const daysDiff = (dataPoints[i].date.getTime() - dataPoints[i-1].date.getTime()) / (1000 * 60 * 60 * 24);
+
+        if (daysDiff <= 3) {
+            const dailyReturn = (dataPoints[i].value - dataPoints[i-1].value) / dataPoints[i-1].value;
+            returns.push(dailyReturn);
+        }
+    }
+
+    if (returns.length > 10) {
+        const sortedReturns = [...returns].sort((a, b) => a - b);
+        const q1Index = Math.floor(returns.length * 0.25);
+        const q3Index = Math.floor(returns.length * 0.75);
+        const iqr = sortedReturns[q3Index] - sortedReturns[q1Index];
+        const lowerBound = sortedReturns[q1Index] - 1.5 * iqr;
+        const upperBound = sortedReturns[q3Index] + 1.5 * iqr;
+
+        const filteredReturns = returns.filter(ret => ret >= lowerBound && ret <= upperBound);
+
+        if (filteredReturns.length > 0) {
+            returns.length = 0;
+            returns.push(...filteredReturns);
+        }
+    }
+
+    const meanReturn = returns.reduce((sum, ret) => sum + ret, 0) / returns.length;
+    const squaredDiffs = returns.map(ret => Math.pow(ret - meanReturn, 2));
+    const variance = squaredDiffs.reduce((sum, diff) => sum + diff, 0) / returns.length;
+    const volatility = Math.sqrt(variance);
+
+    return {
+        baseValue,
+        volatility: Math.max(volatility, 0.005)
+    };
+};
+
+export const calculateTrend = (historicalData: ExchangeRateData[], currency: string): number => {
+    if (!historicalData || historicalData.length < 2) {
+        return 0;
+    }
+    const dataPoints = historicalData
+        .filter(x => x.currency.code === currency)
+        .map(item => ({
+            date: new Date(item.date),
+            value: item.value
+        }))
+        .sort((a, b) => a.date.getTime() - b.date.getTime());
+
+    if (dataPoints.length < 2) return 0;
+
+    const firstValue = dataPoints[0].value;
+    const lastValue = dataPoints[dataPoints.length - 1].value;
+    const totalDays = differenceInDays(dataPoints[dataPoints.length - 1].date, dataPoints[0].date) || 1;
+
+    const totalPercentChange = (lastValue - firstValue) / firstValue;
+    const dailyTrend = totalPercentChange / totalDays;
+
+    return Math.max(Math.min(dailyTrend, 0.05), -0.05);
+};
+
+export const interpolateValue = (
+    currentDate: Date,
+    startDate: Date,
+    endDate: Date,
+    startValue: number,
+    endValue: number
+): number => {
+    const totalDays = differenceInDays(endDate, startDate) || 1;
+    const daysPassed = differenceInDays(currentDate, startDate) || 0;
+    const ratio = daysPassed / totalDays;
+
+    return startValue + (endValue - startValue) * ratio;
+};
+
+export const findNextRealDateIndex = (
+    currentDate: Date,
+    allDays: Date[],
+    dataByDate: Map<string, number>
+): number => {
+    const currentIndex = allDays.findIndex(d =>
+        d.getFullYear() === currentDate.getFullYear() &&
+        d.getMonth() === currentDate.getMonth() &&
+        d.getDate() === currentDate.getDate()
+    );
+
+    if (currentIndex === -1) return -1;
+
+    for (let i = currentIndex + 1; i < allDays.length; i++) {
+        const dateStr = format(allDays[i], "yyyy-MM-dd");
+        if (dataByDate.has(dateStr)) {
+            return i;
+        }
+    }
+
+    return -1;
+};
 
 export const currencyColors: Record<string, { stroke: string; fill: string }> = {
     USD: { stroke: "#10b981", fill: "rgba(16, 185, 129, 0.1)" },

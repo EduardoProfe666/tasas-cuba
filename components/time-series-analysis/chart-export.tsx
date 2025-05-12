@@ -54,7 +54,7 @@ export function ChartExport({ chartRef, currency, startDate, endDate }: ChartExp
             if (ctx) {
                 ctx.font = "12px Arial"
                 ctx.fillStyle = "rgba(255,255,255,0.3)"
-                ctx.fillText("Datos proporcionados por El Toque - " + process.env.APP_URL, 10, canvas.height - 10)
+                ctx.fillText("Datos proporcionados por elToque - " + process.env.APP_URL, 10, canvas.height - 10)
             }
 
             const link = document.createElement("a")
@@ -110,7 +110,7 @@ export function ChartExport({ chartRef, currency, startDate, endDate }: ChartExp
             pdf.setFontSize(10)
             pdf.setTextColor(100, 100, 100)
             pdf.text(
-                "Datos proporcionados por El Toque - Tasas del mercado informal de divisas en Cuba",
+                "Datos proporcionados por elToque - Tasas del mercado informal de divisas en Cuba",
                 pdf.internal.pageSize.getWidth() / 2,
                 pdf.internal.pageSize.getHeight() - 10,
                 { align: "center" },
@@ -139,6 +139,7 @@ export function ChartExport({ chartRef, currency, startDate, endDate }: ChartExp
             <DropdownMenuTrigger asChild>
                 <Button
                     variant="outline"
+                    size="sm"
                     className="gap-2 bg-slate-800 border-slate-700 hover:bg-slate-700 hover:border-slate-600 text-slate-300"
                     disabled={isExporting}
                 >

@@ -22,12 +22,6 @@ interface ChartControlsProps {
     setShowEMA: (show: boolean) => void
     showBollinger: boolean
     setShowBollinger: (show: boolean) => void
-    showRSI: boolean
-    setShowRSI: (show: boolean) => void
-    showMACD: boolean
-    setShowMACD: (show: boolean) => void
-    showStochastic: boolean
-    setShowStochastic: (show: boolean) => void
     onShowSummary: () => void
     chartRef: React.RefObject<HTMLDivElement | null>
     currency: string
@@ -46,12 +40,6 @@ export function ChartControls({
                                   setShowEMA,
                                   showBollinger,
                                   setShowBollinger,
-                                  showRSI,
-                                  setShowRSI,
-                                  showMACD,
-                                  setShowMACD,
-                                  showStochastic,
-                                  setShowStochastic,
                                   onShowSummary,
                                   chartRef,
                                   currency,
@@ -191,74 +179,6 @@ export function ChartControls({
                                 </Tooltip>
                             </TooltipProvider>
                         </Label>
-                    </div>
-                </div>
-
-                <div className="mt-4 border-t border-slate-700 pt-4">
-                    <h4 className="text-xs font-medium text-slate-400 mb-3">Indicadores avanzados</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div className="flex items-center space-x-2">
-                            <Switch id="rsi" checked={showRSI} onCheckedChange={setShowRSI} />
-                            <Label htmlFor="rsi" className="cursor-pointer text-slate-300">
-                                <TooltipProvider>
-                                    <Tooltip>
-                                        <TooltipTrigger asChild>
-                      <span className="flex items-center gap-1">
-                        RSI (14)
-                        <Info className="h-3 w-3 text-slate-400" />
-                      </span>
-                                        </TooltipTrigger>
-                                        <TooltipContent>
-                                            <p className="max-w-xs text-xs">
-                                                Índice de Fuerza Relativa. Mide la velocidad y el cambio de los movimientos de precios.
-                                            </p>
-                                        </TooltipContent>
-                                    </Tooltip>
-                                </TooltipProvider>
-                            </Label>
-                        </div>
-
-                        <div className="flex items-center space-x-2">
-                            <Switch id="macd" checked={showMACD} onCheckedChange={setShowMACD} />
-                            <Label htmlFor="macd" className="cursor-pointer text-slate-300">
-                                <TooltipProvider>
-                                    <Tooltip>
-                                        <TooltipTrigger asChild>
-                      <span className="flex items-center gap-1">
-                        MACD
-                        <Info className="h-3 w-3 text-slate-400" />
-                      </span>
-                                        </TooltipTrigger>
-                                        <TooltipContent>
-                                            <p className="max-w-xs text-xs">
-                                                Convergencia/Divergencia de Medias Móviles. Muestra la relación entre dos medias móviles.
-                                            </p>
-                                        </TooltipContent>
-                                    </Tooltip>
-                                </TooltipProvider>
-                            </Label>
-                        </div>
-
-                        <div className="flex items-center space-x-2">
-                            <Switch id="stochastic" checked={showStochastic} onCheckedChange={setShowStochastic} />
-                            <Label htmlFor="stochastic" className="cursor-pointer text-slate-300">
-                                <TooltipProvider>
-                                    <Tooltip>
-                                        <TooltipTrigger asChild>
-                      <span className="flex items-center gap-1">
-                        Estocástico
-                        <Info className="h-3 w-3 text-slate-400" />
-                      </span>
-                                        </TooltipTrigger>
-                                        <TooltipContent>
-                                            <p className="max-w-xs text-xs">
-                                                Oscilador estocástico. Compara el precio de cierre con el rango de precios durante un período.
-                                            </p>
-                                        </TooltipContent>
-                                    </Tooltip>
-                                </TooltipProvider>
-                            </Label>
-                        </div>
                     </div>
                 </div>
             </div>

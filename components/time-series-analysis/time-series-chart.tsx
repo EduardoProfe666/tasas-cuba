@@ -15,6 +15,7 @@ import {
 } from "recharts"
 import { motion } from "framer-motion"
 import { currencyColors } from "./chart-utils"
+import {ChartTooltip} from "@/components/time-series-analysis/chart-tooltip";
 
 interface TimeSeriesChartProps {
     data: any[]
@@ -24,16 +25,10 @@ interface TimeSeriesChartProps {
     showSMA: boolean
     showEMA: boolean
     showBollinger: boolean
-    showRSI: boolean
-    showMACD: boolean
-    showStochastic: boolean
     average: number
     smaData: any[]
     emaData: any[]
     bollingerData: any[]
-    rsiData: any[]
-    macdData: any[]
-    stochasticData: any[]
     chartRef: React.RefObject<any>
 }
 
@@ -45,27 +40,25 @@ export function TimeSeriesChart({
                                     showSMA,
                                     showEMA,
                                     showBollinger,
-                                    showRSI,
-                                    showMACD,
-                                    showStochastic,
                                     average,
                                     smaData,
                                     emaData,
                                     bollingerData,
-                                    rsiData,
-                                    macdData,
-                                    stochasticData,
                                     chartRef,
                                 }: TimeSeriesChartProps) {
     const gridColor = "#334155" // slate-700
     const textColor = "#94a3b8" // slate-400
-    const backgroundColor = "#1e293b" // slate-800
 
-    const showAdditionalIndicators = showRSI || showMACD || showStochastic
+    const mainChartHeight = 400
 
-    const mainChartHeight = showAdditionalIndicators ? 300 : 400
-
-    const indicatorHeight = 100
+    const mergedData = data.map((item, idx) => ({
+        ...item,
+        sma: smaData[idx]?.sma,
+        ema: emaData[idx]?.ema,
+        upperBand: bollingerData[idx].upperBand,
+        lowerBand: bollingerData[idx].lowerBand,
+        middleBand: bollingerData[idx].middleBand
+    }));
 
     return (
         <motion.div
@@ -79,7 +72,7 @@ export function TimeSeriesChart({
                 <div className="mb-4">
                     <ResponsiveContainer width="100%" height={mainChartHeight}>
                         {chartType === "area" ? (
-                            <AreaChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+                            <AreaChart data={mergedData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
                                 <defs>
                                     <linearGradient id={`color${currency}`} x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="5%" stopColor={currencyColors[currency]?.stroke || "#10b981"} stopOpacity={0.8} />
@@ -111,51 +104,45 @@ export function TimeSeriesChart({
                                 />
 
                                 <Tooltip
-                                    formatter={(value: number) => [`${value.toFixed(2)} CUP`, currency]}
-                                    labelFormatter={(label) => `Fecha: ${label}`}
-                                    contentStyle={{
-                                        backgroundColor: backgroundColor,
-                                        borderColor: "#475569",
-                                        borderRadius: "0.375rem",
-                                        color: "#e2e8f0",
-                                    }}
-                                    itemStyle={{ color: "#e2e8f0" }}
-                                    cursor={{ stroke: "#64748b", strokeWidth: 1, strokeDasharray: "5 5" }}
+                                    content={<ChartTooltip currency={currency} />}
                                 />
 
                                 {/* Bollinger Bands */}
                                 {showBollinger && bollingerData.length > 0 && (
-                                    <>
-                                        <Area
-                                            type="monotone"
-                                            dataKey="upperBand"
-                                            data={bollingerData}
-                                            stroke="#3b82f6"
-                                            strokeWidth={1}
-                                            strokeDasharray="3 3"
-                                            fillOpacity={0}
-                                            isAnimationActive={true}
-                                        />
-                                        <Area
-                                            type="monotone"
-                                            dataKey="lowerBand"
-                                            data={bollingerData}
-                                            stroke="#3b82f6"
-                                            strokeWidth={1}
-                                            strokeDasharray="3 3"
-                                            fillOpacity={0}
-                                            isAnimationActive={true}
-                                        />
-                                        <Area
-                                            type="monotone"
-                                            dataKey="upperBand"
-                                            data={bollingerData}
-                                            stroke="none"
-                                            fill="url(#bollingerGradient)"
-                                            fillOpacity={1}
-                                            isAnimationActive={true}
-                                        />
-                                    </>
+                                    <Area
+                                        type="monotone"
+                                        dataKey="upperBand"
+                                        stroke="#3b82f6"
+                                        strokeWidth={1}
+                                        strokeDasharray="3 3"
+                                        fillOpacity={0.2}
+                                        isAnimationActive={true}
+                                        fill="#3b82f6"
+                                    />
+                                )}
+                                {showBollinger && bollingerData.length > 0 && (
+                                    <Area
+                                        type="monotone"
+                                        dataKey="middleBand"
+                                        stroke="#3b82f6"
+                                        strokeWidth={1}
+                                        strokeDasharray="3 3"
+                                        fillOpacity={0.2}
+                                        isAnimationActive={true}
+                                        fill="#3b82f6"
+                                    />
+                                )}
+                                {showBollinger && bollingerData.length > 0 && (
+                                    <Area
+                                        type="monotone"
+                                        dataKey="lowerBand"
+                                        stroke="#3b82f6"
+                                        strokeWidth={1}
+                                        strokeDasharray="3 3"
+                                        fillOpacity={0.2}
+                                        isAnimationActive={true}
+                                        fill="#3b82f6"
+                                    />
                                 )}
 
                                 {/* Main Area */}
@@ -172,29 +159,31 @@ export function TimeSeriesChart({
 
                                 {/* SMA Line */}
                                 {showSMA && smaData.length > 0 && (
-                                    <Line
+                                    <Area
                                         type="monotone"
                                         dataKey="sma"
-                                        data={smaData}
                                         stroke="#f59e0b"
                                         strokeWidth={2}
                                         dot={false}
                                         activeDot={false}
                                         isAnimationActive={true}
+                                        fillOpacity={0.2}
+                                        fill="#f59e0b"
                                     />
                                 )}
 
                                 {/* EMA Line */}
                                 {showEMA && emaData.length > 0 && (
-                                    <Line
+                                    <Area
                                         type="monotone"
                                         dataKey="ema"
-                                        data={emaData}
                                         stroke="#ec4899"
                                         strokeWidth={2}
                                         dot={false}
                                         activeDot={false}
                                         isAnimationActive={true}
+                                        fillOpacity={0.2}
+                                        fill="#ec4899"
                                     />
                                 )}
 
@@ -215,7 +204,7 @@ export function TimeSeriesChart({
                                 )}
                             </AreaChart>
                         ) : (
-                            <LineChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+                            <LineChart data={mergedData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
                                 <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
 
                                 <XAxis
@@ -234,55 +223,46 @@ export function TimeSeriesChart({
                                 />
 
                                 <Tooltip
-                                    formatter={(value: number) => [`${value.toFixed(2)} CUP`, currency]}
-                                    labelFormatter={(label) => `Fecha: ${label}`}
-                                    contentStyle={{
-                                        backgroundColor: backgroundColor,
-                                        borderColor: "#475569",
-                                        borderRadius: "0.375rem",
-                                        color: "#e2e8f0",
-                                    }}
-                                    itemStyle={{ color: "#e2e8f0" }}
-                                    cursor={{ stroke: "#64748b", strokeWidth: 1, strokeDasharray: "5 5" }}
+                                    content={<ChartTooltip currency={currency} />}
                                 />
 
                                 {/* Bollinger Bands */}
                                 {showBollinger && bollingerData.length > 0 && (
-                                    <>
-                                        <Line
-                                            type="monotone"
-                                            dataKey="upperBand"
-                                            data={bollingerData}
-                                            stroke="#3b82f6"
-                                            strokeWidth={1}
-                                            strokeDasharray="3 3"
-                                            dot={false}
-                                            activeDot={false}
-                                            isAnimationActive={true}
-                                        />
-                                        <Line
-                                            type="monotone"
-                                            dataKey="middleBand"
-                                            data={bollingerData}
-                                            stroke="#3b82f6"
-                                            strokeWidth={1}
-                                            dot={false}
-                                            activeDot={false}
-                                            isAnimationActive={true}
-                                        />
-                                        <Line
-                                            type="monotone"
-                                            dataKey="lowerBand"
-                                            data={bollingerData}
-                                            stroke="#3b82f6"
-                                            strokeWidth={1}
-                                            strokeDasharray="3 3"
-                                            dot={false}
-                                            activeDot={false}
-                                            isAnimationActive={true}
-                                        />
-                                    </>
+                                    <Line
+                                        type="monotone"
+                                        dataKey="upperBand"
+                                        stroke="#3b82f6"
+                                        strokeWidth={2}
+                                        strokeDasharray="1 1"
+                                        dot={false}
+                                        activeDot={false}
+                                        isAnimationActive={true}
+                                    />
                                 )}
+                                {showBollinger && bollingerData.length > 0 && (
+                                    <Line
+                                        type="monotone"
+                                        dataKey="middleBand"
+                                        stroke="#3b82f6"
+                                        strokeWidth={2}
+                                        dot={false}
+                                        activeDot={false}
+                                        isAnimationActive={true}
+                                    />
+                                )}
+                                {showBollinger && bollingerData.length > 0 && (
+                                    <Line
+                                        type="monotone"
+                                        dataKey="lowerBand"
+                                        stroke="#3b82f6"
+                                        strokeWidth={2}
+                                        strokeDasharray="3 3"
+                                        dot={false}
+                                        activeDot={false}
+                                        isAnimationActive={true}
+                                    />
+                                )}
+
 
                                 {/* Main Line */}
                                 <Line
@@ -301,7 +281,6 @@ export function TimeSeriesChart({
                                     <Line
                                         type="monotone"
                                         dataKey="sma"
-                                        data={smaData}
                                         stroke="#f59e0b"
                                         strokeWidth={2}
                                         dot={false}
@@ -315,7 +294,6 @@ export function TimeSeriesChart({
                                     <Line
                                         type="monotone"
                                         dataKey="ema"
-                                        data={emaData}
                                         stroke="#ec4899"
                                         strokeWidth={2}
                                         dot={false}
@@ -343,131 +321,6 @@ export function TimeSeriesChart({
                         )}
                     </ResponsiveContainer>
                 </div>
-
-                {/* Indicadores adicionales */}
-                {showRSI && rsiData.length > 0 && (
-                    <div className="mb-4">
-                        <div className="text-xs text-slate-400 mb-1">RSI (14)</div>
-                        <ResponsiveContainer width="100%" height={indicatorHeight}>
-                            <LineChart data={rsiData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-                                <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                                <XAxis
-                                    dataKey="formattedDate"
-                                    tick={{ fill: textColor }}
-                                    tickMargin={10}
-                                    axisLine={{ stroke: gridColor }}
-                                    tickLine={{ stroke: gridColor }}
-                                    height={20}
-                                    tickFormatter={() => ""}
-                                />
-                                <YAxis
-                                    domain={[0, 100]}
-                                    tick={{ fill: textColor }}
-                                    axisLine={{ stroke: gridColor }}
-                                    tickLine={{ stroke: gridColor }}
-                                />
-                                <Tooltip
-                                    formatter={(value: number) => [`${value.toFixed(2)}`, "RSI"]}
-                                    labelFormatter={(label) => `Fecha: ${label}`}
-                                    contentStyle={{
-                                        backgroundColor: backgroundColor,
-                                        borderColor: "#475569",
-                                        borderRadius: "0.375rem",
-                                        color: "#e2e8f0",
-                                    }}
-                                    itemStyle={{ color: "#e2e8f0" }}
-                                />
-                                <ReferenceLine y={70} stroke="#ef4444" strokeDasharray="3 3" />
-                                <ReferenceLine y={30} stroke="#10b981" strokeDasharray="3 3" />
-                                <Line type="monotone" dataKey="rsi" stroke="#a855f7" dot={false} isAnimationActive={true} />
-                            </LineChart>
-                        </ResponsiveContainer>
-                    </div>
-                )}
-
-                {showMACD && macdData.length > 0 && (
-                    <div className="mb-4">
-                        <div className="text-xs text-slate-400 mb-1">MACD (12,26,9)</div>
-                        <ResponsiveContainer width="100%" height={indicatorHeight}>
-                            <LineChart data={macdData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-                                <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                                <XAxis
-                                    dataKey="formattedDate"
-                                    tick={{ fill: textColor }}
-                                    tickMargin={10}
-                                    axisLine={{ stroke: gridColor }}
-                                    tickLine={{ stroke: gridColor }}
-                                    height={20}
-                                    tickFormatter={() => ""}
-                                />
-                                <YAxis tick={{ fill: textColor }} axisLine={{ stroke: gridColor }} tickLine={{ stroke: gridColor }} />
-                                <Tooltip
-                                    formatter={(value: number) => [`${value.toFixed(4)}`, ""]}
-                                    labelFormatter={(label) => `Fecha: ${label}`}
-                                    contentStyle={{
-                                        backgroundColor: backgroundColor,
-                                        borderColor: "#475569",
-                                        borderRadius: "0.375rem",
-                                        color: "#e2e8f0",
-                                    }}
-                                    itemStyle={{ color: "#e2e8f0" }}
-                                />
-                                <ReferenceLine y={0} stroke="#64748b" />
-                                <Line type="monotone" dataKey="macd" stroke="#3b82f6" dot={false} isAnimationActive={true} />
-                                <Line type="monotone" dataKey="signal" stroke="#f97316" dot={false} isAnimationActive={true} />
-                                <Area
-                                    type="monotone"
-                                    dataKey="histogram"
-                                    fill="#10b981"
-                                    stroke="#10b981"
-                                    fillOpacity={0.5}
-                                    isAnimationActive={true}
-                                />
-                            </LineChart>
-                        </ResponsiveContainer>
-                    </div>
-                )}
-
-                {showStochastic && stochasticData.length > 0 && (
-                    <div>
-                        <div className="text-xs text-slate-400 mb-1">Estocástico (14,3)</div>
-                        <ResponsiveContainer width="100%" height={indicatorHeight}>
-                            <LineChart data={stochasticData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-                                <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-                                <XAxis
-                                    dataKey="formattedDate"
-                                    tick={{ fill: textColor }}
-                                    tickMargin={10}
-                                    axisLine={{ stroke: gridColor }}
-                                    tickLine={{ stroke: gridColor }}
-                                    height={20}
-                                    tickFormatter={() => ""}
-                                />
-                                <YAxis
-                                    domain={[0, 100]}
-                                    tick={{ fill: textColor }}
-                                    axisLine={{ stroke: gridColor }}
-                                    tickLine={{ stroke: gridColor }}
-                                />
-                                <Tooltip
-                                    formatter={(value: number) => [`${value.toFixed(2)}`, ""]}
-                                    labelFormatter={(label) => `Fecha: ${label}`}
-                                    contentStyle={{
-                                        backgroundColor: backgroundColor,
-                                        borderColor: "#475569",
-                                        borderRadius: "0.375rem",
-                                        color: "#e2e8f0",
-                                    }}
-                                    itemStyle={{ color: "#e2e8f0" }}
-                                />
-                                <ReferenceLine y={80} stroke="#ef4444" strokeDasharray="3 3" />
-                                <ReferenceLine y={20} stroke="#10b981" strokeDasharray="3 3" />
-                                <Line type="monotone" dataKey="k" stroke="#ec4899" dot={false} isAnimationActive={true} />
-                                <Line type="monotone" dataKey="d" stroke="#f59e0b" dot={false} isAnimationActive={true} />
-                            </LineChart>
-                        </ResponsiveContainer>
-                    </div>
-                )}
             </div>
         </motion.div>
     )

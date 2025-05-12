@@ -12,7 +12,7 @@ import {
 import { format } from "date-fns"
 import { es } from "date-fns/locale"
 import { ArrowDown, ArrowUp, Minus, TrendingDown, TrendingUp, AlertTriangle } from "lucide-react"
-import { currencyNames } from "./chart-utils"
+import {CurrencyData} from "@/types/currency-data";
 
 interface ChartSummaryDialogProps {
     open: boolean
@@ -20,7 +20,8 @@ interface ChartSummaryDialogProps {
     data: any[]
     currency: string
     startDate: Date
-    endDate: Date
+    endDate: Date,
+    currencies: CurrencyData[]
 }
 
 export function ChartSummaryDialog({
@@ -30,6 +31,7 @@ export function ChartSummaryDialog({
                                        currency,
                                        startDate,
                                        endDate,
+                                       currencies
                                    }: ChartSummaryDialogProps) {
     if (!data.length) return null
 
@@ -95,11 +97,11 @@ export function ChartSummaryDialog({
             <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto bg-slate-900 text-slate-200 border-slate-700">
                 <DialogHeader>
                     <DialogTitle className="text-xl text-slate-100">
-                        Resumen de {currencyNames[currency] || currency} ({currency})
+                        Resumen de {currencies.find(x => x.code === currency)?.name || currency} ({currency === 'ECU' ? 'EUR' : currency})
                     </DialogTitle>
                     <DialogDescription className="text-slate-400">
-                        Análisis del {format(startDate, "dd/MM/yyyy", { locale: es })} al{" "}
-                        {format(endDate, "dd/MM/yyyy", { locale: es })}
+                        Análisis del <span className="text-emerald-400">{format(startDate, "dd 'de' MMMM 'de' yyyy", { locale: es })}</span> al{" "}
+                        <span className="text-emerald-400">{format(endDate, "dd 'de' MMMM 'de' yyyy", {locale: es})}</span>
                     </DialogDescription>
                 </DialogHeader>
 
@@ -108,13 +110,13 @@ export function ChartSummaryDialog({
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="bg-slate-800 rounded-lg p-4 shadow-sm border border-slate-700">
                             <div className="text-sm text-slate-400">Valor inicial</div>
-                            <div className="text-2xl font-bold text-slate-100">{firstValue.toFixed(2)} CUP</div>
+                            <div className="text-2xl font-bold text-slate-100">{firstValue?.toFixed(2)} CUP</div>
                             <div className="text-xs text-slate-500 mt-1">{format(startDate, "dd MMM yyyy", { locale: es })}</div>
                         </div>
 
                         <div className="bg-slate-800 rounded-lg p-4 shadow-sm border border-slate-700">
                             <div className="text-sm text-slate-400">Valor final</div>
-                            <div className="text-2xl font-bold text-slate-100">{lastValue.toFixed(2)} CUP</div>
+                            <div className="text-2xl font-bold text-slate-100">{lastValue?.toFixed(2)} CUP</div>
                             <div className="text-xs text-slate-500 mt-1">{format(endDate, "dd MMM yyyy", { locale: es })}</div>
                         </div>
 
@@ -122,7 +124,7 @@ export function ChartSummaryDialog({
                             <div className="text-sm text-slate-400">Variación</div>
                             <div
                                 className={`text-2xl font-bold flex items-center gap-1
-                ${change > 0 ? "text-emerald-400" : change < 0 ? "text-rose-400" : "text-slate-400"}`}
+                ${change > 0 ? "text-rose-400" : change < 0 ? "text-emerald-400" : "text-slate-400"}`}
                             >
                                 {change === 0 ? (
                                     <Minus className="h-5 w-5" />
@@ -143,19 +145,19 @@ export function ChartSummaryDialog({
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div>
                                 <div className="text-xs text-slate-400">Mínimo</div>
-                                <div className="text-base font-medium text-slate-100">{min.toFixed(2)} CUP</div>
+                                <div className="text-base font-medium text-slate-100">{min?.toFixed(0)} CUP</div>
                             </div>
                             <div>
                                 <div className="text-xs text-slate-400">Máximo</div>
-                                <div className="text-base font-medium text-slate-100">{max.toFixed(2)} CUP</div>
+                                <div className="text-base font-medium text-slate-100">{max?.toFixed(0)} CUP</div>
                             </div>
                             <div>
                                 <div className="text-xs text-slate-400">Promedio</div>
-                                <div className="text-base font-medium text-slate-100">{avg.toFixed(2)} CUP</div>
+                                <div className="text-base font-medium text-slate-100">{avg?.toFixed(2)} CUP</div>
                             </div>
                             <div>
                                 <div className="text-xs text-slate-400">Volatilidad</div>
-                                <div className="text-base font-medium text-slate-100">{volatility.toFixed(2)}</div>
+                                <div className="text-base font-medium text-slate-100">{volatility?.toFixed(2)}</div>
                             </div>
                         </div>
                     </div>
@@ -164,9 +166,9 @@ export function ChartSummaryDialog({
                     <div className="bg-slate-800 rounded-lg p-4 shadow-sm border border-slate-700">
                         <h3 className="text-sm font-medium text-slate-300 mb-3 flex items-center gap-2">
                             {trendDirection === "alcista" ? (
-                                <TrendingUp className="h-4 w-4 text-emerald-400" />
+                                <TrendingUp className="h-4 w-4 text-rose-400" />
                             ) : trendDirection === "bajista" ? (
-                                <TrendingDown className="h-4 w-4 text-rose-400" />
+                                <TrendingDown className="h-4 w-4 text-emerald-400" />
                             ) : (
                                 <Minus className="h-4 w-4 text-slate-400" />
                             )}
@@ -179,9 +181,9 @@ export function ChartSummaryDialog({
                                     className={`px-2 py-1 rounded-full text-xs font-medium
                   ${
                                         trendDirection === "alcista"
-                                            ? "bg-emerald-900/20 text-emerald-400"
+                                            ? "bg-rose-900/20 text-rose-400"
                                             : trendDirection === "bajista"
-                                                ? "bg-rose-900/20 text-rose-400"
+                                                ? "bg-emerald-900/20 text-emerald-400"
                                                 : "bg-slate-700 text-slate-300"
                                     }`}
                                 >
@@ -211,7 +213,7 @@ export function ChartSummaryDialog({
                                 <h3 className="text-sm font-medium text-amber-300 mb-1">Nota importante</h3>
                                 <p className="text-sm text-amber-400">
                                     Este análisis se basa en el mercado informal de divisas de Cuba. Debe tenerse
-                                    en cuenta a la hora de tomar alguna decisión.
+                                    en cuenta a la hora de tomar decisiones.
                                 </p>
                             </div>
                         </div>
