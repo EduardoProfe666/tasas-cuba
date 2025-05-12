@@ -11,6 +11,10 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Tasas de Cambio - Peso Cubano",
+  icons: {
+    icon: '/icons/icon-512x512.png',
+    apple: '/icons/apple-touch-icon.png'
+  },
   description:
     "Consulta las tasas de cambio actualizadas del peso cubano (CUP) frente a USD, Euro, MLC y otras monedas. Información histórica y comparativa diaria.",
   keywords: [
