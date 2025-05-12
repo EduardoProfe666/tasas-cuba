@@ -1,0 +1,6 @@
+# Allow all user agents
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://tasas-cuba.vercel.app/sitemap.xml
