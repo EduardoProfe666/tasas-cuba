@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DateComparison } from "@/components/date-comparison"
-import { TimeSeriesAnalysis } from "@/components/time-series-analysis"
+import { TimeSeriesAnalysis } from "@/components/time-series-analysis/time-series-analysis"
 import { TrendingUp, Scale } from "lucide-react"
 import { motion } from "framer-motion"
 

@@ -10,6 +10,10 @@
 </div>
 
 <div align="center">
+  <h2>🚧EN CONSTRUCCIÓN🚧</h2>
+</div>
+
+<div align="center">
   <h3>
     <a href="https://tasas-cuba.vercel.app/" target="_blank">Demo en Vivo</a> |
     <a href="#características">Características</a> |
@@ -102,18 +106,18 @@ La aplicación está desplegada y disponible en: [https://tasas-cuba.vercel.app/
 <div align="center">
   <table>
     <tr>
-      <td align="center"><b>Dashboard Principal</b></td>
+      <td align="center" colspan="2"><b>Dashboard Principal</b></td>
     </tr>
     <tr>
-      <td><img src="https://via.placeholder.com/400x250?text=Dashboard" alt="Dashboard"/></td>
+      <td colspan="2"><img src="/assets/banner.png" alt="Dashboard"/></td>
     </tr>
     <tr>
       <td align="center"><b>Comparación de Fechas</b></td>
       <td align="center"><b>Análisis Histórico</b></td>
     </tr>
     <tr>
-      <td><img src="https://via.placeholder.com/400x250?text=Comparación" alt="Comparación"/></td>
-      <td><img src="https://via.placeholder.com/400x250?text=Análisis+Histórico" alt="Análisis Histórico"/></td>
+      <td><img src="/assets/comparison.png" alt="Comparación"/></td>
+      <td><img src="/assets/graph.png" alt="Análisis Gráfico"/></td>
     </tr>
   </table>
 </div>

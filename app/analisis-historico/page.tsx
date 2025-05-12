@@ -1,6 +1,7 @@
 import { HistoricalAnalysis } from "@/components/historical-analysis"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import {MobileAlert} from "@/components/mobile-alert";
 
 export const metadata = {
   title: "Análisis Histórico | Tasas de Cambio - Peso Cubano",
@@ -10,6 +11,7 @@ export const metadata = {
 export default function HistoricalAnalysisPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+      <MobileAlert pageKey="analisis-historico" />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-6">
           <Link
