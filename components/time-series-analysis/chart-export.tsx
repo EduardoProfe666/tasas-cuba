@@ -18,7 +18,7 @@ import html2canvas from "html2canvas"
 import jsPDF from "jspdf"
 
 interface ChartExportProps {
-    chartRef: React.RefObject<HTMLDivElement>
+    chartRef: React.RefObject<HTMLDivElement | null>
     currency: string
     startDate: Date
     endDate: Date

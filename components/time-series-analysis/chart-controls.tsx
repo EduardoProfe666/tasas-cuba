@@ -29,7 +29,7 @@ interface ChartControlsProps {
     showStochastic: boolean
     setShowStochastic: (show: boolean) => void
     onShowSummary: () => void
-    chartRef: React.RefObject<HTMLDivElement>
+    chartRef: React.RefObject<HTMLDivElement | null>
     currency: string
     startDate: Date
     endDate: Date
