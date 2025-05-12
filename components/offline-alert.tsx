@@ -45,13 +45,19 @@ export function OfflineAlert() {
         transition={{ duration: 0.3 }}
         className="fixed top-4 left-4 right-4 z-50 md:left-1/2 md:right-auto md:w-96 md:-translate-x-1/2"
       >
-        <Alert variant={isOnline ? "default" : "destructive"}>
-          {isOnline ? <Wifi className="h-4 w-4" /> : <WifiOff className="h-4 w-4" />}
-          <AlertTitle>{isOnline ? "Conexión restaurada" : "Sin conexión"}</AlertTitle>
-          <AlertDescription>
+        <Alert variant={"default"}>
+          {isOnline ? (
+              <Wifi className="h-4 w-4 text-emerald-600" />
+          ) : (
+              <WifiOff className="h-4 w-4 text-rose-500" />
+          )}
+          <AlertTitle className={isOnline ? "" : "text-red-700"}>
+            {isOnline ? "Conexión restaurada" : "Sin conexión"}
+          </AlertTitle>
+          <AlertDescription className={isOnline ? "" : "text-red-600"}>
             {isOnline
-              ? "Tu conexión a internet ha sido restaurada. Ahora puedes acceder a todos los datos actualizados."
-              : "No tienes conexión a internet. Algunas funciones pueden no estar disponibles."}
+                ? "Tu conexión a internet ha sido restaurada. Ahora puedes acceder a todos los datos actualizados."
+                : "No tienes conexión a internet. Algunas funciones pueden no estar disponibles."}
           </AlertDescription>
         </Alert>
       </motion.div>

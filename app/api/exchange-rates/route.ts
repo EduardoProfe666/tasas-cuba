@@ -77,7 +77,7 @@ export async function GET(request: NextRequest) {
       firstDate: firstDateRates,
       secondDate: secondDateRates,
     };
-    
+
     return NextResponse.json(response, {
       headers: {
         "Cache-Control": "public, max-age=1800, stale-while-revalidate=3600", // Cache for 30 minutes, stale for 1 hour
