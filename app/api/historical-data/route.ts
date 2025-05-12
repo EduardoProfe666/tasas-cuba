@@ -50,7 +50,7 @@ export async function GET(request: Request) {
 
         return NextResponse.json(response, {
             headers: {
-                "Cache-Control": "public, max-age=3600, stale-while-revalidate=21600", // Cache for 1 hour, stale for 6 hours
+                "Cache-Control": "public, max-age=1800, stale-while-revalidate=3600", // Cache for 30 minutes, stale for 1 hour
             },
         });
     } catch (error) {

@@ -95,7 +95,6 @@ export function ExchangeRatesDashboard() {
         }
 
         const data: ExchangeRateResponse = await response.json()
-
         if(data.firstDate.length === 0){
           toast({
             title: "Datos insuficientes",
