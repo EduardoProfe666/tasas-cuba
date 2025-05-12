@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Tasas de Cambio - Peso Cubano",
   icons: {
-    icon: '/icons/icon-512x512.png',
+    icon: '/icons/icon.png',
     apple: '/icons/apple-touch-icon.png'
   },
   description:
