@@ -131,31 +131,31 @@ La aplicación está desplegada y disponible en: [https://tasas-cuba.vercel.app/
 ### Pasos para Instalación Local
 
 1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/usuario/tasas-cuba.git
-   cd tasas-cuba
-   ```
+>   ```bash
+>   git clone https://github.com/usuario/tasas-cuba.git
+>   cd tasas-cuba
+>   ```
 
 2. **Instalar dependencias**
-   ```bash
-   npm install
-   # o
-   yarn install
-   # o
-   pnpm install
-   ```
+>   ```bash
+>   npm install
+>   # o
+>   yarn install
+>   # o
+>   pnpm install
+>   ```
    
 3. **Configurar variables de entorno**
 > Crea un archivo `.env.local` en la raíz del proyecto con las variables que aparecen en `.env.example`
 
 4. **Iniciar el servidor de desarrollo**
-   ```bash
-   npm run dev
-   # o
-   yarn dev
-   # o
-   pnpm run dev
-   ```
+>   ```bash
+>   npm run dev
+>   # o
+>   yarn dev
+>   # o
+>   pnpm run dev
+>   ```
    
 5. **Acceder a la aplicación**
 > Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
