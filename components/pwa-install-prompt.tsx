@@ -13,14 +13,11 @@ interface BeforeInstallPromptEvent extends Event {
 export function PWAInstallPrompt() {
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [isVisible, setIsVisible] = useState(false)
-  const [isDismissed, setIsDismissed] = useState(false)
 
   useEffect(() => {
     const isAppInstalled = window.matchMedia("(display-mode: standalone)").matches
 
-    const hasUserDismissedPrompt = localStorage.getItem("pwaPromptDismissed") === "true"
-
-    if (isAppInstalled || hasUserDismissedPrompt) {
+    if (isAppInstalled) {
       return
     }
 
@@ -57,11 +54,9 @@ export function PWAInstallPrompt() {
 
   const handleDismiss = () => {
     setIsVisible(false)
-    setIsDismissed(true)
-    localStorage.setItem("pwaPromptDismissed", "true")
   }
 
-  if (!isVisible || isDismissed) return null
+  if (!isVisible) return null
 
   return (
     <AnimatePresence>

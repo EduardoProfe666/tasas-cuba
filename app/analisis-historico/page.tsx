@@ -3,8 +3,8 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 
 export const metadata = {
-  title: "Comparación de Fechas | Tasas de Cambio - Peso Cubano",
-  description: "Compara las tasas de cambio del peso cubano entre diferentes fechas para analizar las variaciones.",
+  title: "Análisis Histórico | Tasas de Cambio - Peso Cubano",
+  description: "Análisis histórico y comparativo de las tasas de cambio del peso cubano (CUP) a lo largo del tiempo.",
 }
 
 export default function HistoricalAnalysisPage() {

@@ -11,6 +11,8 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import {ExchangeRateData, ExchangeRateResponse} from "@/types/exchange-rate";
 import {CurrencyData} from "@/types/currency-data";
+import { useToast } from "@/hooks/use-toast"
+
 
 const saveToLocalStorage = (key: string, data: any) => {
   try {
@@ -39,13 +41,12 @@ export function ExchangeRatesDashboard() {
   const [isOffline, setIsOffline] = useState(false)
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [currencies, setCurrencies] = useState<CurrencyData[]>([]);
+  const { toast } = useToast()
 
   const fetchRates = async (selectedDate: Date) => {
     setLoading(true)
     setError(null)
     setIsOffline(false)
-
-    console.log(selectedDate)
 
     const formattedDate = format(selectedDate, "yyyy-MM-dd");
     const currentKey = `rates-${formattedDate}`
@@ -94,10 +95,23 @@ export function ExchangeRatesDashboard() {
         }
 
         const data: ExchangeRateResponse = await response.json()
+
+        if(data.firstDate.length === 0){
+          toast({
+            title: "Datos insuficientes",
+            description: "Actualmente no existen suficientes datos para el día seleccionado. Estableciendo la fecha para el último día registrado.",
+            duration: 5000
+          })
+          setDate(subDays(new Date(), 1))
+          return;
+        }
+
         setCurrentRates(data.firstDate)
-        saveToLocalStorage(currentKey, data)
+        if(data.firstDate.length > 0)
+          saveToLocalStorage(currentKey, data)
         setPreviousRates(data.secondDate)
-        saveToLocalStorage(previousKey, data.secondDate)
+        if(data.secondDate.length > 0)
+          saveToLocalStorage(previousKey, data.secondDate)
       }
     } catch (err) {
       console.error(err)
