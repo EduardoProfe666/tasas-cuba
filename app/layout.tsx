@@ -39,6 +39,7 @@ export const metadata: Metadata = {
     description:
       "Consulta las tasas de cambio actualizadas del peso cubano (CUP) frente a USD, Euro, MLC y otras monedas. Información histórica y comparativa diaria.",
     siteName: "Tasas de Cambio - Peso Cubano",
+    images: ['/opengraph-image.png'],
   },
   twitter: {
     card: "summary_large_image",
