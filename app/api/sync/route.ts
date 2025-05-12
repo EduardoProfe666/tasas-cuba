@@ -15,11 +15,19 @@ async function getLastSync(client: PoolClient) {
             `SELECT MAX(date) as last_sync FROM exchange_rate`
         );
         lastSyncDate = lastSyncQuery.rows[0]?.last_sync || minDate;
-        if(lastSyncDate > minDate){
-            lastSyncDate.setDate(lastSyncDate.getDate() + 1);
-        }
     }catch(err){
         console.error('Error in getLastSync', err);
+    }
+}
+
+async function deleteRatesByDate(client: PoolClient, date: string) {
+    try {
+        await client.query(
+            `DELETE FROM exchange_rate WHERE date = $1`,
+            [date]
+        );
+    } catch (err) {
+        console.error('Error deleting exchange rates for date', date, err);
     }
 }
 
@@ -97,6 +105,8 @@ export async function GET() {
     const currencyMap = await getCurrencyMap(client);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+
+    await deleteRatesByDate(client, format(lastSyncDate, "yyyy-MM-dd"));
 
     let batchRates: { date: string; value: number; currencyId: number }[] = [];
 
