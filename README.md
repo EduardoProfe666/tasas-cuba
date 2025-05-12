@@ -10,10 +10,6 @@
 </div>
 
 <div align="center">
-  <h2>🚧EN CONSTRUCCIÓN🚧</h2>
-</div>
-
-<div align="center">
   <h3>
     <a href="https://tasas-cuba.vercel.app/" target="_blank">Demo en Vivo</a> |
     <a href="#características">Características</a> |
