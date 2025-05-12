@@ -1,129 +1,158 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
+
 export const alt = "Tasas de Cambio - Peso Cubano";
 export const size = {
     width: 1200,
     height: 630,
 };
-export const contentType = "image/png";
 
+export const contentType = "image/png";
 
 export default async function Image() {
     return new ImageResponse(
         <div
             style={{
-                fontFamily: '"Inter", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif',
-                background: "linear-gradient(135deg, #0f172a 0%, #155e75 70%, #22d3ee 100%)",
+                fontFamily:
+                    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif',
+                background:
+                    "radial-gradient(circle at top left, #10b981, #14b8a6 60%, #0f766e 100%)",
                 width: "100%",
                 height: "100%",
-                color: "#fff",
+                color: "#f0f9ff",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                padding: 64,
+                padding: 48,
                 boxSizing: "border-box",
                 position: "relative",
             }}
         >
-            {/* ICONOS */}
             <div
                 style={{
                     display: "flex",
-                    gap: 40,
-                    marginBottom: 48,
-                    filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.25))",
+                    gap: 24,
+                    marginBottom: 40,
+                    filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
                 }}
                 aria-label="Iconos de monedas y tarjeta"
             >
-                <span style={{ fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Dinero en efectivo">💵</span>
-                <span style={{ fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Euro">💶</span>
-                <span style={{ fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Tarjeta de crédito">💳</span>
+        <span
+            style={{
+                fontSize: 112,
+                lineHeight: 1,
+                userSelect: "none",
+            }}
+            role="img"
+            aria-label="Dinero en efectivo"
+        >
+          💵
+        </span>
+                <span
+                    style={{
+                        fontSize: 112,
+                        lineHeight: 1,
+                        userSelect: "none",
+                    }}
+                    role="img"
+                    aria-label="Euro"
+                >
+          💶
+        </span>
+                <span
+                    style={{
+                        fontSize: 112,
+                        lineHeight: 1,
+                        userSelect: "none",
+                    }}
+                    role="img"
+                    aria-label="Tarjeta de crédito"
+                >
+          💳
+        </span>
             </div>
 
-            {/* TÍTULO */}
             <h1
                 style={{
-                    fontSize: 70,
+                    fontSize: 72,
                     fontWeight: 900,
                     margin: 0,
-                    marginBottom: 18,
+                    marginBottom: 20,
                     textAlign: "center",
-                    background: "linear-gradient(90deg, #f0fdff 0%, #67e8f9 40%, #38bdf8 100%)",
+                    background:
+                        "linear-gradient(90deg, #a7f3d0, #22c55e, #14b8a6, #0f766e)",
                     backgroundClip: "text",
                     WebkitBackgroundClip: "text",
                     color: "transparent",
-                    textShadow: "0 4px 16px rgba(0,0,0,0.25)",
-                    letterSpacing: "-1px",
+                    textShadow:
+                        "0 2px 8px rgba(0, 0, 0, 0.2), 0 0 12px rgba(20, 184, 166, 0.6)",
                     userSelect: "none",
-                    fontFamily: '"Poppins", "Inter", sans-serif',
+                    fontFamily: '"Poppins", sans-serif',
                 }}
             >
                 Tasas de Cambio
                 <br />
-                <span style={{
-                    fontWeight: 700,
-                    fontSize: 50,
-                    color: "#fff",
-                    background: "none",
-                    textShadow: "0 2px 8px rgba(0,0,0,0.30)"
-                }}>
-                    Peso Cubano
-                </span>
+                <span style={{ fontWeight: 700, fontSize: 56, color: "#d1fae5" }}>
+          Peso Cubano
+        </span>
             </h1>
 
-            {/* DESCRIPCIÓN */}
             <p
                 style={{
-                    fontSize: 32,
-                    maxWidth: 800,
+                    fontSize: 28,
+                    maxWidth: 720,
                     textAlign: "center",
-                    color: "#e0e7ef",
+                    color: "#d1d5db",
                     margin: 0,
-                    marginBottom: 0,
                     lineHeight: 1.4,
                     fontWeight: 500,
                     userSelect: "none",
-                    textShadow: "0 2px 8px rgba(0,0,0,0.20)",
+                    filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.15))",
                 }}
             >
                 Consulta las tasas de cambio actualizadas del peso cubano en tiempo real,
                 con datos confiables y precisos.
             </p>
 
-            {/* AUTOR */}
             <div
                 style={{
                     position: "absolute",
-                    bottom: 32,
-                    right: 40,
-                    fontSize: 22,
-                    color: "rgba(255,255,255,0.75)",
+                    bottom: 24,
+                    right: 24,
+                    fontSize: 18,
+                    color: "rgba(255, 255, 255, 0.6)",
                     fontWeight: 600,
                     fontStyle: "italic",
                     userSelect: "none",
                     display: "flex",
                     alignItems: "center",
-                    gap: 8,
-                    fontFamily: '"Fira Mono", "Courier New", Courier, monospace',
-                    textShadow: "0 2px 8px rgba(0,0,0,0.20)"
+                    gap: 6,
+                    fontFamily: '"Courier New", Courier, monospace',
                 }}
                 aria-label="Autor"
             >
                 <span>Creado por</span>
-                <span style={{
-                    background: "linear-gradient(45deg, #67e8f9, #38bdf8, #0ea5e9)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    fontWeight: "bold",
-                }}>
-                    EduardoProfe666
-                </span>
-                <span role="img" aria-label="Sombrero de copa">🎩</span>
+                <span
+                    style={{
+                        background:
+                            "linear-gradient(45deg, #34d399, #059669, #065f46)",
+                        WebkitBackgroundClip: "text",
+                        backgroundClip: "text",
+                        color: "transparent",
+                        fontWeight: "bold",
+                    }}
+                >
+          EduardoProfe666
+        </span>
+                <span role="img" aria-label="Sombrero de copa">
+          🎩
+        </span>
             </div>
         </div>,
-        { ...size }
+        {
+            ...size,
+        }
     );
 }
