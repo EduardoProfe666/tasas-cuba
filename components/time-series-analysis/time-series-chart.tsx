@@ -154,7 +154,7 @@ export function TimeSeriesChart({
                                             fill="url(#bollingerGradient)"
                                             fillOpacity={1}
                                             isAnimationActive={true}
-                                            baseValue={(dataPoint) => dataPoint.lowerBand}
+                                            baseValue={(dataPoint: any) => dataPoint.lowerBand}
                                         />
                                     </>
                                 )}
