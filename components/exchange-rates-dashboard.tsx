@@ -225,7 +225,7 @@ export function ExchangeRatesDashboard() {
                   const exchangeRate = currentRates.find(x => x.currency.code === currency);
                   const previousExchangeRate = previousRates.find(x => x.currency.code === currency);
 
-                  const rate = exchangeRate?.value ?? 1
+                  const rate = exchangeRate?.value ?? previousExchangeRate?.value ?? 1
                   const previousRate = previousExchangeRate?.value ?? 1
                   const change = rate - previousRate
                   const percentChange = (change / previousRate) * 100

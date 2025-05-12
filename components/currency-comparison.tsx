@@ -88,7 +88,7 @@ export function CurrencyComparison({ data1, data2, date1, date2 }: CurrencyCompa
             {currencyOrder.map((currency) => {
               const er1 = data1.find(x => x.currency.code === currency)
               const er2 = data2.find(x => x.currency.code === currency)
-              const rate1 = er1?.value || 1
+              const rate1 = er1?.value || er2?.value || 1
               const rate2 = er2?.value || 1
               const difference = rate2 - rate1
               const percentChange = (difference / rate1) * 100
