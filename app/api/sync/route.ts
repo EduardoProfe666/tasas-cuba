@@ -87,6 +87,17 @@ async function insertExchangeRates(client: PoolClient, rates: { date: string; va
     }
 }
 
+function withCORS(response: Response) {
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    return response;
+}
+
+export async function OPTIONS() {
+    return withCORS(new Response(null, { status: 204 }));
+}
+
 export async function GET() {
 
     if(isSyncActive){
@@ -151,8 +162,9 @@ export async function GET() {
     isSyncActive = false;
     client.release();
     console.info('Sync finished');
-    return NextResponse.json({
+    const resp = NextResponse.json({
         success: true,
         message: 'Sincronización terminada'
     });
+    return withCORS(resp);
 }
