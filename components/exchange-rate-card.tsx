@@ -53,7 +53,7 @@ export function ExchangeRateCard({
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-      <Card className="overflow-hidden border-slate-200 dark:border-slate-700 transition-all duration-200 hover:shadow-lg">
+      <Card className="overflow-hidden dark:bg-slate-900 shadow-2xl border-slate-200 dark:border-slate-700 transition-all duration-200 hover:shadow-lg">
         <CardHeader className="pb-2">
           <div className="flex justify-between items-start">
             <div className="flex items-center gap-2">

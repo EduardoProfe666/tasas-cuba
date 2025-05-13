@@ -116,7 +116,7 @@ export function DateComparison() {
     }, [compareDate1, compareDate2])
 
     return (
-        <Card>
+        <Card className="dark:bg-slate-900 ">
             <CardHeader>
                 <CardTitle>Comparación entre Fechas</CardTitle>
                 <CardDescription>
