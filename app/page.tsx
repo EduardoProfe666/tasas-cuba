@@ -4,7 +4,7 @@ import { ExchangeRatesDashboard } from "@/components/exchange-rates-dashboard"
 import { PWAInstallPrompt } from "@/components/pwa-install-prompt"
 import { InfoDisclaimer } from "@/components/info-disclaimer"
 import Link from "next/link"
-import { LineChartIcon as ChartLineUp, ExternalLink } from "lucide-react"
+import {LineChartIcon as ChartLineUp, ExternalLink, Calculator} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import {useRef, useState} from "react";
@@ -59,6 +59,16 @@ export default function Home() {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="mt-6"
           >
+            <Link href="/calculadora" className="mr-4">
+              <Button
+                  variant="default"
+                  size="lg"
+                  className="group bg-emerald-600 hover:bg-emerald-700 text-white dark:bg-emerald-500 dark:hover:bg-emerald-600"
+              >
+                <Calculator className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
+                Calculadora Monetaria
+              </Button>
+            </Link>
             <Link href="/analisis-historico">
               <Button
                 variant="outline"
