@@ -60,6 +60,10 @@ La aplicación está diseñada para ser intuitiva, rápida y accesible, funciona
     - Cálculo automático de diferencias y porcentajes
     - Exportación de datos comparativos en múltiples formatos
 
+- **Calculadora Monetaria**:
+  - Conversión entre pesos cubanos (CUP) y las divisas disponibles.
+  - Cambio de dirección de la conversión.
+
 ### 🌙 Características Generales
 - Diseño responsive adaptado a dispositivos móviles y escritorio
 - Tema oscuro/claro automático (basado en preferencias del sistema)
@@ -114,6 +118,12 @@ La aplicación está desplegada y disponible en: [https://tasas-cuba.vercel.app/
     <tr>
       <td><img src="/assets/comparison.png" alt="Comparación"/></td>
       <td><img src="/assets/graph.png" alt="Análisis Gráfico"/></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2"><b>Calculadora Monetaria</b></td>
+    </tr>
+    <tr>
+      <td colspan="2"><img src="/assets/calculator.png" alt="Calculator"/></td>
     </tr>
   </table>
 </div>
