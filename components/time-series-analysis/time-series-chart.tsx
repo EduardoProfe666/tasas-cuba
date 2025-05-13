@@ -270,8 +270,8 @@ export function TimeSeriesChart({
                                     dataKey={currency}
                                     stroke={currencyColors[currency]?.stroke || "#10b981"}
                                     strokeWidth={3}
-                                    dot={{ r: 2, fill: currencyColors[currency]?.stroke || "#10b981" }}
-                                    activeDot={{ r: 6, strokeWidth: 2 }}
+                                    dot={false}
+                                    activeDot={false}
                                     animationDuration={1500}
                                     animationEasing="ease-in-out"
                                 />
