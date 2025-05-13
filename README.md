@@ -60,7 +60,7 @@ La aplicación está diseñada para ser intuitiva, rápida y accesible, funciona
     - Cálculo automático de diferencias y porcentajes
     - Exportación de datos comparativos en múltiples formatos
 
-- **Calculadora Monetaria**:
+### 💱 Calculadora Monetaria:
   - Conversión entre pesos cubanos (CUP) y las divisas disponibles.
   - Cambio de dirección de la conversión.
 
