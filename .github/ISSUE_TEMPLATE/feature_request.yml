@@ -1,0 +1,43 @@
+name: 🚀 Sugerir Feature
+description: Sugiere una nueva funcionalidad o mejora
+title: "[FEATURE]"
+labels: [enhancement]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por tu sugerencia. Por favor completa el formulario para que podamos entender mejor tu idea.
+
+  - type: input
+    id: feature_summary
+    attributes:
+      label: Resumen de la funcionalidad
+      description: Describe brevemente la funcionalidad que deseas.
+      placeholder: "Ejemplo: Añadir modo oscuro"
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivación
+      description: ¿Por qué es útil esta funcionalidad?
+      placeholder: "Mejoraría la experiencia de usuarios en ambientes con poca luz."
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: ¿Has considerado otras soluciones?
+      placeholder: "No, ninguna otra solución viable."
+      required: false
+
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: Información adicional
+      description: Cualquier otra información que quieras agregar.
+      placeholder: ""
+      required: false
