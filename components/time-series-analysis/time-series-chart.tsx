@@ -270,6 +270,7 @@ export function TimeSeriesChart({
                                     dataKey={currency}
                                     stroke={currencyColors[currency]?.stroke || "#10b981"}
                                     strokeWidth={3}
+                                    dot={false}
                                     animationDuration={1500}
                                     animationEasing="ease-in-out"
                                 />
