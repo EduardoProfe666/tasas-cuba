@@ -42,3 +42,4 @@ jobs:
           name: Jest Test Results
           path: reports/jest-junit.xml
           reporter: jest-junit
+          token: ${{ secrets.GITHUB_TOKEN }}
