@@ -78,11 +78,7 @@ export async function GET(request: NextRequest) {
       secondDate: secondDateRates,
     };
 
-    return NextResponse.json(response, {
-      headers: {
-        "Cache-Control": "public, max-age=1800, stale-while-revalidate=3600", // Cache for 30 minutes, stale for 1 hour
-      },
-    });
+    return NextResponse.json(response);
   } catch (error) {
     console.error("Error fetching exchange rates by dates:", error);
     return NextResponse.json(

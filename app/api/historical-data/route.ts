@@ -48,11 +48,7 @@ export async function GET(request: Request) {
 
         const response: HistoricalData = { data};
 
-        return NextResponse.json(response, {
-            headers: {
-                "Cache-Control": "public, max-age=1800, stale-while-revalidate=3600", // Cache for 30 minutes, stale for 1 hour
-            },
-        });
+        return NextResponse.json(response);
     } catch (error) {
         console.error("Error fetching historical data:", error);
         return NextResponse.json(
