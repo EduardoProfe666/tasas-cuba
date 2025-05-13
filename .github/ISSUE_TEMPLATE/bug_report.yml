@@ -1,0 +1,54 @@
+name: 🐛 Reportar Bug
+description: Reporta un error en el proyecto
+title: "[BUG]"
+labels: [bug]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportar un bug. Por favor completa la información para ayudarnos a reproducirlo y solucionarlo.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Resumen breve del bug
+      description: Describe brevemente el problema.
+      placeholder: "Ejemplo: Error al cargar la página principal"
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: Pasos para reproducir
+      description: Describe paso a paso cómo reproducir el bug.
+      placeholder: |
+        1. Ir a la página de inicio
+        2. Hacer clic en "Iniciar sesión"
+        3. Ver el error
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Comportamiento esperado
+      description: ¿Qué esperabas que ocurriera?
+      placeholder: "La página debería cargar sin errores."
+      required: true
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: Comportamiento actual
+      description: ¿Qué ocurrió realmente?
+      placeholder: "Aparece un error 500."
+      required: true
+
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: Información adicional
+      description: Cualquier otra información que pueda ayudar.
+      placeholder: "Logs, capturas de pantalla, etc."
+      required: false
