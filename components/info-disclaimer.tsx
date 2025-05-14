@@ -13,7 +13,7 @@ export function InfoDisclaimer({ variant = "full", className = "" }: InfoDisclai
   if (variant === "compact") {
     return (
       <TooltipProvider>
-        <Tooltip delayDuration={0}>
+        <Tooltip supportMobileTap delayDuration={0}>
           <TooltipTrigger asChild>
             <button type="button" aria-label="Información sobre la fuente de las tasas de cambio"
               className={`inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 cursor-help ${className}`}

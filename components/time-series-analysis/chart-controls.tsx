@@ -89,7 +89,7 @@ export function ChartControls({
                 </div>
             </div>
 
-            <div className="bg-slate-800/50 rounded-lg p-4">
+            <div className="bg-slate-800 border-slate-700 rounded-lg p-4">
                 <h3 className="text-sm font-medium text-slate-300 mb-3 flex items-center gap-2">
                     <Activity className="h-4 w-4" />
                     Indicadores técnicos
@@ -100,7 +100,7 @@ export function ChartControls({
                         <Switch id="average" checked={showAverage} onCheckedChange={setShowAverage} />
                         <Label htmlFor="average" className="cursor-pointer text-slate-300">
                             <TooltipProvider>
-                                <Tooltip>
+                                <Tooltip delayDuration={0} supportMobileTap>
                                     <TooltipTrigger asChild>
                     <span className="flex items-center gap-1">
                       Promedio
@@ -121,7 +121,7 @@ export function ChartControls({
                         <Switch id="sma" checked={showSMA} onCheckedChange={setShowSMA} />
                         <Label htmlFor="sma" className="cursor-pointer text-slate-300">
                             <TooltipProvider>
-                                <Tooltip>
+                                <Tooltip delayDuration={0} supportMobileTap>
                                     <TooltipTrigger asChild>
                     <span className="flex items-center gap-1">
                       SMA (14)
@@ -143,7 +143,7 @@ export function ChartControls({
                         <Switch id="ema" checked={showEMA} onCheckedChange={setShowEMA} />
                         <Label htmlFor="ema" className="cursor-pointer text-slate-300">
                             <TooltipProvider>
-                                <Tooltip>
+                                <Tooltip delayDuration={0} supportMobileTap>
                                     <TooltipTrigger asChild>
                     <span className="flex items-center gap-1">
                       EMA (14)
@@ -164,7 +164,7 @@ export function ChartControls({
                         <Switch id="bollinger" checked={showBollinger} onCheckedChange={setShowBollinger} />
                         <Label htmlFor="bollinger" className="cursor-pointer text-slate-300">
                             <TooltipProvider>
-                                <Tooltip>
+                                <Tooltip delayDuration={0} supportMobileTap>
                                     <TooltipTrigger asChild>
                     <span className="flex items-center gap-1">
                       Bandas Bollinger

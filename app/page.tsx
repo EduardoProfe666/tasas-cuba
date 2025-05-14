@@ -66,7 +66,7 @@ export default function Home() {
               <Button
                   variant="default"
                   size="lg"
-                  className="group mr-4 bg-emerald-600 hover:bg-emerald-700 text-white dark:bg-emerald-500 dark:hover:bg-emerald-600"
+                  className="group mr-4 bg-emerald-600 hover:bg-emerald-700 text-white dark:bg-emerald-600 dark:hover:bg-emerald-500"
               >
                 <Calculator className="mr-2 h-5 w-5 transition-transform group-hover:scale-110"/>
                 Calculadora Monetaria
@@ -76,7 +76,7 @@ export default function Home() {
               <Button
                   variant="outline"
                   size="lg"
-                  className="group mt-5 bg-white dark:bg-slate-800 border-emerald-200 dark:border-emerald-800 hover:border-emerald-300 dark:hover:border-emerald-700 text-emerald-600 dark:text-emerald-400"
+                  className="group mt-5 bg-white dark:bg-slate-800 dark:hover:bg-slate-700 border-emerald-200 dark:border-emerald-800 hover:border-emerald-300 dark:hover:border-emerald-700 text-emerald-600 dark:text-emerald-400"
               >
                 <ChartLineUp className="mr-2 h-5 w-5 transition-transform group-hover:scale-110"/>
                 Análisis histórico
