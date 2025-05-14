@@ -9,6 +9,10 @@ import {ArrowRightLeft, CalendarDays, Loader2, RefreshCcw, Repeat2} from "lucide
 import clsx from "clsx"
 import {InfoDisclaimer} from "@/components/info-disclaimer";
 import {es} from "date-fns/locale";
+import { DatePicker } from "@/components/ui/date-picker"
+
+const MIN_DATE = new Date(2021, 0, 1)
+const TODAY = new Date()
 
 const saveToLocalStorage = (key: string, data: any) => {
     try {
@@ -39,11 +43,19 @@ export default function Calculator() {
     const [direction, setDirection] = useState<"CUP_TO_OTHER" | "OTHER_TO_CUP">("CUP_TO_OTHER")
     const [targetCurrency, setTargetCurrency] = useState<CurrencyData | null>(null)
     const [result, setResult] = useState<number | null>(null)
+    const [selectedDate, setSelectedDate] = useState<Date>(TODAY)
 
     const currencyOrder = ["USD", "ECU", "MLC", "TRX", "USDT_TRC20", "BTC"]
 
+    const handleDateChange = (date: Date | undefined) => {
+        if (!date) return
+        if (date < MIN_DATE || date > TODAY) return
+        setSelectedDate(date)
+        fetchData(date)
+    }
+
     // Fetch data
-    const fetchData = async () => {
+    const fetchData = async (date?: any) => {
         setIsLoading(true)
         setError(null)
         try {
@@ -63,8 +75,8 @@ export default function Calculator() {
             }
             setCurrencies(currencyData)
 
-            const formattedDate = format(new Date(), "yyyy-MM-dd")
-            const formattedPreviousDate = format(subDays(new Date(), 1), "yyyy-MM-dd")
+            const formattedDate = format(date instanceof Date ? date ?? new Date() : new Date(), "yyyy-MM-dd")
+            const formattedPreviousDate = format(subDays(date instanceof Date ? date ?? new Date() : new Date(), 1), "yyyy-MM-dd")
             const firstDate = encodeURIComponent(formattedDate)
             const secondDate = encodeURIComponent(formattedPreviousDate)
 
@@ -203,52 +215,74 @@ export default function Calculator() {
                 {/* Selector y botón de swap */}
                 <div className="flex items-center gap-2">
                     <div className="flex-1">
-                        <label htmlFor="currency"
-                               className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                        <label
+                            htmlFor="currency"
+                            className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1"
+                        >
                             {direction === "CUP_TO_OTHER" ? "Convertir a" : "Convertir desde"}
                         </label>
-                        <div className="relative">
-                            <select
-                                id="currency"
-                                value={targetCurrency?.code || ""}
-                                onChange={e => {
-                                    const code = e.target.value
-                                    const selected = currencies.find(c => c.code === code)
-                                    setTargetCurrency(selected || null)
-                                }}
-                                className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-lg font-medium text-slate-900 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                        <div className="flex items-center gap-2">
+                            <div className="flex-1 relative">
+                                <select
+                                    id="currency"
+                                    value={targetCurrency?.code || ""}
+                                    onChange={e => {
+                                        const code = e.target.value
+                                        const selected = currencies.find(c => c.code === code)
+                                        setTargetCurrency(selected || null)
+                                    }}
+                                    className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-lg font-medium text-slate-900 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                                >
+                                    {currencies
+                                        .filter(c => c.code !== "CUP")
+                                        .sort((a, b) => {
+                                            const indexA = currencyOrder.indexOf(a.code)
+                                            const indexB = currencyOrder.indexOf(b.code)
+                                            return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB)
+                                        })
+                                        .map(currency => (
+                                            <option key={currency.code} value={currency.code}>
+                                                {currency.icon ? `${currency.icon} ` : ""}
+                                                {currency.name} ({currency.code === "ECU" ? "EUR" : currency.code})
+                                            </option>
+                                        ))}
+                                </select>
+                                <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 select-none">
+                                     ▼
+                                </span>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={handleSwap}
+                                className="p-2 rounded-full bg-emerald-100 dark:bg-emerald-900 hover:bg-emerald-200 dark:hover:bg-emerald-800 text-emerald-700 dark:text-emerald-300 transition flex-shrink-0"
+                                aria-label="Invertir dirección"
+                                title="Invertir dirección"
                             >
-                                {currencies
-                                    .filter(c => c.code !== "CUP")
-                                    .sort((a, b) => {
-                                        const indexA = currencyOrder.indexOf(a.code);
-                                        const indexB = currencyOrder.indexOf(b.code);
-                                        // Si no está en la lista, lo manda al final
-                                        return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB);
-                                    })
-                                    .map(currency => (
-                                        <option key={currency.code} value={currency.code}>
-                                            {currency.icon ? `${currency.icon} ` : ""}{currency.name} ({currency.code === "ECU" ? "EUR" : currency.code})
-                                        </option>
-                                    ))}
-                            </select>
-                            {/* Flecha */}
-                            <span
-                                className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                ▼
-              </span>
+                                <Repeat2 className="w-6 h-6" />
+                            </button>
                         </div>
                     </div>
-                    <button
-                        type="button"
-                        onClick={handleSwap}
-                        className="ml-2 p-2 rounded-full bg-emerald-100 dark:bg-emerald-900 hover:bg-emerald-200 dark:hover:bg-emerald-800 text-emerald-700 dark:text-emerald-300 transition"
-                        aria-label="Invertir dirección"
-                        title="Invertir dirección"
-                    >
-                        <Repeat2 className="w-6 h-6"/>
-                    </button>
                 </div>
+
+
+                {/* Selector de fecha */}
+                <div className="w-full">
+                    <label
+                        htmlFor="date-picker"
+                        className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1"
+                    >
+                        Selecciona la fecha de las tasas
+                    </label>
+                    <DatePicker
+                        date={selectedDate}
+                        onSelect={handleDateChange}
+                        minDate={MIN_DATE}
+                        maxDate={TODAY}
+                        locale={es}
+                        fixedWidthMd={false}
+                    />
+                </div>
+
 
                 {/* Resultado */}
                 <motion.div
@@ -297,10 +331,10 @@ export default function Calculator() {
                                 className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-900/40 border border-emerald-100 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 font-semibold shadow-sm">
                                 <ArrowRightLeft className="w-4 h-4"/>
                                 <span>
-                                    1 <span className="font-bold">{targetCurrency.code === 'ECU' ? 'EUR' : targetCurrency.code}</span>
+                                    1 <span className="font-bold">{direction === "CUP_TO_OTHER" ? 'CUP' : (targetCurrency.code === 'ECU' ? 'EUR' : targetCurrency.code)}</span>
                                     <span className="mx-1">=</span>
-                                    <span className="font-mono">{rate.value}</span> <span
-                                    className="font-bold">CUP</span>
+                                    <span className="font-mono">{direction === "CUP_TO_OTHER" ? (rate.value > 0 ? (1/rate.value).toFixed(6) : 0) : rate.value}</span> <span
+                                    className="font-bold">{direction === "CUP_TO_OTHER" ? 'CUP' : (targetCurrency.code === 'ECU' ? 'EUR' : targetCurrency.code)}</span>
                                   </span>
                             </div>
                             <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 mt-1">

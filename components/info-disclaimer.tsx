@@ -13,14 +13,14 @@ export function InfoDisclaimer({ variant = "full", className = "" }: InfoDisclai
   if (variant === "compact") {
     return (
       <TooltipProvider>
-        <Tooltip>
+        <Tooltip delayDuration={0}>
           <TooltipTrigger asChild>
-            <div
+            <button type="button" aria-label="Información sobre la fuente de las tasas de cambio"
               className={`inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 cursor-help ${className}`}
             >
               <Info className="h-4 w-4" />
-              <span className="text-xs">Fuente: elToque</span>
-            </div>
+              <span className="text-xs select-none">Fuente: elToque</span>
+            </button>
           </TooltipTrigger>
           <TooltipContent side="top" className="max-w-xs">
             <p className="text-sm">

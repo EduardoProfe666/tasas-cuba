@@ -190,61 +190,65 @@ export function ExchangeRatesDashboard() {
           ))}
         </div>
       ) : currentRates && previousRates ? (
-        <>
-          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 mb-6 transition-all duration-200 hover:shadow-lg">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-              <div>
-                <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200">Información actualizada</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  Fecha: {format(date, "dd 'de' MMMM 'de' yyyy", { locale: es })}
-                </p>
-              </div>
-              <div className="flex items-center gap-2">
-                {isOffline && (
-                  <span className="text-xs px-2 py-1 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 rounded-full font-medium">
-                    Datos almacenados localmente
-                  </span>
-                )}
-                {currentRates && (
-                  <div className="text-sm px-3 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-full font-medium">
-                    Actualizado a las {formatTime(new Date().getHours(), new Date().getMinutes())}
-                  </div>
-                )}
+          <>
+            <div
+                className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 mb-6 transition-all duration-200 hover:shadow-lg">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                  <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200">Información actualizada</h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    Fecha: {format(date, "dd 'de' MMMM 'de' yyyy", {locale: es})}
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 justify-center md:justify-end">
+                  {isOffline && (
+                      <span
+                          className="text-xs px-3 py-1 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 rounded-full font-medium whitespace-nowrap">
+          Datos almacenados localmente
+        </span>
+                  )}
+                  {currentRates && (
+                      <div
+                          className="text-sm px-3 py-1 md:mt-0 mt-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-full font-medium whitespace-nowrap">
+                        Actualizado a las {formatTime(new Date().getHours(), new Date().getMinutes())}
+                      </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {currentRates &&
-              previousRates &&
-              (() => {
-                const currencyOrder = ["USD", "ECU", "MLC", "TRX", "USDT_TRC20", "BTC"]
 
-                return currencyOrder.map((currency) => {
-                  const exchangeRate = currentRates.find(x => x.currency.code === currency);
-                  const previousExchangeRate = previousRates.find(x => x.currency.code === currency);
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {currentRates &&
+                  previousRates &&
+                  (() => {
+                    const currencyOrder = ["USD", "ECU", "MLC", "TRX", "USDT_TRC20", "BTC"]
 
-                  const rate = exchangeRate?.value ?? previousExchangeRate?.value ?? 1
-                  const previousRate = previousExchangeRate?.value ?? 1
-                  const change = rate - previousRate
-                  const percentChange = (change / previousRate) * 100
+                    return currencyOrder.map((currency) => {
+                      const exchangeRate = currentRates.find(x => x.currency.code === currency);
+                      const previousExchangeRate = previousRates.find(x => x.currency.code === currency);
 
-                  return (
-                    <ExchangeRateCard
-                      key={currency}
-                      currency={currency}
-                      currencyName={currencies.find(x => x.code === currency)?.name || currency}
-                      icon={currencies.find(x => x.code === currency)?.icon  || "💱"}
-                      currentRate={rate}
-                      previousRate={previousRate}
-                      change={change}
-                      percentChange={percentChange}
-                    />
-                  )
-                })
-              })()}
-          </div>
-        </>
+                      const rate = exchangeRate?.value ?? previousExchangeRate?.value ?? 1
+                      const previousRate = previousExchangeRate?.value ?? 1
+                      const change = rate - previousRate
+                      const percentChange = (change / previousRate) * 100
+
+                      return (
+                          <ExchangeRateCard
+                              key={currency}
+                              currency={currency}
+                              currencyName={currencies.find(x => x.code === currency)?.name || currency}
+                              icon={currencies.find(x => x.code === currency)?.icon || "💱"}
+                              currentRate={rate}
+                              previousRate={previousRate}
+                              change={change}
+                              percentChange={percentChange}
+                          />
+                      )
+                    })
+                  })()}
+            </div>
+          </>
       ) : null}
     </div>
   )

@@ -46,7 +46,10 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-12">
-          <h1 className="text-3xl md:text-5xl font-bold mb-3 text-slate-800 dark:text-slate-100 bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300">
+          <h1 className="block md:hidden text-3xl font-bold mb-3 text-slate-800 dark:text-slate-100 bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300">
+            Tasas de Cambio CUP
+          </h1>
+          <h1 className="hidden md:block text-3xl md:text-5xl font-bold mb-3 text-slate-800 dark:text-slate-100 bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300">
             Tasas de Cambio - Peso Cubano
           </h1>
           <p className="text-center text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-4">
@@ -54,10 +57,10 @@ export default function Home() {
             anteriores.
           </p>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="mt-6"
+              initial={{opacity: 0, y: 20}}
+              animate={{opacity: 1, y: 0}}
+              transition={{delay: 0.5, duration: 0.5}}
+              className="mt-6"
           >
             <Link href="/calculadora">
               <Button
@@ -65,27 +68,28 @@ export default function Home() {
                   size="lg"
                   className="group mr-4 bg-emerald-600 hover:bg-emerald-700 text-white dark:bg-emerald-500 dark:hover:bg-emerald-600"
               >
-                <Calculator className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
+                <Calculator className="mr-2 h-5 w-5 transition-transform group-hover:scale-110"/>
                 Calculadora Monetaria
               </Button>
             </Link>
             <Link href="/analisis-historico">
               <Button
-                variant="outline"
-                size="lg"
-                className="group mt-5 bg-white dark:bg-slate-800 border-emerald-200 dark:border-emerald-800 hover:border-emerald-300 dark:hover:border-emerald-700 text-emerald-600 dark:text-emerald-400"
+                  variant="outline"
+                  size="lg"
+                  className="group mt-5 bg-white dark:bg-slate-800 border-emerald-200 dark:border-emerald-800 hover:border-emerald-300 dark:hover:border-emerald-700 text-emerald-600 dark:text-emerald-400"
               >
-                <ChartLineUp className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
+                <ChartLineUp className="mr-2 h-5 w-5 transition-transform group-hover:scale-110"/>
                 Análisis histórico
               </Button>
             </Link>
           </motion.div>
         </header>
-        <ExchangeRatesDashboard />
+        <ExchangeRatesDashboard/>
         <div className="mt-8 mb-8">
-          <InfoDisclaimer />
+          <InfoDisclaimer/>
         </div>
-        <footer className="mt-16 text-center text-sm text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-8">
+        <footer
+            className="mt-16 text-center text-sm text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-8">
           <p>
             Desarrollado por{" "}
             <a

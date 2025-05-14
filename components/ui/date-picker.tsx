@@ -16,15 +16,16 @@ interface DatePickerProps {
     disabled?: boolean
     minDate?: Date
     maxDate?: Date
+    fixedWidthMd?: boolean
 }
 
-export function DatePicker({date, onSelect, locale = es, disabled = false, minDate, maxDate}: DatePickerProps) {
+export function DatePicker({date, onSelect, locale = es, disabled = false, minDate, maxDate, fixedWidthMd = true,}: DatePickerProps) {
     return (
         <Popover>
             <PopoverTrigger asChild>
                 <Button
                     variant={"outline"}
-                    className={cn("w-full md:w-[240px] justify-start text-left font-normal", !date && "text-muted-foreground")}
+                    className={cn("w-full justify-start text-left font-normal", !date && "text-muted-foreground", fixedWidthMd && "md:w-[240px]")}
                     disabled={disabled}
                 >
                     <CalendarIcon className="mr-2 h-4 w-4"/>
