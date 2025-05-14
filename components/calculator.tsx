@@ -9,6 +9,10 @@ import {ArrowRightLeft, CalendarDays, Loader2, RefreshCcw, Repeat2} from "lucide
 import clsx from "clsx"
 import {InfoDisclaimer} from "@/components/info-disclaimer";
 import {es} from "date-fns/locale";
+import { DatePicker } from "@/components/ui/date-picker"
+
+const MIN_DATE = new Date(2021, 0, 1)
+const TODAY = new Date()
 
 const saveToLocalStorage = (key: string, data: any) => {
     try {
@@ -39,11 +43,19 @@ export default function Calculator() {
     const [direction, setDirection] = useState<"CUP_TO_OTHER" | "OTHER_TO_CUP">("CUP_TO_OTHER")
     const [targetCurrency, setTargetCurrency] = useState<CurrencyData | null>(null)
     const [result, setResult] = useState<number | null>(null)
+    const [selectedDate, setSelectedDate] = useState<Date>(TODAY)
 
     const currencyOrder = ["USD", "ECU", "MLC", "TRX", "USDT_TRC20", "BTC"]
 
+    const handleDateChange = (date: Date | undefined) => {
+        if (!date) return
+        if (date < MIN_DATE || date > TODAY) return
+        setSelectedDate(date)
+        fetchData(date)
+    }
+
     // Fetch data
-    const fetchData = async () => {
+    const fetchData = async (date?: any) => {
         setIsLoading(true)
         setError(null)
         try {
@@ -63,8 +75,8 @@ export default function Calculator() {
             }
             setCurrencies(currencyData)
 
-            const formattedDate = format(new Date(), "yyyy-MM-dd")
-            const formattedPreviousDate = format(subDays(new Date(), 1), "yyyy-MM-dd")
+            const formattedDate = format(date instanceof Date ? date ?? new Date() : new Date(), "yyyy-MM-dd")
+            const formattedPreviousDate = format(subDays(date instanceof Date ? date ?? new Date() : new Date(), 1), "yyyy-MM-dd")
             const firstDate = encodeURIComponent(formattedDate)
             const secondDate = encodeURIComponent(formattedPreviousDate)
 
@@ -249,6 +261,25 @@ export default function Calculator() {
                         <Repeat2 className="w-6 h-6"/>
                     </button>
                 </div>
+
+                {/* Selector de fecha */}
+                <div className="w-full">
+                    <label
+                        htmlFor="date-picker"
+                        className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1"
+                    >
+                        Selecciona la fecha de las tasas
+                    </label>
+                    <DatePicker
+                        date={selectedDate}
+                        onSelect={handleDateChange}
+                        minDate={MIN_DATE}
+                        maxDate={TODAY}
+                        locale={es}
+                        fixedWidthMd={false}
+                    />
+                </div>
+
 
                 {/* Resultado */}
                 <motion.div
