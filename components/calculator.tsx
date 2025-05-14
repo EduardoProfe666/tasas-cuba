@@ -334,7 +334,7 @@ export default function Calculator() {
                                     1 <span className="font-bold">{direction === "CUP_TO_OTHER" ? 'CUP' : (targetCurrency.code === 'ECU' ? 'EUR' : targetCurrency.code)}</span>
                                     <span className="mx-1">=</span>
                                     <span className="font-mono">{direction === "CUP_TO_OTHER" ? (rate.value > 0 ? (1/rate.value).toFixed(6) : 0) : rate.value}</span> <span
-                                    className="font-bold">{direction === "CUP_TO_OTHER" ? 'CUP' : (targetCurrency.code === 'ECU' ? 'EUR' : targetCurrency.code)}</span>
+                                    className="font-bold">{direction === "CUP_TO_OTHER" ? (targetCurrency.code === 'ECU' ? 'EUR' : targetCurrency.code) : 'CUP'}</span>
                                   </span>
                             </div>
                             <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 mt-1">
