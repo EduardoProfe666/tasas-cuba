@@ -240,7 +240,7 @@ export function TimeSeriesAnalysis() {
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-            <Card className="bg-slate-900 border-slate-800 text-slate-200">
+            <Card className="bg-slate-900 border-slate-700 text-slate-200 shadow-lg hover-shadow-2xl">
                 <CardHeader>
                     <CardTitle>Análisis Histórico de Tasas de Cambio</CardTitle>
                     <CardDescription className="text-slate-400">

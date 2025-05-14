@@ -208,7 +208,7 @@ export default function Calculator() {
                         placeholder={direction === "CUP_TO_OTHER"
                             ? "Introduce la cantidad en pesos cubanos"
                             : `Introduce la cantidad en ${targetCurrency?.name || "moneda"}`}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-lg font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                        className="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-md font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
                     />
                 </div>
 
@@ -231,7 +231,7 @@ export default function Calculator() {
                                         const selected = currencies.find(c => c.code === code)
                                         setTargetCurrency(selected || null)
                                     }}
-                                    className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-lg font-medium text-slate-900 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                                    className="cursor-pointer w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-md font-medium text-slate-900 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
                                 >
                                     {currencies
                                         .filter(c => c.code !== "CUP")

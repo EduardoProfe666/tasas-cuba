@@ -12,9 +12,9 @@ export function HistoricalAnalysis() {
 
   return (
       <div className="space-y-8">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
+        <motion.div className="border-slate-700" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full border-slate-700">
+            <TabsList className="grid w-full grid-cols-2 border-slate-700">
               <TabsTrigger value="graph" className="flex items-center gap-2">
                 <TrendingUp className="h-4 w-4" />
                 Análisis Gráfico

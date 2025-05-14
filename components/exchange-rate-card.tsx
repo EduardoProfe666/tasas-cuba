@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { ArrowDown, ArrowUp, HelpCircle, Minus, TrendingDown, TrendingUp } from "lucide-react"
 import { motion } from "framer-motion"
+import {useState} from "react";
 
 interface ExchangeRateCardProps {
   currency: string
@@ -53,11 +54,11 @@ export function ExchangeRateCard({
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-      <Card className="overflow-hidden dark:bg-slate-900 shadow-2xl border-slate-200 dark:border-slate-700 transition-all duration-200 hover:shadow-lg">
+      <Card className="overflow-hidden dark:bg-slate-800 shadow-lg border-slate-200 dark:border-slate-700 dark:hover:bg-slate-700 transition-all duration-200 hover:shadow-2xl">
         <CardHeader className="pb-2">
           <div className="flex justify-between items-start">
             <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 text-2xl">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-600 text-2xl">
                 {icon}
               </div>
               <div>
@@ -66,16 +67,16 @@ export function ExchangeRateCard({
               </div>
             </div>
             <TooltipProvider>
-              <Tooltip>
+              <Tooltip supportMobileTap delayDuration={0}>
                 <TooltipTrigger asChild>
                   <button className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
                     <HelpCircle className="h-4 w-4" />
                     <span className="sr-only">Más información</span>
                   </button>
                 </TooltipTrigger>
-                <TooltipContent side="left">
+                <TooltipContent>
                   <p className="max-w-xs">
-                    Tasa de cambio: 1 {currency} = {currentRate} CUP (Pesos Cubanos)
+                    Tasa de cambio: 1 {currency === 'ECU' ? 'EUR' : currency} = {currentRate} CUP
                   </p>
                 </TooltipContent>
               </Tooltip>
