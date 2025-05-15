@@ -206,7 +206,7 @@ export function ExchangeRatesDashboard() {
                     <div
                         className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 mb-6 transition-all duration-200 hover:shadow-lg">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                            <div>
+                            <div className="text-center md:text-left">
                                 <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200">Información
                                     actualizada</h3>
                                 <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -216,7 +216,7 @@ export function ExchangeRatesDashboard() {
                             <div className="flex flex-wrap items-center gap-2 justify-center md:justify-end">
                                 {isOffline && (
                                     <span
-                                        className="text-xs px-3 py-1 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 rounded-full font-medium whitespace-nowrap">
+                                        className="text-sm px-3 py-1 md:mt-0 mt-2 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 rounded-full font-medium whitespace-nowrap">
           Datos almacenados localmente
         </span>
                                 )}

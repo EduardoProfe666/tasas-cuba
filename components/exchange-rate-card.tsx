@@ -54,7 +54,7 @@ export function ExchangeRateCard({
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-      <Card className="overflow-hidden dark:bg-slate-800 shadow-lg border-slate-200 dark:border-slate-700 dark:hover:bg-slate-700 transition-all duration-200 hover:shadow-2xl">
+      <Card className="overflow-hidden dark:bg-slate-800 shadow-lg border-slate-200 dark:border-slate-700  transition-all duration-200 hover:shadow-2xl">
         <CardHeader className="pb-2">
           <div className="flex justify-between items-start">
             <div className="flex items-center gap-2">
@@ -74,7 +74,7 @@ export function ExchangeRateCard({
                     <span className="sr-only">Más información</span>
                   </button>
                 </TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent side="left">
                   <p className="max-w-xs">
                     Tasa de cambio: 1 {currency === 'ECU' ? 'EUR' : currency} = {currentRate} CUP
                   </p>
