@@ -20,7 +20,7 @@ export function CurrencySelector({ selectedCurrency, onSelectCurrency, currencie
             transition={{ duration: 0.3 }}
             className="space-y-2"
         >
-            <h3 className="text-sm font-medium text-slate-300 mb-2">Selecciona una moneda</h3>
+            <h3 className="text-sm font-medium dark:text-slate-300 mb-2">Selecciona una moneda</h3>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
                 <TooltipProvider>
@@ -35,8 +35,8 @@ export function CurrencySelector({ selectedCurrency, onSelectCurrency, currencie
                                     onClick={() => onSelectCurrency((currency?.code ?? c))}
                                     className={`flex items-center justify-center gap-2 h-auto py-3 ${
                                         selectedCurrency === (currency?.code ?? c)
-                                            ? "bg-emerald-600 hover:bg-emerald-700 text-white"
-                                            : "bg-slate-800 border-slate-700 hover:bg-slate-700 text-slate-300"
+                                            ? "dark:bg-emerald-600 bg-emerald-500 dark:hover:bg-emerald-700 hover:bg-emerald-600 text-white"
+                                            : "dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 dark:text-slate-300"
                                     }`}
                                 >
                                     <span className="text-lg">{currency?.icon ?? '💱'}</span>

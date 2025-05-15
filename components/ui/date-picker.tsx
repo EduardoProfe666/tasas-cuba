@@ -26,7 +26,7 @@ export function DatePicker({date, onSelect, locale = es, disabled = false, minDa
                 <Button
                     variant={"outline"}
                     size="lg"
-                    className={cn("w-full justify-start text-left font-normal hover:bg-slate-700 bg-slate-800 focus:ring-emerald-400 border-slate-700", !date && "text-muted-foreground", fixedWidthMd && "md:w-[240px]")}
+                    className={cn("w-full justify-start text-left font-normal dark:hover:bg-slate-700 dark:bg-slate-800 focus:ring-emerald-400 dark:border-slate-700", !date && "text-muted-foreground", fixedWidthMd && "md:w-[240px]")}
                     disabled={disabled}
                 >
                     <CalendarIcon className="-ml-3 h-4 w-4"/>
@@ -34,7 +34,7 @@ export function DatePicker({date, onSelect, locale = es, disabled = false, minDa
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="end">
-                <Calendar className="bg-slate-800 " mode="single" selected={date} onSelect={onSelect} initialFocus locale={locale}
+                <Calendar className="dark:bg-slate-800 " mode="single" selected={date} onSelect={onSelect} initialFocus locale={locale}
                           minDate={minDate}
                           maxDate={maxDate}/>
             </PopoverContent>

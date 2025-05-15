@@ -55,18 +55,18 @@ export function ChartControls({
         >
             <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                    <h3 className="text-sm font-medium text-slate-300 mb-2">Tipo de gráfico</h3>
+                    <h3 className="text-sm font-medium dark:text-slate-300 mb-2">Tipo de gráfico</h3>
                     <Tabs
                         value={chartType}
                         onValueChange={(value) => setChartType(value as "area" | "line")}
                         className="w-[260px]"
                     >
-                        <TabsList className="grid grid-cols-2 bg-slate-800">
-                            <TabsTrigger value="area" className="flex items-center gap-2 data-[state=active]:bg-slate-700">
+                        <TabsList className="grid grid-cols-2 bg-slate-200 dark:bg-slate-800">
+                            <TabsTrigger value="area" className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-emerald-600 dark:data-[state=active]:text-emerald-400 rounded-md transition-all duration-200">
                                 <BarChart3 className="h-4 w-4" />
                                 Área
                             </TabsTrigger>
-                            <TabsTrigger value="line" className="flex items-center gap-2 data-[state=active]:bg-slate-700">
+                            <TabsTrigger value="line" className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-emerald-600 dark:data-[state=active]:text-emerald-400 rounded-md transition-all duration-200">
                                 <LineChart className="h-4 w-4" />
                                 Línea
                             </TabsTrigger>
@@ -81,7 +81,7 @@ export function ChartControls({
                         variant="outline"
                         size="sm"
                         onClick={onShowSummary}
-                        className="flex items-center gap-2 bg-slate-800 border-slate-700 hover:bg-slate-700 hover:border-slate-600 text-slate-300"
+                        className="flex items-center gap-2 dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 dark:hover:border-slate-600 dark:text-slate-300"
                     >
                         <Info className="h-4 w-4" />
                         Ver resumen
@@ -89,8 +89,8 @@ export function ChartControls({
                 </div>
             </div>
 
-            <div className="bg-slate-800 border-slate-700 rounded-lg p-4">
-                <h3 className="text-sm font-medium text-slate-300 mb-3 flex items-center gap-2">
+            <div className="dark:bg-slate-800 dark:border-slate-700 bg-slate-200 rounded-lg p-4">
+                <h3 className="text-sm font-medium dark:text-slate-300 mb-3 flex items-center gap-2">
                     <Activity className="h-4 w-4" />
                     Indicadores técnicos
                 </h3>
@@ -98,13 +98,13 @@ export function ChartControls({
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="flex items-center space-x-2">
                         <Switch id="average" checked={showAverage} onCheckedChange={setShowAverage} />
-                        <Label htmlFor="average" className="cursor-pointer text-slate-300">
+                        <Label htmlFor="average" className="cursor-pointer dark:text-slate-300">
                             <TooltipProvider>
                                 <Tooltip delayDuration={0} supportMobileTap>
                                     <TooltipTrigger asChild>
                     <span className="flex items-center gap-1">
                       Promedio
-                      <Info className="h-3 w-3 text-slate-400" />
+                      <Info className="h-3 w-3 dark:text-slate-400" />
                     </span>
                                     </TooltipTrigger>
                                     <TooltipContent>
@@ -119,13 +119,13 @@ export function ChartControls({
 
                     <div className="flex items-center space-x-2">
                         <Switch id="sma" checked={showSMA} onCheckedChange={setShowSMA} />
-                        <Label htmlFor="sma" className="cursor-pointer text-slate-300">
+                        <Label htmlFor="sma" className="cursor-pointer dark:text-slate-300">
                             <TooltipProvider>
                                 <Tooltip delayDuration={0} supportMobileTap>
                                     <TooltipTrigger asChild>
                     <span className="flex items-center gap-1">
                       SMA (14)
-                      <Info className="h-3 w-3 text-slate-400" />
+                      <Info className="h-3 w-3 dark:text-slate-400" />
                     </span>
                                     </TooltipTrigger>
                                     <TooltipContent>
@@ -141,13 +141,13 @@ export function ChartControls({
 
                     <div className="flex items-center space-x-2">
                         <Switch id="ema" checked={showEMA} onCheckedChange={setShowEMA} />
-                        <Label htmlFor="ema" className="cursor-pointer text-slate-300">
+                        <Label htmlFor="ema" className="cursor-pointer dark:text-slate-300">
                             <TooltipProvider>
                                 <Tooltip delayDuration={0} supportMobileTap>
                                     <TooltipTrigger asChild>
                     <span className="flex items-center gap-1">
                       EMA (14)
-                      <Info className="h-3 w-3 text-slate-400" />
+                      <Info className="h-3 w-3 dark:text-slate-400" />
                     </span>
                                     </TooltipTrigger>
                                     <TooltipContent>
@@ -162,13 +162,13 @@ export function ChartControls({
 
                     <div className="flex items-center space-x-2">
                         <Switch id="bollinger" checked={showBollinger} onCheckedChange={setShowBollinger} />
-                        <Label htmlFor="bollinger" className="cursor-pointer text-slate-300">
+                        <Label htmlFor="bollinger" className="cursor-pointer dark:text-slate-300">
                             <TooltipProvider>
                                 <Tooltip delayDuration={0} supportMobileTap>
                                     <TooltipTrigger asChild>
                     <span className="flex items-center gap-1">
                       Bandas Bollinger
-                      <Info className="h-3 w-3 text-slate-400" />
+                      <Info className="h-3 w-3 dark:text-slate-400" />
                     </span>
                                     </TooltipTrigger>
                                     <TooltipContent>

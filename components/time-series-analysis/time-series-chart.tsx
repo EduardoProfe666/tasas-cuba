@@ -67,7 +67,7 @@ export function TimeSeriesChart({
             transition={{ duration: 0.5 }}
             className="relative"
         >
-            <div className="w-full bg-slate-800 rounded-lg p-4 shadow-md" ref={chartRef}>
+            <div className="w-full dark:bg-slate-800 rounded-lg p-4 shadow-md" ref={chartRef}>
                 {/* Gráfico principal */}
                 <div className="mb-4">
                     <ResponsiveContainer width="100%" height={mainChartHeight}>

@@ -13,6 +13,8 @@ import {ExchangeRateData, ExchangeRateResponse} from "@/types/exchange-rate";
 import {CurrencyData} from "@/types/currency-data";
 import {useToast} from "@/hooks/use-toast"
 import {TooltipContent, TooltipProvider, TooltipTrigger, Tooltip} from "@/components/ui/tooltip";
+import {useConfig} from "@/hooks/use-config";
+import {AppConfig} from "@/types/config";
 
 
 const saveToLocalStorage = (key: string, data: any) => {
@@ -69,7 +71,10 @@ export function ExchangeRatesDashboard() {
                 } else {
                     const data: CurrencyData[] = await currencyResponse.json()
                     setCurrencies(data)
-                    saveToLocalStorage('currency', data)
+                    const config: AppConfig = getFromLocalStorage('tasas-cuba-config')
+                    if(config && config?.privacy?.saveOfflineData){
+                        saveToLocalStorage('currency', data)
+                    }
                 }
             }
 
@@ -106,10 +111,11 @@ export function ExchangeRatesDashboard() {
                 }
 
                 setCurrentRates(data.firstDate)
-                if (data.firstDate.length > 0)
+                const config: AppConfig = getFromLocalStorage('tasas-cuba-config')
+                if (data.firstDate.length > 0 && config && config?.privacy?.saveOfflineData)
                     saveToLocalStorage(currentKey, data)
                 setPreviousRates(data.secondDate)
-                if (data.secondDate.length > 0)
+                if (data.secondDate.length > 0 && config && config?.privacy?.saveOfflineData)
                     saveToLocalStorage(previousKey, data.secondDate)
             }
         } catch (err) {
@@ -164,7 +170,7 @@ export function ExchangeRatesDashboard() {
                                     size="icon"
                                     onClick={handleRefresh}
                                     disabled={loading || isRefreshing}
-                                    className="h-11 w-11 hover:bg-slate-700 bg-slate-800  border-slate-700"
+                                    className="h-11 w-11 dark:hover:bg-slate-700 dark:bg-slate-800  dark:border-slate-700"
                                 >
                                     <RefreshCw className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}/>
                                     <span className="sr-only">Actualizar</span>

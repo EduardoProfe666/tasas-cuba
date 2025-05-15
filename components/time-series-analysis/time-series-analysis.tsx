@@ -23,6 +23,8 @@ import {
 import {CurrencyData} from "@/types/currency-data";
 import {HistoricalData} from "@/types/historical-data";
 import {ExchangeRateData} from "@/types/exchange-rate";
+import {useConfig} from "@/hooks/use-config";
+import {AppConfig} from "@/types/config";
 
 const saveToLocalStorage = (key: string, data: any) => {
     try {
@@ -161,7 +163,10 @@ export function TimeSeriesAnalysis() {
                 else{
                     const data: CurrencyData[] = await currencyResponse.json()
                     setCurrencies(data)
-                    saveToLocalStorage('currency', data)
+                    const config: AppConfig = getFromLocalStorage('tasas-cuba-config')
+                    if(config && config?.privacy?.saveOfflineData){
+                        saveToLocalStorage('currency', data)
+                    }
                     return 1
                 }
             }
@@ -181,7 +186,10 @@ export function TimeSeriesAnalysis() {
                 }else{
                     const data: HistoricalData = await historicalDataResponse.json()
                     setHistoricalData(data.data)
-                    saveToLocalStorage('historical', data)
+                    const config: AppConfig = getFromLocalStorage('tasas-cuba-config')
+                    if(config && config?.privacy?.saveHistory){
+                        saveToLocalStorage('historical', data)
+                    }
                     return 1
                 }
             }
@@ -240,10 +248,10 @@ export function TimeSeriesAnalysis() {
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-            <Card className="bg-slate-900 border-slate-700 text-slate-200 shadow-lg hover-shadow-2xl">
+            <Card className="dark:bg-slate-900 dark:border-slate-700 dark:text-slate-200 shadow-lg hover-shadow-2xl">
                 <CardHeader>
                     <CardTitle>Análisis Histórico de Tasas de Cambio</CardTitle>
-                    <CardDescription className="text-slate-400">
+                    <CardDescription className="dark:text-slate-400">
                         Visualiza la evolución de las tasas a lo largo del tiempo. Selecciona un rango de fechas y la moneda que
                         deseas analizar.
                     </CardDescription>
@@ -280,7 +288,7 @@ export function TimeSeriesAnalysis() {
 
                         {loading ? (
                             <div className="w-full h-[400px]">
-                                <Skeleton className="w-full h-full rounded-lg bg-slate-800" />
+                                <Skeleton className="w-full h-full rounded-lg dark:bg-slate-800" />
                             </div>
                         ) : chartData.length > 0 ? (
                             <motion.div
@@ -290,23 +298,23 @@ export function TimeSeriesAnalysis() {
                                 className="space-y-6"
                             >
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                                    <Card className="bg-slate-800 border-slate-700">
+                                    <Card className="dark:bg-slate-800 dark:border-slate-700">
                                         <CardContent className="p-4">
-                                            <div className="text-sm text-slate-400">Valor Mínimo</div>
-                                            <div className="text-2xl font-bold text-slate-100">{min} CUP</div>
+                                            <div className="text-sm dark:text-slate-400 text-slate-600">Valor Mínimo</div>
+                                            <div className="text-2xl font-bold dark:text-slate-100">{min} CUP</div>
                                         </CardContent>
                                     </Card>
-                                    <Card className="bg-slate-800 border-slate-700">
+                                    <Card className="dark:bg-slate-800 dark:border-slate-700">
                                         <CardContent className="p-4">
-                                            <div className="text-sm text-slate-400">Valor Máximo</div>
-                                            <div className="text-2xl font-bold text-slate-100">{max} CUP</div>
+                                            <div className="text-sm dark:text-slate-400 text-slate-600">Valor Máximo</div>
+                                            <div className="text-2xl font-bold dark:text-slate-100">{max} CUP</div>
                                         </CardContent>
                                     </Card>
-                                    <Card className="bg-slate-800 border-slate-700">
+                                    <Card className="dark:bg-slate-800 dark:border-slate-700">
                                         <CardContent className="p-4">
-                                            <div className="text-sm text-slate-400">Variación</div>
+                                            <div className="text-sm dark:text-slate-400 text-slate-600">Variación</div>
                                             <div
-                                                className={`text-2xl font-bold ${percentChange > 0 ? "text-rose-400" : percentChange < 0 ? "text-emerald-400" : "text-slate-400"}`}
+                                                className={`text-2xl font-bold ${percentChange > 0 ? "dark:text-rose-400 text-rose-500" : percentChange < 0 ? "dark:text-emerald-400 text-emerald-500" : "dark:text-slate-400 text-slate-500"}`}
                                             >
                                                 {percentChange.toFixed(2)}%
                                             </div>
@@ -339,17 +347,17 @@ export function TimeSeriesAnalysis() {
                                     currencies={currencies}
                                 />
 
-                                <div className="bg-slate-800/50 rounded-lg p-4 mt-6">
-                                    <h3 className="text-sm font-medium text-slate-300 mb-2">Interpretación</h3>
-                                    <p className="text-sm text-slate-400">
+                                <div className="dark:bg-slate-800/50 bg-slate-200/50 rounded-lg p-4 mt-6">
+                                    <h3 className="text-sm font-medium dark:text-slate-300 text-slate-600 mb-2">Interpretación</h3>
+                                    <p className="text-sm dark:text-slate-400">
                                         Este gráfico muestra la evolución de la tasa de cambio en pesos cubanos (CUP) durante el período
                                         seleccionado. Un valor más alto indica que se necesitan más pesos cubanos para comprar la moneda
                                         extranjera.
                                     </p>
-                                    <p className="text-sm text-slate-400 mt-2">
+                                    <p className="text-sm dark:text-slate-400 text-slate-600 mt-2">
                                         <strong>Indicadores técnicos:</strong>
                                     </p>
-                                    <ul className="text-sm text-slate-400 list-disc pl-5 mt-1 space-y-1">
+                                    <ul className="text-sm dark:text-slate-400 text-slate-500 list-disc pl-5 mt-1 space-y-1">
                                         <li>
                                             <span className="text-amber-400 font-medium">SMA (14):</span> Media Móvil Simple de 14 períodos,
                                             útil para identificar tendencias a medio plazo.
@@ -366,7 +374,7 @@ export function TimeSeriesAnalysis() {
                                 </div>
                             </motion.div>
                         ) : (
-                            <div className="text-center py-12 text-slate-400">
+                            <div className="text-center py-12 dark:text-slate-400 text-slate-600">
                                 No hay datos disponibles para el rango de fechas seleccionado.
                             </div>
                         )}
