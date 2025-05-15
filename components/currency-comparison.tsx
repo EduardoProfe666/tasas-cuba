@@ -65,7 +65,7 @@ export function CurrencyComparison({ data1, data2, date1, date2 }: CurrencyCompa
         </div>
       </div>
 
-      <div className="overflow-x-auto" id="comparison-table">
+      <div className="overflow-x-auto shadow-md rounded-lg" id="comparison-table">
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-slate-100 dark:bg-slate-800">
@@ -99,7 +99,7 @@ export function CurrencyComparison({ data1, data2, date1, date2 }: CurrencyCompa
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800"
+                  className="bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   <td className="px-4 py-4">
                     <div className="flex items-center gap-2">
@@ -143,7 +143,7 @@ export function CurrencyComparison({ data1, data2, date1, date2 }: CurrencyCompa
         </table>
       </div>
 
-      <div className="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-4 mt-6">
+      <div className="bg-slate-100 dark:bg-slate-800/50 rounded-lg p-4 mt-6">
         <h3 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Interpretación</h3>
         <p className="text-sm text-slate-600 dark:text-slate-400">
           Un valor positivo indica un aumento en la tasa de cambio, lo que significa que se necesitan más pesos cubanos

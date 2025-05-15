@@ -58,7 +58,7 @@ export function TimeRangeSelector({ startDate, endDate, onSelectStartDate, onSel
                     variant="outline"
                     size="sm"
                     onClick={() => setPresetRange("1w")}
-                    className="bg-slate-800 border-slate-700 hover:bg-slate-700 text-slate-300"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 dark:text-slate-300"
                 >
                     1 semana
                 </Button>
@@ -66,7 +66,7 @@ export function TimeRangeSelector({ startDate, endDate, onSelectStartDate, onSel
                     variant="outline"
                     size="sm"
                     onClick={() => setPresetRange("1m")}
-                    className="bg-slate-800 border-slate-700 hover:bg-slate-700 text-slate-300"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 dark:text-slate-300"
                 >
                     1 mes
                 </Button>
@@ -74,7 +74,7 @@ export function TimeRangeSelector({ startDate, endDate, onSelectStartDate, onSel
                     variant="outline"
                     size="sm"
                     onClick={() => setPresetRange("3m")}
-                    className="bg-slate-800 border-slate-700 hover:bg-slate-700 text-slate-300"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 dark:text-slate-300"
                 >
                     3 meses
                 </Button>
@@ -82,7 +82,7 @@ export function TimeRangeSelector({ startDate, endDate, onSelectStartDate, onSel
                     variant="outline"
                     size="sm"
                     onClick={() => setPresetRange("6m")}
-                    className="bg-slate-800 border-slate-700 hover:bg-slate-700 text-slate-300"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 dark:text-slate-300"
                 >
                     6 meses
                 </Button>
@@ -90,7 +90,7 @@ export function TimeRangeSelector({ startDate, endDate, onSelectStartDate, onSel
                     variant="outline"
                     size="sm"
                     onClick={() => setPresetRange("1y")}
-                    className="bg-slate-800 border-slate-700 hover:bg-slate-700 text-slate-300"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 dark:text-slate-300"
                 >
                     1 año
                 </Button>
@@ -98,7 +98,7 @@ export function TimeRangeSelector({ startDate, endDate, onSelectStartDate, onSel
                     variant="outline"
                     size="sm"
                     onClick={() => setPresetRange("all")}
-                    className="bg-slate-800 border-slate-700 hover:bg-slate-700 text-slate-300"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 dark:text-slate-300"
                 >
                     Todo
                 </Button>
@@ -106,11 +106,11 @@ export function TimeRangeSelector({ startDate, endDate, onSelectStartDate, onSel
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1">Fecha de inicio</label>
+                    <label className="block text-sm font-medium dark:text-slate-300 mb-1">Fecha de inicio</label>
                     <DatePicker minDate={new Date(2021,1,1)} maxDate={endDate} date={startDate} onSelect={onSelectStartDate} locale={es} />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-1">Fecha de fin</label>
+                    <label className="block text-sm font-medium dark:text-slate-300 mb-1">Fecha de fin</label>
                     <DatePicker minDate={startDate} maxDate={new Date()} date={endDate} onSelect={onSelectEndDate} locale={es} />
                 </div>
             </div>

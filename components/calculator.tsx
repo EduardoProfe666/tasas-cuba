@@ -11,6 +11,8 @@ import clsx from "clsx"
 import {InfoDisclaimer} from "@/components/info-disclaimer";
 import {es} from "date-fns/locale";
 import { DatePicker } from "@/components/ui/date-picker"
+import {useConfig} from "@/hooks/use-config";
+import {AppConfig} from "@/types/config";
 
 const MIN_DATE = new Date(2021, 0, 1)
 const TODAY = new Date()
@@ -72,7 +74,9 @@ export default function Calculator() {
                 }
             } else {
                 currencyData = await currencyResponse.json()
-                saveToLocalStorage('currency', currencyData)
+                const config: AppConfig = getFromLocalStorage('tasas-cuba-config')
+                if(config && config?.privacy?.saveOfflineData)
+                    saveToLocalStorage('currency', currencyData)
             }
             setCurrencies(currencyData)
 

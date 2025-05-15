@@ -12,6 +12,8 @@ import { CurrencyComparison } from "@/components/currency-comparison"
 import { InfoDisclaimer } from "@/components/info-disclaimer"
 import {ExchangeRateData, ExchangeRateResponse} from "@/types/exchange-rate";
 import {useToast} from "@/hooks/use-toast";
+import {useConfig} from "@/hooks/use-config";
+import {AppConfig} from "@/types/config";
 
 const saveToLocalStorage = (key: string, data: any) => {
     try {
@@ -87,10 +89,11 @@ export function DateComparison() {
 
                 setCompareData1(data.firstDate)
                 setCompareData2(data.secondDate)
+                const config: AppConfig = getFromLocalStorage('tasas-cuba-config')
 
-                if(data.firstDate.length > 0)
+                if(data.firstDate.length > 0 && config && config?.privacy?.saveOfflineData)
                     saveToLocalStorage(`rates-${formattedDate1}`, data.firstDate)
-                if(data.secondDate.length > 0)
+                if(data.secondDate.length > 0 && config && config?.privacy?.saveOfflineData)
                     saveToLocalStorage(`rates-${formattedDate2}`, data.secondDate)
             }
         } catch (err) {

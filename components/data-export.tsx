@@ -257,12 +257,12 @@ export function DataExport({ data1, data2, date1, date2, elementId }: DataExport
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="lg" variant="outline" className="gap-2 bg-slate-800 hover:bg-slate-700 border-slate-700" disabled={isExporting}>
+        <Button size="lg" variant="outline" className="gap-2 dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700" disabled={isExporting}>
           {isExporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
           Exportar datos
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56 bg-slate-800 border-slate-700">
+      <DropdownMenuContent align="end" className="w-56 dark:bg-slate-800 dark:border-slate-700">
         <DropdownMenuLabel>Formato de exportación</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => exportAsImage("png")} disabled={isExporting}>
@@ -277,7 +277,7 @@ export function DataExport({ data1, data2, date1, date2, elementId }: DataExport
           <FilePdf className="mr-2 h-4 w-4" />
           <span>Documento PDF</span>
         </DropdownMenuItem>
-        <DropdownMenuSeparator className="bg-slate-700"  />
+        <DropdownMenuSeparator className="dark:bg-slate-700"  />
         <DropdownMenuItem onClick={exportAsJSON} disabled={isExporting}>
           <FileJson className="mr-2 h-4 w-4" />
           <span>Datos JSON</span>

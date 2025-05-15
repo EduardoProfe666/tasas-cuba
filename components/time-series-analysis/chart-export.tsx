@@ -140,20 +140,20 @@ export function ChartExport({ chartRef, currency, startDate, endDate }: ChartExp
                 <Button
                     variant="outline"
                     size="sm"
-                    className="gap-2 bg-slate-800 border-slate-700 hover:bg-slate-700 hover:border-slate-600 text-slate-300"
+                    className="gap-2 dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 dark:hover:border-slate-600 dark:text-slate-300"
                     disabled={isExporting}
                 >
                     {isExporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
                     Exportar gráfico
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 bg-slate-800 border-slate-700 text-slate-300">
+            <DropdownMenuContent align="end" className="w-56 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300">
                 <DropdownMenuLabel>Formato de exportación</DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-slate-700" />
+                <DropdownMenuSeparator className="dark:bg-slate-700" />
                 <DropdownMenuItem
                     onClick={() => exportAsImage("png")}
                     disabled={isExporting}
-                    className="hover:bg-slate-700 focus:bg-slate-700 cursor-pointer"
+                    className="dark:hover:bg-slate-700 dark:focus:bg-slate-700 cursor-pointer"
                 >
                     <FileImage className="mr-2 h-4 w-4" />
                     <span>Imagen PNG</span>
@@ -161,7 +161,7 @@ export function ChartExport({ chartRef, currency, startDate, endDate }: ChartExp
                 <DropdownMenuItem
                     onClick={() => exportAsImage("jpeg")}
                     disabled={isExporting}
-                    className="hover:bg-slate-700 focus:bg-slate-700 cursor-pointer"
+                    className="dark:hover:bg-slate-700 dark:focus:bg-slate-700 cursor-pointer"
                 >
                     <FileImage className="mr-2 h-4 w-4" />
                     <span>Imagen JPEG</span>
@@ -169,7 +169,7 @@ export function ChartExport({ chartRef, currency, startDate, endDate }: ChartExp
                 <DropdownMenuItem
                     onClick={exportAsPDF}
                     disabled={isExporting}
-                    className="hover:bg-slate-700 focus:bg-slate-700 cursor-pointer"
+                    className="dark:hover:bg-slate-700 dark:focus:bg-slate-700 cursor-pointer"
                 >
                     <FilePdf className="mr-2 h-4 w-4" />
                     <span>Documento PDF</span>

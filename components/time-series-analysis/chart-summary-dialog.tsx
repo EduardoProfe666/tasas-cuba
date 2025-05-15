@@ -94,37 +94,37 @@ export function ChartSummaryDialog({
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto bg-slate-900 text-slate-200 border-slate-700">
+            <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto dark:bg-slate-900 dark:text-slate-200 dark:border-slate-700">
                 <DialogHeader>
-                    <DialogTitle className="text-xl text-slate-100">
+                    <DialogTitle className="text-xl dark:text-slate-100">
                         Resumen de {currencies.find(x => x.code === currency)?.name || currency} ({currency === 'ECU' ? 'EUR' : currency})
                     </DialogTitle>
-                    <DialogDescription className="text-slate-400">
-                        Análisis del <span className="text-emerald-400">{format(startDate, "dd 'de' MMMM 'de' yyyy", { locale: es })}</span> al{" "}
-                        <span className="text-emerald-400">{format(endDate, "dd 'de' MMMM 'de' yyyy", {locale: es})}</span>
+                    <DialogDescription className="dark:text-slate-400">
+                        Análisis del <span className="dark:text-emerald-400 text-emerald-600">{format(startDate, "dd 'de' MMMM 'de' yyyy", { locale: es })}</span> al{" "}
+                        <span className="dark:text-emerald-400 text-emerald-600">{format(endDate, "dd 'de' MMMM 'de' yyyy", {locale: es})}</span>
                     </DialogDescription>
                 </DialogHeader>
 
                 <div className="space-y-6 py-4">
                     {/* Resumen principal */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div className="bg-slate-800 rounded-lg p-4 shadow-sm border border-slate-700">
-                            <div className="text-sm text-slate-400">Valor inicial</div>
-                            <div className="text-2xl font-bold text-slate-100">{firstValue?.toFixed(2)} CUP</div>
-                            <div className="text-xs text-slate-500 mt-1">{format(startDate, "dd MMM yyyy", { locale: es })}</div>
+                        <div className="dark:bg-slate-800 rounded-lg p-4 shadow-sm border dark:border-slate-700">
+                            <div className="text-sm dark:text-slate-400 text-slate-600">Valor inicial</div>
+                            <div className="text-2xl font-bold dark:text-slate-100">{firstValue?.toFixed(2)} CUP</div>
+                            <div className="text-xs dark:text-slate-500 text-slate-600 mt-1">{format(startDate, "dd MMM yyyy", { locale: es })}</div>
                         </div>
 
-                        <div className="bg-slate-800 rounded-lg p-4 shadow-sm border border-slate-700">
-                            <div className="text-sm text-slate-400">Valor final</div>
-                            <div className="text-2xl font-bold text-slate-100">{lastValue?.toFixed(2)} CUP</div>
-                            <div className="text-xs text-slate-500 mt-1">{format(endDate, "dd MMM yyyy", { locale: es })}</div>
+                        <div className="dark:bg-slate-800 rounded-lg p-4 shadow-sm border dark:border-slate-700">
+                            <div className="text-sm dark:text-slate-400 text-slate-600">Valor final</div>
+                            <div className="text-2xl font-bold dark:text-slate-100">{lastValue?.toFixed(2)} CUP</div>
+                            <div className="text-xs dark:text-slate-500 text-slate-600 mt-1">{format(endDate, "dd MMM yyyy", { locale: es })}</div>
                         </div>
 
-                        <div className="bg-slate-800 rounded-lg p-4 shadow-sm border border-slate-700">
-                            <div className="text-sm text-slate-400">Variación</div>
+                        <div className="dark:bg-slate-800 rounded-lg p-4 shadow-sm border dark:border-slate-700">
+                            <div className="text-sm dark:text-slate-400 text-slate-600">Variación</div>
                             <div
                                 className={`text-2xl font-bold flex items-center gap-1
-                ${change > 0 ? "text-rose-400" : change < 0 ? "text-emerald-400" : "text-slate-400"}`}
+                ${change > 0 ? "dark:text-rose-400 text-rose-500" : change < 0 ? "dark:text-emerald-400 text-emerald-500" : "dark:text-slate-400 text-slate-500"}`}
                             >
                                 {change === 0 ? (
                                     <Minus className="h-5 w-5" />
@@ -135,42 +135,42 @@ export function ChartSummaryDialog({
                                 )}
                                 {Math.abs(percentChange).toFixed(2)}%
                             </div>
-                            <div className="text-xs text-slate-500 mt-1">{Math.abs(change).toFixed(2)} CUP</div>
+                            <div className="text-xs dark:text-slate-500 text-slate-600 mt-1">{Math.abs(change).toFixed(2)} CUP</div>
                         </div>
                     </div>
 
                     {/* Estadísticas */}
-                    <div className="bg-slate-800 rounded-lg p-4 shadow-sm border border-slate-700">
-                        <h3 className="text-sm font-medium text-slate-300 mb-3">Estadísticas</h3>
+                    <div className="dark:bg-slate-800 rounded-lg p-4 shadow-sm border dark:border-slate-700">
+                        <h3 className="text-sm font-medium dark:text-slate-300 mb-3">Estadísticas</h3>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div>
-                                <div className="text-xs text-slate-400">Mínimo</div>
-                                <div className="text-base font-medium text-slate-100">{min?.toFixed(0)} CUP</div>
+                                <div className="text-xs dark:text-slate-400 text-slate-600">Mínimo</div>
+                                <div className="text-base font-medium dark:text-slate-100">{min?.toFixed(0)} CUP</div>
                             </div>
                             <div>
-                                <div className="text-xs text-slate-400">Máximo</div>
-                                <div className="text-base font-medium text-slate-100">{max?.toFixed(0)} CUP</div>
+                                <div className="text-xs dark:text-slate-400 text-slate-600">Máximo</div>
+                                <div className="text-base font-medium dark:text-slate-100">{max?.toFixed(0)} CUP</div>
                             </div>
                             <div>
-                                <div className="text-xs text-slate-400">Promedio</div>
-                                <div className="text-base font-medium text-slate-100">{avg?.toFixed(2)} CUP</div>
+                                <div className="text-xs dark:text-slate-400 text-slate-600">Promedio</div>
+                                <div className="text-base font-medium dark:text-slate-100">{avg?.toFixed(2)} CUP</div>
                             </div>
                             <div>
-                                <div className="text-xs text-slate-400">Volatilidad</div>
-                                <div className="text-base font-medium text-slate-100">{volatility?.toFixed(2)}</div>
+                                <div className="text-xs dark:text-slate-400 text-slate-600">Volatilidad</div>
+                                <div className="text-base font-medium dark:text-slate-100">{volatility?.toFixed(2)}</div>
                             </div>
                         </div>
                     </div>
 
                     {/* Análisis de tendencia */}
-                    <div className="bg-slate-800 rounded-lg p-4 shadow-sm border border-slate-700">
-                        <h3 className="text-sm font-medium text-slate-300 mb-3 flex items-center gap-2">
+                    <div className="dark:bg-slate-800 rounded-lg p-4 shadow-sm border dark:border-slate-700">
+                        <h3 className="text-sm font-medium dark:text-slate-300 mb-3 flex items-center gap-2">
                             {trendDirection === "alcista" ? (
-                                <TrendingUp className="h-4 w-4 text-rose-400" />
+                                <TrendingUp className="h-4 w-4 dark:text-rose-400 text-rose-500" />
                             ) : trendDirection === "bajista" ? (
-                                <TrendingDown className="h-4 w-4 text-emerald-400" />
+                                <TrendingDown className="h-4 w-4 dark:text-emerald-400 text-emerald-500" />
                             ) : (
-                                <Minus className="h-4 w-4 text-slate-400" />
+                                <Minus className="h-4 w-4 dark:text-slate-400 text-slate-500" />
                             )}
                             Análisis de tendencia
                         </h3>
@@ -181,37 +181,37 @@ export function ChartSummaryDialog({
                                     className={`px-2 py-1 rounded-full text-xs font-medium
                   ${
                                         trendDirection === "alcista"
-                                            ? "bg-rose-900/20 text-rose-400"
+                                            ? "bg-rose-900/20 dark:text-rose-400 text-rose-500"
                                             : trendDirection === "bajista"
-                                                ? "bg-emerald-900/20 text-emerald-400"
-                                                : "bg-slate-700 text-slate-300"
+                                                ? "bg-emerald-900/20 dark:text-emerald-400 text-emerald-500"
+                                                : "bg-slate-700 dark:text-slate-300 text-slate-500"
                                     }`}
                                 >
                                     Tendencia {trendDirection}
                                 </div>
 
                                 {isStrongTrend && (
-                                    <div className="px-2 py-1 rounded-full text-xs font-medium bg-amber-900/20 text-amber-400">
+                                    <div className="px-2 py-1 rounded-full text-xs font-medium bg-amber-900/20 dark:text-amber-400 text-amber-500">
                                         Tendencia fuerte
                                     </div>
                                 )}
                             </div>
 
-                            <p className="text-sm text-slate-400">{trendDescription}</p>
+                            <p className="text-sm dark:text-slate-400 text-slate-600">{trendDescription}</p>
 
                             <div className="pt-2">
-                                <h4 className="text-xs font-medium text-slate-300 mb-1">Impulso reciente</h4>
-                                <p className="text-sm text-slate-400">{momentumDescription}</p>
+                                <h4 className="text-xs font-medium dark:text-slate-300 mb-1">Impulso reciente</h4>
+                                <p className="text-sm dark:text-slate-400 text-slate-600">{momentumDescription}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-amber-900/20 rounded-lg p-4 border border-amber-800">
+                    <div className="dark:bg-amber-900/20 border-amber-200 bg-amber-50 rounded-lg p-4 border dark:border-amber-800">
                         <div className="flex gap-2">
-                            <AlertTriangle className="h-5 w-5 text-amber-400 flex-shrink-0" />
+                            <AlertTriangle className="h-5 w-5 dark:text-amber-400 text-amber-600 flex-shrink-0" />
                             <div>
-                                <h3 className="text-sm font-medium text-amber-300 mb-1">Nota importante</h3>
-                                <p className="text-sm text-amber-400">
+                                <h3 className="text-sm font-medium dark:text-amber-300 text-amber-600 mb-1">Nota importante</h3>
+                                <p className="text-sm dark:text-amber-400 text-amber-500">
                                     Este análisis se basa en el mercado informal de divisas de Cuba. Debe tenerse
                                     en cuenta a la hora de tomar decisiones.
                                 </p>
