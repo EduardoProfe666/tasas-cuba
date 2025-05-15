@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent } from "@/components/ui/card"
-import { Clock, ArrowUpDown, BellOff, Bell, AlertTriangle, CheckCircle2 } from "lucide-react"
+import {Clock, ArrowUpDown, BellOff, Bell, AlertTriangle, CheckCircle2, BellRing, Paintbrush} from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { TimeInput } from "./time-input"
 import { motion } from "framer-motion"
@@ -248,7 +248,10 @@ export function NotificationSettings() {
         return (
             <div className="space-y-4">
                 <div>
-                    <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200">Notificaciones</h3>
+                    <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                        <BellRing className="h-5 w-5 text-emerald-600 dark:text-emerald-400"/>
+                        Notificaciones
+                    </h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400">
                         Configura las alertas de cambios en las tasas de cambio.
                     </p>
@@ -286,7 +289,7 @@ export function NotificationSettings() {
         <div className="space-y-6">
             <div>
                 <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                    <Bell className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                    <BellRing className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                     Notificaciones
                 </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-400">

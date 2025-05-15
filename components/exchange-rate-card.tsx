@@ -1,10 +1,10 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { ArrowDown, ArrowUp, HelpCircle, Minus, TrendingDown, TrendingUp } from "lucide-react"
-import { motion } from "framer-motion"
-import {useState} from "react";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip"
+import {ArrowDown, ArrowUp, HelpCircle, Minus, TrendingDown, TrendingUp} from "lucide-react"
+import {motion} from "framer-motion"
+import {CurrencyConverterDialog} from "@/components/currency-converter-dialog";
 
 interface ExchangeRateCardProps {
   currency: string
@@ -95,14 +95,14 @@ export function ExchangeRateCard({
 
             <div className="flex items-center gap-2">
               <div
-                className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${getChangeColor()} ${getChangeBackgroundColor()}`}
+                  className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${getChangeColor()} ${getChangeBackgroundColor()}`}
               >
                 {getChangeIcon()}
                 <span>{Math.abs(change).toFixed(2)}</span>
               </div>
 
               <div
-                className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${getChangeColor()} ${getChangeBackgroundColor()}`}
+                  className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${getChangeColor()} ${getChangeBackgroundColor()}`}
               >
                 {getChangeIcon()}
                 <span>{Math.abs(percentChange).toFixed(2)}%</span>
@@ -116,6 +116,9 @@ export function ExchangeRateCard({
               <span className="font-medium">{previousRate} CUP</span>
             </div>
           </div>
+
+          <CurrencyConverterDialog currency={currency} currencyName={currencyName} rate={currentRate} icon={icon} />
+
         </CardContent>
       </Card>
     </motion.div>

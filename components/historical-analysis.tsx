@@ -17,11 +17,11 @@ export function HistoricalAnalysis() {
             <TabsList className="grid w-full grid-cols-2 bg-slate-200 dark:bg-slate-800">
               <TabsTrigger value="graph" className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-emerald-600 dark:data-[state=active]:text-emerald-400 rounded-md transition-all duration-200">
                 <TrendingUp className="h-4 w-4" />
-                Análisis Gráfico
+                <span className="hidden sm:inline">Análisis Gráfico</span>
               </TabsTrigger>
               <TabsTrigger value="comparison" className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-emerald-600 dark:data-[state=active]:text-emerald-400 rounded-md transition-all duration-200">
                 <Scale className="h-4 w-4" />
-                Comparación de Fechas
+                <span className="hidden sm:inline">Comparación de Fechas</span>
               </TabsTrigger>
             </TabsList>
 

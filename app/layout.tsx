@@ -13,13 +13,13 @@ import {NotificationPermission} from "@/components/config/notification-permissio
 const inter = Inter({subsets: ["latin"]})
 
 export const metadata: Metadata = {
-    title: "Tasas de Cambio - Peso Cubano",
+    title: "Candela",
     icons: {
         icon: '/icons/icon.png',
         apple: '/icons/apple-touch-icon.png'
     },
     description:
-        "Consulta las tasas de cambio actualizadas del peso cubano (CUP) frente a USD, Euro, MLC y otras monedas. Información histórica y comparativa diaria.",
+        "Consulta las tasas de cambio actualizadas del peso cubano (CUP) frente a USD, Euro, MLC y otras monedas. Calculadora, Información histórica y comparativa diaria.",
     keywords: [
         "tasas de cambio",
         "peso cubano",
@@ -33,21 +33,21 @@ export const metadata: Metadata = {
     ],
     authors: [{name: "Eduardo Alejandro González Martell", url: "https://eduardoprofe666.github.io/"}],
     creator: "Eduardo Alejandro González Martell",
-    publisher: "Eduardo Alejandro González Martell",
+    publisher: "Medialityc",
     openGraph: {
         type: "website",
         locale: "es_ES",
         url: process.env.APP_URL,
-        title: "Tasas de Cambio - Peso Cubano | Consulta Actualizada",
+        title: "Candela",
         description:
-            "Consulta las tasas de cambio actualizadas del peso cubano (CUP) frente a USD, Euro, MLC y otras monedas. Información histórica y comparativa diaria.",
-        siteName: "Tasas de Cambio - Peso Cubano",
+            "Consulta las tasas de cambio actualizadas del peso cubano (CUP) frente a USD, Euro, MLC y otras monedas. Calculadora, Información histórica y comparativa diaria.",
+        siteName: "Candela",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Tasas de Cambio - Peso Cubano | Consulta Actualizada",
+        title: "Candela | Tasas de cambio del Peso Cubano",
         description:
-            "Consulta las tasas de cambio actualizadas del peso cubano (CUP) frente a USD, Euro, MLC y otras monedas.",
+            "Consulta las tasas de cambio actualizadas del peso cubano (CUP) frente a USD, Euro, MLC y otras monedas. Calculadora, Información histórica y comparativa diaria.",
         creator: "@eduardoprofe666",
     },
     robots: {
@@ -61,13 +61,13 @@ export const metadata: Metadata = {
     appleWebApp: {
         capable: true,
         statusBarStyle: "default",
-        title: "Tasas Cuba",
+        title: "Candela",
     },
     formatDetection: {
         telephone: false,
     },
-    applicationName: "Tasas Cuba",
-    themeColor: "#10b981",
+    applicationName: "Candela",
+    themeColor: "#fb923c",
 }
 
 export default function RootLayout({

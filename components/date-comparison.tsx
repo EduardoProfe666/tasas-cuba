@@ -7,7 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Skeleton } from "@/components/ui/skeleton"
 import {format, subDays} from "date-fns"
 import { es } from "date-fns/locale"
-import { AlertCircle } from "lucide-react"
+import {AlertCircle, BellRing, Scale} from "lucide-react"
 import { CurrencyComparison } from "@/components/currency-comparison"
 import { InfoDisclaimer } from "@/components/info-disclaimer"
 import {ExchangeRateData, ExchangeRateResponse} from "@/types/exchange-rate";
@@ -121,7 +121,10 @@ export function DateComparison() {
     return (
         <Card className="dark:bg-slate-900 shadow-lg hover-shadow-2xl dark:border-slate-700">
             <CardHeader>
-                <CardTitle>Comparación entre Fechas</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                    <Scale className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                    Comparación entre Fechas
+                </CardTitle>
                 <CardDescription>
                     Compara las tasas de cambio entre dos fechas específicas para analizar las diferencias.
                 </CardDescription>

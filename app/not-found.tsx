@@ -14,8 +14,8 @@ export default function NotFound() {
                 transition={{ duration: 0.5 }}
                 className="flex flex-col items-center w-full max-w-2xl"
             >
-                <Ghost className="w-16 h-16 md:w-20 md:h-20 text-emerald-500 mb-6 drop-shadow-lg" />
-                <h1 className="text-3xl md:text-5xl font-extrabold text-slate-800 dark:text-slate-100 mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300">
+                <Ghost className="w-16 h-16 md:w-20 md:h-20 text-orange-500 mb-6 drop-shadow-lg" />
+                <h1 className="text-3xl p-2 md:text-5xl font-extrabold text-slate-800 dark:text-slate-100 mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-amber-500 dark:from-orange-400 dark:to-amber-300">
                     Página no encontrada
                 </h1>
                 <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 mb-8 text-center max-w-xl">
@@ -27,7 +27,7 @@ export default function NotFound() {
                         <Button
                             size="lg"
                             variant="default"
-                            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white dark:bg-emerald-500 dark:hover:bg-emerald-600"
+                            className="w-full bg-orange-600 hover:bg-orange-700 text-white dark:bg-orange-500 dark:hover:bg-orange-600"
                         >
                             <Home className="mr-2 h-5 w-5" />
                             Ir al inicio
@@ -37,7 +37,7 @@ export default function NotFound() {
                         <Button
                             size="lg"
                             variant="outline"
-                            className="w-full border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400"
+                            className="w-full border-orange-200 dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-orange-800 text-orange-600 dark:text-orange-400"
                         >
                             <Calculator className="mr-2 h-5 w-5" />
                             Calculadora Monetaria
@@ -47,7 +47,7 @@ export default function NotFound() {
                         <Button
                             size="lg"
                             variant="outline"
-                            className="w-full border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400"
+                            className="w-full border-orange-200 dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-orange-800 text-orange-600 dark:text-orange-400"
                         >
                             <ChartLineUp className="mr-2 h-5 w-5" />
                             Análisis histórico
@@ -62,7 +62,7 @@ export default function NotFound() {
                 href="https://eduardoprofe666.github.io/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
+                className="text-orange-600 dark:text-orange-400 hover:underline font-medium"
             >
             Contacta al desarrollador
           </a>

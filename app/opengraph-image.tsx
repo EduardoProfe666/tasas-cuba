@@ -13,7 +13,7 @@ export default async function Image() {
         <div
             style={{
                 fontFamily: '"Inter", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif',
-                background: "linear-gradient(135deg, #0f172a 0%, #155e75 70%, #22d3ee 100%)",
+                background: "linear-gradient(135deg, #ed5c3a 0%, #d68438 70%, #d39140 100%)", // naranja cálido degradado
                 width: "100%",
                 height: "100%",
                 color: "#fff",
@@ -36,9 +36,9 @@ export default async function Image() {
                 }}
                 aria-label="Iconos de monedas y tarjeta"
             >
-                <span style={{ fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Dinero en efectivo">💵</span>
-                <span style={{ fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Euro">💶</span>
-                <span style={{ fontSize: 127, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Tarjeta de crédito">💳</span>
+                <span style={{ textShadow: "0 2px 8px rgba(0,0,0,0.30)", fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Dinero en efectivo">💵</span>
+                <span style={{ textShadow: "0 2px 8px rgba(0,0,0,0.30)", fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Euro">💶</span>
+                <span style={{ textShadow: "0 2px 8px rgba(0,0,0,0.30)", fontSize: 127, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Tarjeta de crédito">💳</span>
             </div>
 
             {/* TÍTULO */}
@@ -56,15 +56,13 @@ export default async function Image() {
                     fontFamily: '"Poppins", "Inter", sans-serif',
                 }}
             >
-                Tasas de Cambio{" "}
                 <span style={{
-                    marginLeft: 18,
                     fontWeight: 700,
                     fontSize: 70,
-                    color: "#6bdef1",
+                    color: "#e89460", // naranja claro candela
                     textShadow: "0 2px 8px rgba(0,0,0,0.30)"
                 }}>
-                    {" "}CUP
+                    🔥 Candela 🔥
                 </span>
             </h1>
 
@@ -74,7 +72,7 @@ export default async function Image() {
                     fontSize: 30,
                     maxWidth: 800,
                     textAlign: "center",
-                    color: "#e0e7ef",
+                    color: "#FFE8D6", // tono crema anaranjado claro
                     margin: 0,
                     marginBottom: 0,
                     lineHeight: 1.4,
@@ -94,7 +92,7 @@ export default async function Image() {
                     bottom: 32,
                     left: 40,
                     fontSize: 22,
-                    color: "#dcfaff",
+                    color: "#FFD8B1", // naranja pálido
                     fontWeight: 600,
                     fontStyle: "italic",
                     userSelect: "none",
@@ -109,7 +107,7 @@ export default async function Image() {
                 }}
                 aria-label="Autor"
             >
-                Creado por <span style={{ marginLeft: 8, color: "#a0edfa", fontWeight: 700 }}>EduardoProfe666🎩</span>
+                Creado por <span style={{ textShadow: "0 2px 8px rgba(0,0,0,0.30)", marginLeft: 8, color: "#ec8e49", fontWeight: 700 }}>EduardoProfe666🎩@Medialityc</span>
             </div>
 
             {/* POWERED BY ELTOQUE */}
@@ -119,7 +117,7 @@ export default async function Image() {
                     bottom: 32,
                     right: 40,
                     fontSize: 22,
-                    color: "#dcfaff",
+                    color: "#FFD8B1",
                     fontWeight: 600,
                     fontStyle: "italic",
                     userSelect: "none",
@@ -134,7 +132,7 @@ export default async function Image() {
                 }}
                 aria-label="Powered by elToque"
             >
-                Powered by <span style={{ marginLeft: 8, color: "#a0edfa", fontWeight: 700 }}>elToque</span>
+                Powered by <span style={{textShadow: "0 2px 8px rgba(0,0,0,0.30)", marginLeft: 8, color: "#ec8e49", fontWeight: 700 }}>elToque</span>
             </div>
         </div>,
         { ...size }
