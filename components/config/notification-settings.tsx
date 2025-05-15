@@ -244,7 +244,7 @@ export function NotificationSettings() {
         show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
     }
 
-    if (isPWAInstalled) {
+    if (!isPWAInstalled) {
         return (
             <div className="space-y-4">
                 <div>
