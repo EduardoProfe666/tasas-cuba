@@ -45,7 +45,7 @@ export const SyncModal: FC<SyncModalProps> = ({ open, onClose, onSync, status })
                         {status === "idle" && (
                             <button
                                 onClick={onSync}
-                                className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-semibold shadow transition"
+                                className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg font-semibold shadow transition"
                                 type="button"
                             >
                                 Sincronizar ahora
@@ -53,8 +53,8 @@ export const SyncModal: FC<SyncModalProps> = ({ open, onClose, onSync, status })
                         )}
                         {status === "loading" && (
                             <div className="flex flex-col items-center gap-2">
-                                <Loader2 className="animate-spin w-10 h-10 text-emerald-600" />
-                                <span className="text-emerald-600 font-medium mt-2">
+                                <Loader2 className="animate-spin w-10 h-10 text-orange-600" />
+                                <span className="text-orange-600 font-medium mt-2">
                   Sincronizando...
                 </span>
                             </div>
