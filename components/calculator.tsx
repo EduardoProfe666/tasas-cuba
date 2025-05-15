@@ -1,11 +1,12 @@
 "use client"
+import * as Select from "@radix-ui/react-select"
 
-import {useEffect, useState} from "react"
+import {useEffect, useRef, useState} from "react"
 import {CurrencyData} from "@/types/currency-data"
 import {ExchangeRateData, ExchangeRateResponse} from "@/types/exchange-rate"
 import {format, subDays} from "date-fns"
 import {motion, AnimatePresence} from "framer-motion"
-import {ArrowRightLeft, CalendarDays, Loader2, RefreshCcw, Repeat2} from "lucide-react"
+import {ArrowRightLeft, CalendarDays, ChevronDown, Loader2, RefreshCcw, Repeat2} from "lucide-react"
 import clsx from "clsx"
 import {InfoDisclaimer} from "@/components/info-disclaimer";
 import {es} from "date-fns/locale";
@@ -147,6 +148,19 @@ export default function Calculator() {
         ? exchangeRates.find(er => er.currency.code === targetCurrency.code)
         : null;
 
+    const [rotation, setRotation] = useState(0)
+
+    const handleSwapWithRotation = () => {
+        setRotation(prev => prev + 180)
+        handleSwap()
+    }
+
+    const [isOpen, setIsOpen] = useState(false)
+    const selectRef = useRef<HTMLSelectElement>(null)
+
+    const handleFocus = () => setIsOpen(true)
+    const handleBlur = () => setIsOpen(false)
+
     return (
         <section
             className="max-w-xl mx-auto bg-white/70 dark:bg-slate-900/70 rounded-2xl shadow-lg p-6 md:p-10 border border-slate-100 dark:border-slate-800 relative">
@@ -225,7 +239,10 @@ export default function Calculator() {
                             <div className="flex-1 relative">
                                 <select
                                     id="currency"
+                                    ref={selectRef}
                                     value={targetCurrency?.code || ""}
+                                    onFocus={handleFocus}
+                                    onBlur={handleBlur}
                                     onChange={e => {
                                         const code = e.target.value
                                         const selected = currencies.find(c => c.code === code)
@@ -247,18 +264,31 @@ export default function Calculator() {
                                             </option>
                                         ))}
                                 </select>
-                                <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 select-none">
-                                     ▼
-                                </span>
+                                <motion.span
+                                    animate={{rotate: isOpen ? 180 : 0}}
+                                    transition={{type: "spring", stiffness: 300, damping: 20}}
+                                    className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-slate-400 select-none"
+                                >
+                                    <ChevronDown className="w-6 h-6"/>
+                                </motion.span>
                             </div>
                             <button
                                 type="button"
-                                onClick={handleSwap}
+                                onClick={handleSwapWithRotation}
                                 className="p-2 rounded-full bg-emerald-100 dark:bg-emerald-900 hover:bg-emerald-200 dark:hover:bg-emerald-800 text-emerald-700 dark:text-emerald-300 transition flex-shrink-0"
                                 aria-label="Invertir dirección"
                                 title="Invertir dirección"
                             >
-                                <Repeat2 className="w-6 h-6" />
+                                <motion.div
+                                    animate={{rotate: rotation}}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 300,
+                                        damping: 15
+                                    }}
+                                >
+                                    <Repeat2 className="w-6 h-6"/>
+                                </motion.div>
                             </button>
                         </div>
                     </div>

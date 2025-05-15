@@ -29,7 +29,7 @@ export function DatePicker({date, onSelect, locale = es, disabled = false, minDa
                     className={cn("w-full justify-start text-left font-normal hover:bg-slate-700 bg-slate-800 focus:ring-emerald-400 border-slate-700", !date && "text-muted-foreground", fixedWidthMd && "md:w-[240px]")}
                     disabled={disabled}
                 >
-                    <CalendarIcon className="mr-2 h-4 w-4"/>
+                    <CalendarIcon className="-ml-3 h-4 w-4"/>
                     {date ? format(date, "PPP", {locale}) : <span>Seleccionar fecha</span>}
                 </Button>
             </PopoverTrigger>
