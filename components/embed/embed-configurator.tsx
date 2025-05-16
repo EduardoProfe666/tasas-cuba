@@ -325,19 +325,23 @@ export function EmbedConfigurator() {
                 </Tabs>
             </CardContent>
 
-            <CardFooter className="flex justify-between border-t p-6">
-                <Button variant="outline" onClick={() => window.open("/embed", "_blank")} className="gap-1 dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700">
+            <CardFooter className="flex flex-col sm:flex-row justify-between border-t p-6 gap-4">
+                <Button
+                    variant="outline"
+                    onClick={() => window.open("/embed", "_blank")}
+                    className="gap-1 dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 w-full sm:w-auto"
+                >
                     <ExternalLink className="h-4 w-4" />
                     Abrir en nueva pestaña
                 </Button>
 
                 <Button
                     onClick={() => {
-                        setActiveTab("preview")
-                        handleCopy("iframe")
+                        setActiveTab("preview");
+                        handleCopy("iframe");
                     }}
                     disabled={selectedCurrencies.length === 0}
-                    className="gap-1 bg-amber-600 hover:bg-amber-700"
+                    className="gap-1 bg-amber-600 hover:bg-amber-700 w-full sm:w-auto"
                 >
                     <Code className="h-4 w-4" />
                     Obtener código
