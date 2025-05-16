@@ -204,7 +204,7 @@ export function PrivacySettings() {
         <motion.div variants={container} initial="hidden" animate="show" className="space-y-6">
             <div>
                 <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                    <ShieldAlert className="h-5 w-5 text-emerald-600 dark:text-emerald-400"/>
+                    <ShieldAlert className="h-5 w-5 text-orange-600 dark:text-orange-400"/>
                     Privacidad y Almacenamiento
                 </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -217,7 +217,7 @@ export function PrivacySettings() {
                 <Card className="border-slate-200 dark:border-slate-700 dark:bg-slate-800/50 overflow-hidden">
                     <CardHeader className="pb-2">
                         <CardTitle className="text-base flex items-center gap-2">
-                            <Database className="h-4 w-4 text-emerald-500 dark:text-emerald-400"/>
+                            <Database className="h-4 w-4 text-orange-500 dark:text-orange-400"/>
                             Uso de almacenamiento
                         </CardTitle>
                         <CardDescription>Espacio utilizado por la aplicación en este dispositivo</CardDescription>
@@ -361,7 +361,7 @@ export function PrivacySettings() {
                             htmlFor="save-history"
                             className="font-medium flex items-center gap-2 text-slate-800 dark:text-slate-200"
                         >
-                            <History className="h-4 w-4 text-emerald-600 dark:text-emerald-400"/>
+                            <History className="h-4 w-4 text-orange-600 dark:text-orange-400"/>
                             Guardar historial
                         </Label>
                         <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -372,7 +372,7 @@ export function PrivacySettings() {
                         id="save-history"
                         checked={privacy.saveHistory}
                         onCheckedChange={handleSaveHistoryToggle}
-                        className="data-[state=checked]:bg-emerald-600"
+                        className="data-[state=checked]:bg-orange-600"
                     />
                 </div>
 
@@ -383,7 +383,7 @@ export function PrivacySettings() {
                             htmlFor="save-offline"
                             className="font-medium flex items-center gap-2 text-slate-800 dark:text-slate-200"
                         >
-                            <Save className="h-4 w-4 text-emerald-600 dark:text-emerald-400"/>
+                            <Save className="h-4 w-4 text-orange-600 dark:text-orange-400"/>
                             Datos sin conexión
                         </Label>
                         <p className="text-sm text-slate-600 dark:text-slate-400">Guardar datos para uso sin conexión a
@@ -393,7 +393,7 @@ export function PrivacySettings() {
                         id="save-offline"
                         checked={privacy.saveOfflineData}
                         onCheckedChange={handleSaveOfflineDataToggle}
-                        className="data-[state=checked]:bg-emerald-600"
+                        className="data-[state=checked]:bg-orange-600"
                     />
                 </div>
             </motion.div>
