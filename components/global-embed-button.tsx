@@ -23,7 +23,7 @@ export function GlobalEmbedButton() {
                         whileTap={{scale: 0.95}}
                     >
                         <TooltipProvider>
-                            <Tooltip supportMobileTap delayDuration={0}>
+                            <Tooltip delayDuration={0}>
                                 <TooltipTrigger asChild>
                                     <Button
                                         size="icon"
