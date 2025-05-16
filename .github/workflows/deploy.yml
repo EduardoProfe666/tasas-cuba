@@ -22,6 +22,7 @@ jobs:
           echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
           echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
           echo "APP_URL=${{ secrets.APP_URL }}" >> .env
+          echo "NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}" >> .env
 
       - name: Create deploy.tar for CapRover
         run: tar --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='deploy.tar' -cvf deploy.tar .
