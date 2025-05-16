@@ -46,11 +46,8 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-12">
-          <h1 className="block md:hidden text-3xl font-bold mb-3 text-slate-800 dark:text-slate-100 bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300">
-            Tasas de Cambio CUP
-          </h1>
-          <h1 className="hidden md:block text-3xl md:text-5xl font-bold mb-3 text-slate-800 dark:text-slate-100 bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300">
-            Tasas de Cambio - Peso Cubano
+          <h1 className="block text-5xl font-bold mb-3 text-slate-800 dark:text-slate-100">
+            🔥 <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-amber-500 dark:from-orange-400 dark:to-amber-300">Candela</span> 🔥
           </h1>
           <p className="text-center text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-4">
             Información actualizada sobre las tasas de cambio en Cuba. Consulta las tasas históricas y compara con días
@@ -66,7 +63,7 @@ export default function Home() {
               <Button
                   variant="default"
                   size="lg"
-                  className="group mr-4 bg-emerald-600 hover:bg-emerald-700 text-white dark:bg-emerald-600 dark:hover:bg-emerald-500"
+                  className="group mr-4 bg-orange-600 hover:bg-orange-700 text-white dark:bg-orange-600 dark:hover:bg-orange-500"
               >
                 <Calculator className="mr-2 h-5 w-5 transition-transform group-hover:scale-110"/>
                 Calculadora Monetaria
@@ -76,7 +73,7 @@ export default function Home() {
               <Button
                   variant="outline"
                   size="lg"
-                  className="group mt-5 bg-white dark:bg-slate-800 dark:hover:bg-slate-700 border-emerald-200 dark:border-emerald-800 hover:border-emerald-300 dark:hover:border-emerald-700 text-emerald-600 dark:text-emerald-400"
+                  className="group mt-5 bg-white dark:bg-slate-800 dark:hover:bg-slate-700 border-orange-200 dark:border-orange-800 hover:border-orange-300 dark:hover:border-orange-700 text-orange-600 hover:text-orange-400 dark:text-orange-400"
               >
                 <ChartLineUp className="mr-2 h-5 w-5 transition-transform group-hover:scale-110"/>
                 Análisis histórico
@@ -96,7 +93,7 @@ export default function Home() {
                 href="https://eduardoprofe666.github.io/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
+                className="text-orange-600 dark:text-orange-400 hover:underline font-medium"
             >
               EduardoProfe666
             </a>
@@ -109,6 +106,18 @@ export default function Home() {
             >
                 🎩
               </span>
+          </p>
+          <p className="mt-2">
+            © {new Date().getFullYear()}{" "}
+            <a
+                href="https://www.medialityc.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-orange-600 dark:text-orange-400 hover:underline font-medium"
+            >
+              Medialityc
+            </a>
+            . Todos los derechos reservados.
           </p>
         </footer>
       </div>

@@ -15,7 +15,7 @@ import { AppearanceSettings } from "./appearance-settings"
 import { NotificationSettings } from "./notification-settings"
 import { PrivacySettings } from "./privacy-settings"
 import { useConfig } from "@/hooks/use-config"
-import { Paintbrush, BellRing, Shield, RotateCcw } from "lucide-react"
+import {Paintbrush, BellRing, Shield, RotateCcw, ShieldAlert} from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { motion, AnimatePresence } from "framer-motion"
 import { Separator } from "@/components/ui/separator"
@@ -47,8 +47,8 @@ export function ConfigDialog({ open, onOpenChange }: ConfigDialogProps) {
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent className="md:max-w-[650px] sm:max-w-[500px] max-w-[380px] max-h-[95%] p-0 gap-0 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900 shadow-xl">
-                <DialogHeader className="p-6 pb-2 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-t-xl">
-                    <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-400">
+                <DialogHeader className="p-6 pb-2 rounded-t-xl">
+                    <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400">
                         Configuración
                     </DialogTitle>
                     <DialogDescription className="text-slate-600 dark:text-slate-400">
@@ -61,23 +61,23 @@ export function ConfigDialog({ open, onOpenChange }: ConfigDialogProps) {
                         <TabsList className="grid grid-cols-3 p-1 bg-slate-100 dark:bg-slate-800 rounded-lg">
                             <TabsTrigger
                                 value="appearance"
-                                className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-emerald-600 dark:data-[state=active]:text-emerald-400 rounded-md transition-all duration-200"
+                                className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-orange-600 dark:data-[state=active]:text-orange-400 rounded-md transition-all duration-200"
                             >
                                 <Paintbrush className="h-4 w-4" />
                                 <span className="hidden sm:inline">Apariencia</span>
                             </TabsTrigger>
                             <TabsTrigger
                                 value="notifications"
-                                className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-emerald-600 dark:data-[state=active]:text-emerald-400 rounded-md transition-all duration-200"
+                                className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-orange-600 dark:data-[state=active]:text-orange-400 rounded-md transition-all duration-200"
                             >
                                 <BellRing className="h-4 w-4" />
                                 <span className="hidden sm:inline">Notificaciones</span>
                             </TabsTrigger>
                             <TabsTrigger
                                 value="privacy"
-                                className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-emerald-600 dark:data-[state=active]:text-emerald-400 rounded-md transition-all duration-200"
+                                className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-orange-600 dark:data-[state=active]:text-orange-400 rounded-md transition-all duration-200"
                             >
-                                <Shield className="h-4 w-4" />
+                                <ShieldAlert className="h-4 w-4" />
                                 <span className="hidden sm:inline">Privacidad</span>
                             </TabsTrigger>
                         </TabsList>
@@ -146,7 +146,7 @@ export function ConfigDialog({ open, onOpenChange }: ConfigDialogProps) {
                     </Button>
                     <Button
                         onClick={() => onOpenChange(false)}
-                        className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white transition-all duration-200"
+                        className="flex-1 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white transition-all duration-200"
                     >
                         Guardar y cerrar
                     </Button>

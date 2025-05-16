@@ -24,7 +24,7 @@ export function ConfigButton() {
                     <Button
                         onClick={() => setIsOpen(true)}
                         size="icon"
-                        className="h-12 w-12 rounded-full shadow-lg bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white border-none"
+                        className="h-12 w-12 rounded-full shadow-lg bg-gradient-to-br from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white border-none"
                         aria-label="Configuración"
                     >
                         <Settings className="h-5 w-5" />

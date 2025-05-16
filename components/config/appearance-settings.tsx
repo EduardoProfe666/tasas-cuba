@@ -5,7 +5,7 @@ import { useConfig } from "@/hooks/use-config"
 import type { ThemeMode } from "@/types/config"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Sun, Moon, Monitor } from "lucide-react"
+import {Sun, Moon, Monitor, ShieldAlert, BellRing, Paintbrush} from "lucide-react"
 import { motion } from "framer-motion"
 
 export function AppearanceSettings() {
@@ -32,7 +32,10 @@ export function AppearanceSettings() {
     return (
         <div className="space-y-6">
             <div>
-                <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200">Apariencia</h3>
+                <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                    <Paintbrush className="h-5 w-5 text-orange-600 dark:text-orange-400"/>
+                    Apariencia
+                </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
                     Personaliza el aspecto visual de la aplicación según tus preferencias.
                 </p>
@@ -47,7 +50,7 @@ export function AppearanceSettings() {
                     <RadioGroupItem value="light" id="theme-light" className="peer sr-only" />
                     <Label
                         htmlFor="theme-light"
-                        className="flex h-full flex-col items-center justify-between rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 peer-data-[state=checked]:border-emerald-500 dark:peer-data-[state=checked]:border-emerald-500 [&:has([data-state=checked])]:border-emerald-500 dark:[&:has([data-state=checked])]:border-emerald-500 cursor-pointer transition-all duration-200"
+                        className="flex h-full flex-col items-center justify-between rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 peer-data-[state=checked]:border-orange-500 dark:peer-data-[state=checked]:border-orange-500 [&:has([data-state=checked])]:border-orange-500 dark:[&:has([data-state=checked])]:border-orange-500 cursor-pointer transition-all duration-200"
                     >
                         <div className="rounded-full bg-yellow-100 dark:bg-yellow-900/30 p-3 mb-3">
                             <Sun className="h-8 w-8 text-yellow-600 dark:text-yellow-500" />
@@ -63,7 +66,7 @@ export function AppearanceSettings() {
                     <RadioGroupItem value="dark" id="theme-dark" className="peer sr-only" />
                     <Label
                         htmlFor="theme-dark"
-                        className="flex h-full flex-col items-center justify-between rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 peer-data-[state=checked]:border-emerald-500 dark:peer-data-[state=checked]:border-emerald-500 [&:has([data-state=checked])]:border-emerald-500 dark:[&:has([data-state=checked])]:border-emerald-500 cursor-pointer transition-all duration-200"
+                        className="flex h-full flex-col items-center justify-between rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 peer-data-[state=checked]:border-orange-500 dark:peer-data-[state=checked]:border-orange-500 [&:has([data-state=checked])]:border-orange-500 dark:[&:has([data-state=checked])]:border-orange-500 cursor-pointer transition-all duration-200"
                     >
                         <div className="rounded-full bg-indigo-100 dark:bg-indigo-900/30 p-3 mb-3">
                             <Moon className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
@@ -79,7 +82,7 @@ export function AppearanceSettings() {
                     <RadioGroupItem value="system" id="theme-system" className="peer sr-only" />
                     <Label
                         htmlFor="theme-system"
-                        className="flex h-full flex-col items-center justify-between rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 peer-data-[state=checked]:border-emerald-500 dark:peer-data-[state=checked]:border-emerald-500 [&:has([data-state=checked])]:border-emerald-500 dark:[&:has([data-state=checked])]:border-emerald-500 cursor-pointer transition-all duration-200"
+                        className="flex h-full flex-col items-center justify-between rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 peer-data-[state=checked]:border-orange-500 dark:peer-data-[state=checked]:border-orange-500 [&:has([data-state=checked])]:border-orange-500 dark:[&:has([data-state=checked])]:border-orange-500 cursor-pointer transition-all duration-200"
                     >
                         <div className="rounded-full bg-emerald-100 dark:bg-emerald-900/30 p-3 mb-3">
                             <Monitor className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />

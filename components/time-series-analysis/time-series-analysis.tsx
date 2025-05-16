@@ -25,6 +25,7 @@ import {HistoricalData} from "@/types/historical-data";
 import {ExchangeRateData} from "@/types/exchange-rate";
 import {useConfig} from "@/hooks/use-config";
 import {AppConfig} from "@/types/config";
+import {BellRing, TrendingUp} from "lucide-react";
 
 const saveToLocalStorage = (key: string, data: any) => {
     try {
@@ -250,7 +251,10 @@ export function TimeSeriesAnalysis() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
             <Card className="dark:bg-slate-900 dark:border-slate-700 dark:text-slate-200 shadow-lg hover-shadow-2xl">
                 <CardHeader>
-                    <CardTitle>Análisis Histórico de Tasas de Cambio</CardTitle>
+                    <CardTitle className="flex items-center gap-2">
+                        <TrendingUp className="h-5 w-5 text-orange-600 dark:text-orange-400" />
+                        Análisis Gráfico
+                    </CardTitle>
                     <CardDescription className="dark:text-slate-400">
                         Visualiza la evolución de las tasas a lo largo del tiempo. Selecciona un rango de fechas y la moneda que
                         deseas analizar.

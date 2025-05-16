@@ -62,11 +62,11 @@ export function ChartControls({
                         className="w-[260px]"
                     >
                         <TabsList className="grid grid-cols-2 bg-slate-200 dark:bg-slate-800">
-                            <TabsTrigger value="area" className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-emerald-600 dark:data-[state=active]:text-emerald-400 rounded-md transition-all duration-200">
+                            <TabsTrigger value="area" className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-orange-600 dark:data-[state=active]:text-orange-400 rounded-md transition-all duration-200">
                                 <BarChart3 className="h-4 w-4" />
                                 Área
                             </TabsTrigger>
-                            <TabsTrigger value="line" className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-emerald-600 dark:data-[state=active]:text-emerald-400 rounded-md transition-all duration-200">
+                            <TabsTrigger value="line" className="flex items-center gap-2 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700 data-[state=active]:text-orange-600 dark:data-[state=active]:text-orange-400 rounded-md transition-all duration-200">
                                 <LineChart className="h-4 w-4" />
                                 Línea
                             </TabsTrigger>
