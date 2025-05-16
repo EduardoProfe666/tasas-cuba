@@ -90,7 +90,6 @@ export default function RootLayout({
                 <Analytics/>
                 <NotificationPermission/>
                 {children}
-                <ConfigButton/>
             </ConfigProvider>
         </ThemeProvider>
         </body>

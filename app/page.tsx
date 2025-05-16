@@ -7,8 +7,10 @@ import Link from "next/link"
 import {LineChartIcon as ChartLineUp, ExternalLink, Calculator} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import {useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {SyncModal, SyncStatus} from "@/components/sync-modal";
+import {ConfigButton} from "@/components/config/config-button";
+import {GlobalEmbedButton} from "@/components/global-embed-button";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -131,6 +133,8 @@ export default function Home() {
           status={syncStatus}
       />
       <PWAInstallPrompt/>
+      <ConfigButton/>
+      <GlobalEmbedButton/>
     </main>
   )
 }
