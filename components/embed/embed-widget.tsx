@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { format } from "date-fns"
-import { es } from "date-fns/locale"
-import { ArrowDown, ArrowUp, ExternalLink, Loader2, Minus } from "lucide-react"
-import { cn } from "@/lib/utils"
+import {useState, useEffect} from "react"
+import {format} from "date-fns"
+import {es} from "date-fns/locale"
+import {ArrowDown, ArrowUp, ExternalLink, Loader2, Minus} from "lucide-react"
+import {cn} from "@/lib/utils"
 import {ExchangeRateData, ExchangeRateResponse} from "@/types/exchange-rate";
 
 interface ExchangeRates {
@@ -105,13 +105,18 @@ export function EmbedWidget({
     }, [])
 
     const formatTime = (hours: number, minutes: number) => {
-        return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`
+        const period = hours >= 12 ? "pm" : "am";
+        const hours12 = hours % 12 === 0 ? 12 : hours % 12;
+        const minutesStr = minutes.toString().padStart(2, "0");
+        return `${hours12}:${minutesStr} ${period}`;
     }
+
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-full min-h-[100px] w-full bg-white dark:bg-slate-900 rounded-lg p-4">
-                <Loader2 className="h-6 w-6 text-orange-500 animate-spin" />
+            <div
+                className="flex items-center justify-center h-full min-h-[100px] w-full bg-white dark:bg-slate-900 rounded-lg p-4">
+                <Loader2 className="h-6 w-6 text-orange-500 animate-spin"/>
                 <span className="ml-2 text-sm text-slate-600 dark:text-slate-400">Cargando tasas...</span>
             </div>
         )
@@ -119,9 +124,10 @@ export function EmbedWidget({
 
     if (error || !currentRates || !previousRates) {
         return (
-            <div className="flex items-center justify-center h-full min-h-[100px] w-full bg-white dark:bg-slate-900 rounded-lg p-4">
+            <div
+                className="flex items-center justify-center h-full min-h-[100px] w-full bg-white dark:bg-slate-900 rounded-lg p-4">
                 <div className="text-center text-sm text-rose-600 dark:text-rose-400">
-                    No se pudieron cargar las tasas de cambio
+                    No se pudo cargar las tasas de cambio
                 </div>
             </div>
         )
@@ -137,14 +143,16 @@ export function EmbedWidget({
             )}
         >
             {showHeader && (
-                <div className="px-4 py-3 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-slate-800 dark:to-slate-800 border-b border-slate-200 dark:border-slate-800">
+                <div
+                    className="px-4 py-3 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-slate-800 dark:to-slate-800 border-b border-slate-200 dark:border-slate-800">
                     <h1 className={cn("font-medium text-amber-700 dark:text-orange-400", compact ? "text-sm" : "text-base")}>
                         {title}
                     </h1>
                     {showDate && (
                         <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                            {format(new Date(currentRates[0]?.date ?? null), "dd 'de' MMMM 'de' yyyy", { locale: es })} • Actualizado a las{" "}
-                            {formatTime(new Date(currentRates[0]?.date ?? null).getHours(), new Date(currentRates[0]?.date ?? null).getMinutes())}
+                            {format(new Date(currentRates[0]?.date ?? null), "dd 'de' MMMM 'de' yyyy", {locale: es})} •
+                            Actualizado a las{" "}
+                            {formatTime(new Date().getHours(), new Date().getMinutes())}
                         </div>
                     )}
                 </div>
@@ -174,7 +182,8 @@ export function EmbedWidget({
                                 )}
                             >
                                 <div className="flex items-center gap-2">
-                                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 text-lg">
+                                    <div
+                                        className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 text-lg">
                                         {currencyIcons[currency] || "💱"}
                                     </div>
                                     <div>
@@ -190,25 +199,32 @@ export function EmbedWidget({
                                 <div className="flex items-center gap-2">
                                     <div className="text-right">
                                         <div className="font-bold">{rate === -1 ? '---' : rate} CUP</div>
-                                        <div
-                                            className={cn(
-                                                "text-xs flex items-center justify-end gap-1",
-                                                isNeutral
-                                                    ? "text-slate-500"
-                                                    : isPositive
-                                                        ? "text-emerald-600 dark:text-emerald-400"
-                                                        : "text-rose-600 dark:text-rose-400",
-                                            )}
-                                        >
-                                            {isNeutral ? (
-                                                <Minus className="h-3 w-3" />
-                                            ) : isPositive ? (
-                                                <ArrowUp className="h-3 w-3" />
-                                            ) : (
-                                                <ArrowDown className="h-3 w-3" />
-                                            )}
-                                            <span>{rate === -1 ? '---' : Math.abs(percentChange).toFixed(2)}%</span>
-                                        </div>
+                                        {!compact && (<div
+                                                className={cn(
+                                                    "text-xs flex items-center justify-end gap-1",
+                                                    isNeutral
+                                                        ? "text-slate-500"
+                                                        : isPositive
+                                                            ? "text-rose-600 dark:text-rose-400"
+                                                            : "text-emerald-600 dark:text-emerald-400",
+                                                )}
+                                            >
+                                                {isNeutral ? (
+                                                    <Minus className="h-3 w-3"/>
+                                                ) : isPositive ? (
+                                                    <ArrowUp className="h-3 w-3"/>
+                                                ) : (
+                                                    <ArrowDown className="h-3 w-3"/>
+                                                )}
+                                                <span>
+    {rate === -1
+        ? '---' :
+        isNeutral ? ''
+        : `${isPositive ? '+' : '-'}${Math.abs(change).toFixed(2)} CUP (${Math.abs(percentChange).toFixed(2)}%)`
+    }
+  </span>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -218,7 +234,8 @@ export function EmbedWidget({
             </div>
 
             {showBranding && (
-                <div className="px-3 py-2 text-xs text-center text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                <div
+                    className="px-3 py-2 text-xs text-center text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
                     <a
                         href="https://candela.medialityc.com"
                         target="_blank"
@@ -226,7 +243,7 @@ export function EmbedWidget({
                         className="inline-flex items-center hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
                     >
                         candela.medialityc.com
-                        <ExternalLink className="ml-1 h-3 w-3" />
+                        <ExternalLink className="ml-1 h-3 w-3"/>
                     </a>
                 </div>
             )}

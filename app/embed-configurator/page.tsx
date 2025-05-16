@@ -12,7 +12,8 @@ export const metadata: Metadata = {
 
 export default function EmbedConfiguratorPage() {
     return (
-        <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+        <main
+            className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-6">
                     <Link
@@ -62,6 +63,32 @@ export default function EmbedConfiguratorPage() {
                 <EmbedConfigurator/>
             </div>
             <ConfigButton/>
+            <footer
+                className="mt-16 text-center text-sm text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-8">
+                <p>
+                    Desarrollado por{" "}
+                    <a
+                        href="https://eduardoprofe666.github.io/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-orange-600 dark:text-orange-400 hover:underline font-medium"
+                    >
+                        EduardoProfe666🎩
+                    </a>
+                </p>
+                <p className="p-4">
+                    © {new Date().getFullYear()}{" "}
+                    <a
+                        href="https://www.medialityc.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-orange-600 dark:text-orange-400 hover:underline font-medium"
+                    >
+                        Medialityc
+                    </a>
+                    . Todos los derechos reservados.
+                </p>
+            </footer>
         </main>
     )
 }

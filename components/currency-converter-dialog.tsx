@@ -122,7 +122,7 @@ export function CurrencyConverterDialog({ currency, currencyName, rate, icon }: 
                 <Button
                     variant="outline"
                     size="sm"
-                    className="mt-2 w-full gap-1 dark:bg-slate-900 dark:hover:bg-slate-700 dark:border-slate-700 text-slate-600 dark:text-slate-400"
+                    className="mt-2 w-full gap-1 bg-white dark:bg-slate-800 dark:hover:bg-slate-700 border-orange-200 dark:border-orange-800 hover:border-orange-300 dark:hover:border-orange-700 text-orange-600 hover:text-orange-400 dark:text-orange-400"
                     aria-label="Abrir conversor de moneda"
                 >
                     <Calculator className="h-4 w-4" />
