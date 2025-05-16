@@ -249,7 +249,7 @@ export function NotificationSettings() {
             <div className="space-y-4">
                 <div>
                     <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                        <BellRing className="h-5 w-5 text-emerald-600 dark:text-emerald-400"/>
+                        <BellRing className="h-5 w-5 text-orange-600 dark:text-orange-400"/>
                         Notificaciones
                     </h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -271,7 +271,7 @@ export function NotificationSettings() {
 
                 <div className="mt-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700">
                     <h4 className="text-sm font-medium text-slate-800 dark:text-slate-200 mb-2 flex items-center gap-2">
-                        <Bell className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                        <Bell className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                         Beneficios de las notificaciones
                     </h4>
                     <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-2 ml-6 list-disc">
@@ -289,7 +289,7 @@ export function NotificationSettings() {
         <div className="space-y-6">
             <div>
                 <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                    <BellRing className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                    <BellRing className="h-5 w-5 text-orange-600 dark:text-orange-400" />
                     Notificaciones
                 </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -335,7 +335,7 @@ export function NotificationSettings() {
                     id="notifications-toggle"
                     checked={notifications.enabled}
                     onCheckedChange={handleToggleNotifications}
-                    className="data-[state=checked]:bg-emerald-600"
+                    className="data-[state=checked]:bg-orange-600"
                     disabled={permissionState === "denied"}
                 />
             </div>
@@ -352,7 +352,7 @@ export function NotificationSettings() {
                             <h4 className="text-base font-medium text-slate-800 dark:text-slate-200">Monedas a seguir</h4>
                             <Badge
                                 variant="outline"
-                                className="text-xs bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
+                                className="text-xs bg-emerald-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800"
                             >
                                 {Object.values(notifications.currencies).filter((c) => c.enabled).length} seleccionadas
                             </Badge>
@@ -386,7 +386,7 @@ export function NotificationSettings() {
                                                     onCheckedChange={(checked) =>
                                                         handleCurrencyToggle(currency as keyof typeof notifications.currencies, checked)
                                                     }
-                                                    className="data-[state=checked]:bg-emerald-600"
+                                                    className="data-[state=checked]:bg-amber-600"
                                                 />
                                             </div>
 
@@ -398,7 +398,7 @@ export function NotificationSettings() {
                                                             className="text-xs text-slate-600 dark:text-slate-400"
                                                         >
                                                             Umbral de cambio:{" "}
-                                                            <span className="font-medium text-emerald-600 dark:text-emerald-400">
+                                                            <span className="font-medium text-amber-600 dark:text-orange-400">
                                 {settings.threshold}%
                               </span>
                                                         </Label>
@@ -412,7 +412,7 @@ export function NotificationSettings() {
                                                         onValueChange={(value) =>
                                                             handleThresholdChange(currency as keyof typeof notifications.currencies, value[0])
                                                         }
-                                                        className="[&>span:not(:last-child)]:bg-emerald-600"
+                                                        className="[&>span:not(:last-child)]:bg-amber-600"
                                                     />
                                                     <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                                                         Notificar cuando el cambio sea ≥ {settings.threshold}%
@@ -439,7 +439,7 @@ export function NotificationSettings() {
                                     htmlFor="notification-frequency"
                                     className="flex items-center gap-2 text-slate-800 dark:text-slate-200"
                                 >
-                                    <Clock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                                    <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                                     Frecuencia
                                 </Label>
                                 <Select
@@ -466,7 +466,7 @@ export function NotificationSettings() {
                                     htmlFor="notification-type"
                                     className="flex items-center gap-2 text-slate-800 dark:text-slate-200"
                                 >
-                                    <ArrowUpDown className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                                    <ArrowUpDown className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                                     Tipo de cambios
                                 </Label>
                                 <Select
@@ -546,7 +546,7 @@ export function NotificationSettings() {
                         <Button
                             onClick={handleTestNotification}
                             disabled={isTestingNotification || permissionState !== "granted"}
-                            className="w-full gap-2 bg-emerald-600 hover:bg-emerald-700"
+                            className="w-full gap-2 bg-amber-600 hover:bg-amber-700"
                         >
                             {isTestingNotification ? (
                                 <>
