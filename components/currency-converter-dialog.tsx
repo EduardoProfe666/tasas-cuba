@@ -76,6 +76,8 @@ export function CurrencyConverterDialog({ currency, currencyName, rate, icon }: 
         setResult(calculateResult(result, !isInverted))
     }
 
+    const numberFormatter = new Intl.NumberFormat('en-US');
+
     // Copiar resultado al portapapeles
     const handleCopy = () => {
         const toCurrency = isInverted ? currency : "CUP"
@@ -122,7 +124,7 @@ export function CurrencyConverterDialog({ currency, currencyName, rate, icon }: 
                 <Button
                     variant="outline"
                     size="sm"
-                    className="mt-2 w-full gap-1 bg-white dark:bg-slate-800 dark:hover:bg-slate-700 border-orange-200 dark:border-orange-800 hover:border-orange-300 dark:hover:border-orange-700 text-orange-600 hover:text-orange-400 dark:text-orange-400"
+                    className="mt-2 w-full gap-1 bg-white dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700"
                     aria-label="Abrir conversor de moneda"
                 >
                     <Calculator className="h-4 w-4" />
@@ -214,7 +216,7 @@ export function CurrencyConverterDialog({ currency, currencyName, rate, icon }: 
                                 </div>
                                 <div
                                     className="flex-1 h-8 flex items-center text-base font-medium text-slate-800 dark:text-slate-200 overflow-hidden">
-                                    {result}
+                                    {numberFormatter.format(result as any)}
                                 </div>
                                 <div className="ml-2 text-sm text-slate-600 dark:text-slate-400 min-w-[40px]">
                                     {isInverted ? (currency === 'ECU' ? 'EUR' : currency) : "CUP"}
