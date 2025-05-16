@@ -46,7 +46,7 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-12">
-          <h1 className="block text-3xl font-bold mb-3 text-slate-800 dark:text-slate-100">
+          <h1 className="block text-5xl font-bold mb-3 text-slate-800 dark:text-slate-100">
             🔥 <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-amber-500 dark:from-orange-400 dark:to-amber-300">Candela</span> 🔥
           </h1>
           <p className="text-center text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-4">

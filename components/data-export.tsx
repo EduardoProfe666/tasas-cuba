@@ -264,7 +264,7 @@ export function DataExport({ data1, data2, date1, date2, elementId }: DataExport
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56 dark:bg-slate-800 dark:border-slate-700">
         <DropdownMenuLabel>Formato de exportación</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="dark:bg-slate-700" />
         <DropdownMenuItem onClick={() => exportAsImage("png")} disabled={isExporting}>
           <FileImage className="mr-2 h-4 w-4" />
           <span>Imagen PNG</span>

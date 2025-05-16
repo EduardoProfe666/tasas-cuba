@@ -122,7 +122,7 @@ export function DateComparison() {
         <Card className="dark:bg-slate-900 shadow-lg hover-shadow-2xl dark:border-slate-700">
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                    <Scale className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                    <Scale className="h-5 w-5 text-orange-600 dark:text-orange-400" />
                     Comparación entre Fechas
                 </CardTitle>
                 <CardDescription>

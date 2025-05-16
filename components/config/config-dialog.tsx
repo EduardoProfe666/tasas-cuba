@@ -48,7 +48,7 @@ export function ConfigDialog({ open, onOpenChange }: ConfigDialogProps) {
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent className="md:max-w-[650px] sm:max-w-[500px] max-w-[380px] max-h-[95%] p-0 gap-0 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900 shadow-xl">
                 <DialogHeader className="p-6 pb-2 rounded-t-xl">
-                    <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-ambr-600 dark:from-orange-400 dark:to-amber-400">
+                    <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400">
                         Configuración
                     </DialogTitle>
                     <DialogDescription className="text-slate-600 dark:text-slate-400">

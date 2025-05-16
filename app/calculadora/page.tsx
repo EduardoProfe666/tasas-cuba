@@ -12,7 +12,7 @@ export default function Home() {
         <div className="mb-6">
           <Link
               href="/"
-              className="inline-flex items-center text-sm text-slate-600 hover:text-emerald-600 dark:text-slate-400 dark:hover:text-emerald-400 transition-colors"
+              className="inline-flex items-center text-sm text-slate-600 hover:text-orange-600 dark:text-slate-400 dark:hover:text-orange-400 transition-colors"
           >
             <ArrowLeft className="mr-1 h-4 w-4"/>
             Volver a inicio
@@ -20,7 +20,7 @@ export default function Home() {
         </div>
 
         <header className="text-center mb-12">
-          <h1 className="text-3xl md:text-5xl font-bold mb-3 text-slate-800 dark:text-slate-100 bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300">
+          <h1 className="text-3xl md:text-5xl font-bold mb-3 text-slate-800 dark:text-slate-100 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-amber-500 dark:from-orange-400 dark:to-amber-300">
             Calculadora Monetaria
           </h1>
           <p className="text-center text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-4">
@@ -36,17 +36,22 @@ export default function Home() {
                 href="https://eduardoprofe666.github.io/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
+                className="text-orange-600 dark:text-orange-400 hover:underline font-medium"
             >
-              EduardoProfe666
+              EduardoProfe666🎩
             </a>
-            <span
-                className="ml-1 cursor-pointer transition-transform hover:scale-125"
-                title="Sincronizar tasas"
-                style={{userSelect: "none"}}
+          </p>
+          <p className="mt-2">
+            © {new Date().getFullYear()}{" "}
+            <a
+                href="https://www.medialityc.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-orange-600 dark:text-orange-400 hover:underline font-medium"
             >
-                🎩
-              </span>
+              Medialityc
+            </a>
+            . Todos los derechos reservados.
           </p>
         </footer>
       </div>

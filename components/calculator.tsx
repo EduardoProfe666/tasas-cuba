@@ -206,10 +206,10 @@ export default function Calculator() {
                            className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">
                         {direction === "CUP_TO_OTHER" ? (
                             <>Cantidad en <span
-                                className="font-bold text-emerald-600 dark:text-emerald-400">CUP</span></>
+                                className="font-bold text-orange-600 dark:text-orange-400">CUP</span></>
                         ) : (
                             <>Cantidad en <span
-                                className="font-bold text-emerald-600 dark:text-emerald-400">{targetCurrency?.code === "ECU" ? "EUR" : targetCurrency?.code || "Moneda"}</span></>
+                                className="font-bold text-orange-600 dark:text-orange-400">{targetCurrency?.code === "ECU" ? "EUR" : targetCurrency?.code || "Moneda"}</span></>
                         )}
                     </label>
                     <input
@@ -226,7 +226,7 @@ export default function Calculator() {
                         placeholder={direction === "CUP_TO_OTHER"
                             ? "Introduce la cantidad en pesos cubanos"
                             : `Introduce la cantidad en ${targetCurrency?.name || "moneda"}`}
-                        className="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-md font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                        className="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-md font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
                     />
                 </div>
 
@@ -252,7 +252,7 @@ export default function Calculator() {
                                         const selected = currencies.find(c => c.code === code)
                                         setTargetCurrency(selected || null)
                                     }}
-                                    className="cursor-pointer w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-md font-medium text-slate-900 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                                    className="cursor-pointer w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-md font-medium text-slate-900 dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
                                 >
                                     {currencies
                                         .filter(c => c.code !== "CUP")
@@ -279,7 +279,7 @@ export default function Calculator() {
                             <button
                                 type="button"
                                 onClick={handleSwapWithRotation}
-                                className="p-2 rounded-full bg-emerald-100 dark:bg-emerald-900 hover:bg-emerald-200 dark:hover:bg-emerald-800 text-emerald-700 dark:text-emerald-300 transition flex-shrink-0"
+                                className="p-2 rounded-full bg-orange-100 dark:bg-orange-900 hover:bg-orange-200 dark:hover:bg-orange-800 text-orange-700 dark:text-orange-300 transition flex-shrink-0"
                                 aria-label="Invertir dirección"
                                 title="Invertir dirección"
                             >
@@ -328,7 +328,7 @@ export default function Calculator() {
                 >
                     {result !== null && targetCurrency && (
                         <div
-                            className="flex items-center gap-3 text-2xl md:text-3xl font-bold text-emerald-700 dark:text-emerald-300">
+                            className="flex items-center gap-3 text-2xl md:text-3xl font-bold text-amber-700 dark:text-amber-300">
                             {direction === "CUP_TO_OTHER" ? (
                                 <>
                                     {targetCurrency.icon && (
@@ -361,16 +361,6 @@ export default function Calculator() {
 
                     {rate && result != null && targetCurrency && (
                         <div className="flex flex-col items-center gap-1 mt-3">
-                            <div
-                                className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-900/40 border border-emerald-100 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 font-semibold shadow-sm">
-                                <ArrowRightLeft className="w-4 h-4"/>
-                                <span>
-                                    1 <span className="font-bold">{direction === "CUP_TO_OTHER" ? 'CUP' : (targetCurrency.code === 'ECU' ? 'EUR' : targetCurrency.code)}</span>
-                                    <span className="mx-1">=</span>
-                                    <span className="font-mono">{direction === "CUP_TO_OTHER" ? (rate.value > 0 ? (1/rate.value).toFixed(6) : 0) : rate.value}</span> <span
-                                    className="font-bold">{direction === "CUP_TO_OTHER" ? (targetCurrency.code === 'ECU' ? 'EUR' : targetCurrency.code) : 'CUP'}</span>
-                                  </span>
-                            </div>
                             <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 mt-1">
                                 <CalendarDays className="w-4 h-4"/>
                                 <span>
@@ -379,6 +369,16 @@ export default function Calculator() {
                                         className="font-mono">{format(new Date(rate.date), "dd 'de' MMMM 'de' yyyy", {locale: es})}</span>
                                     : "--"}
                               </span>
+                            </div>
+                            <div
+                                className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-900/40 border border-amber-100 dark:border-amber-800 text-amber-700 dark:text-amber-300 font-semibold shadow-sm">
+                                <ArrowRightLeft className="w-4 h-4"/>
+                                <span>
+                                    1 <span className="font-bold">{direction === "CUP_TO_OTHER" ? 'CUP' : (targetCurrency.code === 'ECU' ? 'EUR' : targetCurrency.code)}</span>
+                                    <span className="mx-1">=</span>
+                                    <span className="font-mono">{direction === "CUP_TO_OTHER" ? (rate.value > 0 ? (1/rate.value).toFixed(6) : 0) : rate.value}</span> <span
+                                    className="font-bold">{direction === "CUP_TO_OTHER" ? (targetCurrency.code === 'ECU' ? 'EUR' : targetCurrency.code) : 'CUP'}</span>
+                                  </span>
                             </div>
                         </div>
                     )}
@@ -391,7 +391,7 @@ export default function Calculator() {
                     <button
                         type="button"
                         onClick={fetchData}
-                        className="inline-flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition"
+                        className="inline-flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-orange-700 dark:text-orange-300 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition"
                         aria-label="Actualizar tasas"
                         disabled={isLoading}
                     >

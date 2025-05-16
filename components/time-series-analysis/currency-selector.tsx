@@ -35,7 +35,7 @@ export function CurrencySelector({ selectedCurrency, onSelectCurrency, currencie
                                     onClick={() => onSelectCurrency((currency?.code ?? c))}
                                     className={`flex items-center justify-center gap-2 h-auto py-3 ${
                                         selectedCurrency === (currency?.code ?? c)
-                                            ? "dark:bg-emerald-600 bg-emerald-500 dark:hover:bg-emerald-700 hover:bg-emerald-600 text-white"
+                                            ? "dark:bg-amber-600 bg-amber-500 dark:hover:bg-amber-700 hover:bg-amber-600 text-white"
                                             : "dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 dark:text-slate-300"
                                     }`}
                                 >

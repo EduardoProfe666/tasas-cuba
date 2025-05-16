@@ -100,8 +100,8 @@ export function ChartSummaryDialog({
                         Resumen de {currencies.find(x => x.code === currency)?.name || currency} ({currency === 'ECU' ? 'EUR' : currency})
                     </DialogTitle>
                     <DialogDescription className="dark:text-slate-400">
-                        Análisis del <span className="dark:text-emerald-400 text-emerald-600">{format(startDate, "dd 'de' MMMM 'de' yyyy", { locale: es })}</span> al{" "}
-                        <span className="dark:text-emerald-400 text-emerald-600">{format(endDate, "dd 'de' MMMM 'de' yyyy", {locale: es})}</span>
+                        Análisis del <span className="dark:text-orange-400 text-amber-600">{format(startDate, "dd 'de' MMMM 'de' yyyy", { locale: es })}</span> al{" "}
+                        <span className="dark:text-orange-400 text-amber-600">{format(endDate, "dd 'de' MMMM 'de' yyyy", {locale: es})}</span>
                     </DialogDescription>
                 </DialogHeader>
 
@@ -124,7 +124,7 @@ export function ChartSummaryDialog({
                             <div className="text-sm dark:text-slate-400 text-slate-600">Variación</div>
                             <div
                                 className={`text-2xl font-bold flex items-center gap-1
-                ${change > 0 ? "dark:text-rose-400 text-rose-500" : change < 0 ? "dark:text-emerald-400 text-emerald-500" : "dark:text-slate-400 text-slate-500"}`}
+                ${change > 0 ? "dark:text-rose-400 text-rose-500" : change < 0 ? "dark:text-emerald-400 text-emerald-500" : "dark:text-slate-100"}`}
                             >
                                 {change === 0 ? (
                                     <Minus className="h-5 w-5" />
