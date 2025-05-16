@@ -1,7 +1,8 @@
-import { ImageResponse } from "next/og";
+import {ImageResponse} from "next/og";
+import React from "react";
 
 export const runtime = "edge";
-export const alt = "Tasas de Cambio - Peso Cubano";
+export const alt = "Candela - Tasas de cambio CUP";
 export const size = {
     width: 1200,
     height: 630,
@@ -36,9 +37,15 @@ export default async function Image() {
                 }}
                 aria-label="Iconos de monedas y tarjeta"
             >
-                <span style={{ textShadow: "0 2px 8px rgba(0,0,0,0.30)", fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Dinero en efectivo">💵</span>
-                <span style={{ textShadow: "0 2px 8px rgba(0,0,0,0.30)", fontSize: 110, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Euro">💶</span>
-                <span style={{ textShadow: "0 2px 8px rgba(0,0,0,0.30)", fontSize: 127, lineHeight: 1, userSelect: "none" }} role="img" aria-label="Tarjeta de crédito">💳</span>
+                <span
+                    style={{textShadow: "0 2px 8px rgba(0,0,0,0.30)", fontSize: 110, lineHeight: 1, userSelect: "none"}}
+                    role="img" aria-label="Dinero en efectivo">💵</span>
+                <span
+                    style={{textShadow: "0 2px 8px rgba(0,0,0,0.30)", fontSize: 110, lineHeight: 1, userSelect: "none"}}
+                    role="img" aria-label="Euro">💶</span>
+                <span
+                    style={{textShadow: "0 2px 8px rgba(0,0,0,0.30)", fontSize: 127, lineHeight: 1, userSelect: "none"}}
+                    role="img" aria-label="Tarjeta de crédito">💳</span>
             </div>
 
             {/* TÍTULO */}
@@ -59,10 +66,26 @@ export default async function Image() {
                 <span style={{
                     fontWeight: 700,
                     fontSize: 70,
-                    color: "#e89460", // naranja claro candela
+                    color: "#ffc8aa", // naranja claro candela
                     textShadow: "0 2px 8px rgba(0,0,0,0.30)"
                 }}>
-                    🔥 Candela 🔥
+                    <div style={{display: "flex", alignItems: "center", justifyContent: "center", gap: 8}}>
+                      <img
+                          src="https://candela.medialityc.com/icons/icon.png"
+                          alt="🔥"
+                          width={72}
+                          height={72}
+                          style={{objectFit: "contain"}}
+                      />
+                      <span>Candela</span>
+                      <img
+                          src="https://candela.medialityc.com/icons/icon.png"
+                          alt="🔥"
+                          width={72}
+                          height={72}
+                          style={{objectFit: "contain"}}
+                      />
+                    </div>
                 </span>
             </h1>
 
@@ -107,7 +130,12 @@ export default async function Image() {
                 }}
                 aria-label="Autor"
             >
-                Creado por <span style={{ textShadow: "0 2px 8px rgba(0,0,0,0.30)", marginLeft: 8, color: "#ec8e49", fontWeight: 700 }}>EduardoProfe666🎩@Medialityc</span>
+                Creado por <span style={{
+                textShadow: "0 2px 8px rgba(0,0,0,0.30)",
+                marginLeft: 8,
+                color: "#ec8e49",
+                fontWeight: 700
+            }}>EduardoProfe666🎩@Medialityc</span>
             </div>
 
             {/* POWERED BY ELTOQUE */}
@@ -132,9 +160,14 @@ export default async function Image() {
                 }}
                 aria-label="Powered by elToque"
             >
-                Powered by <span style={{textShadow: "0 2px 8px rgba(0,0,0,0.30)", marginLeft: 8, color: "#ec8e49", fontWeight: 700 }}>elToque</span>
+                Powered by <span style={{
+                textShadow: "0 2px 8px rgba(0,0,0,0.30)",
+                marginLeft: 8,
+                color: "#ec8e49",
+                fontWeight: 700
+            }}>elToque</span>
             </div>
         </div>,
-        { ...size }
+        {...size}
     );
 }
