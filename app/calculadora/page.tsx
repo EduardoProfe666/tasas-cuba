@@ -4,6 +4,8 @@ import {PWAInstallPrompt} from "@/components/pwa-install-prompt"
 import Calculator from "@/components/calculator";
 import Link from "next/link";
 import {ArrowLeft} from "lucide-react";
+import {ConfigButton} from "@/components/config/config-button";
+import type React from "react";
 
 export default function Home() {
   return (
@@ -56,6 +58,7 @@ export default function Home() {
         </footer>
       </div>
       <PWAInstallPrompt/>
+      <ConfigButton/>
     </main>
   )
 }

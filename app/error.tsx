@@ -27,7 +27,7 @@ export default function Error({ error, reset }: ErrorProps) {
                 className="flex flex-col items-center w-full max-w-2xl"
             >
                 <AlertCircle className="w-16 h-16 md:w-20 md:h-20 text-red-500 mb-6 drop-shadow-lg" />
-                <h1 className="text-3xl md:text-5xl font-extrabold text-slate-800 dark:text-slate-100 mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-pink-500 dark:from-red-400 dark:to-pink-400">
+                <h1 className="text-3xl md:text-5xl font-extrabold text-slate-800 dark:text-slate-100 mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-pink-500 dark:from-red-400 dark:to-pink-400 p-3">
                     ¡Ups! Algo salió mal
                 </h1>
                 <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 mb-8 text-center max-w-xl">

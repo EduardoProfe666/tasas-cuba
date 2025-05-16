@@ -2,6 +2,8 @@ import { HistoricalAnalysis } from "@/components/historical-analysis"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import {MobileAlert} from "@/components/mobile-alert";
+import {ConfigButton} from "@/components/config/config-button";
+import type React from "react";
 
 export const metadata = {
   title: "Análisis Histórico | Tasas de Cambio - Peso Cubano",
@@ -58,6 +60,7 @@ export default function HistoricalAnalysisPage() {
           </p>
         </footer>
       </div>
+      <ConfigButton/>
     </main>
   )
 }
