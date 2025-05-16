@@ -1,11 +1,11 @@
 {
-  "name": "Tasas de Cambio - Peso Cubano",
-  "short_name": "Tasas Cuba",
+  "name": "Candela",
+  "short_name": "Candela",
   "description": "Consulta las tasas de cambio actualizadas del peso cubano (CUP) frente a USD, Euro, MLC y otras monedas.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8fafc",
-  "theme_color": "#10b981",
+  "theme_color": "#fb923c",
   "orientation": "portrait",
   "icons": [
     {
