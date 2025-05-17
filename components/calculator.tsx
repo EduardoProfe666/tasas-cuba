@@ -43,9 +43,9 @@ export default function Calculator() {
 
     // UI States
     const [amount, setAmount] = useState<number | "">("")
-    const [direction, setDirection] = useState<"CUP_TO_OTHER" | "OTHER_TO_CUP">("CUP_TO_OTHER")
+    const [direction, setDirection] = useState<"CUP_TO_OTHER" | "OTHER_TO_CUP">("OTHER_TO_CUP")
     const [targetCurrency, setTargetCurrency] = useState<CurrencyData | null>(null)
-    const [result, setResult] = useState<number | null>(null)
+    const [result, setResult] = useState<number | "">("")
     const [selectedDate, setSelectedDate] = useState<Date>(TODAY)
 
     const currencyOrder = ["USD", "ECU", "MLC", "TRX", "USDT_TRC20", "BTC"]
@@ -132,10 +132,10 @@ export default function Calculator() {
                     setResult(amount * rate.value)
                 }
             } else {
-                setResult(null)
+                setResult("")
             }
         } else {
-            setResult(null)
+            setResult("")
         }
     }, [amount, targetCurrency, exchangeRates, direction])
 
@@ -144,8 +144,10 @@ export default function Calculator() {
         setDirection(prev =>
             prev === "CUP_TO_OTHER" ? "OTHER_TO_CUP" : "CUP_TO_OTHER"
         )
-        setAmount("")
-        setResult(null)
+        const a = amount;
+        const r = result;
+        setAmount(r)
+        setResult(a)
     }
 
     const rate = targetCurrency
@@ -200,36 +202,6 @@ export default function Calculator() {
                 onSubmit={e => e.preventDefault()}
                 autoComplete="off"
             >
-                {/* Input de origen */}
-                <div>
-                    <label htmlFor="amount"
-                           className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                        {direction === "CUP_TO_OTHER" ? (
-                            <>Cantidad en <span
-                                className="font-bold text-orange-600 dark:text-orange-400">CUP</span></>
-                        ) : (
-                            <>Cantidad en <span
-                                className="font-bold text-orange-600 dark:text-orange-400">{targetCurrency?.code === "ECU" ? "EUR" : targetCurrency?.code || "Moneda"}</span></>
-                        )}
-                    </label>
-                    <input
-                        id="amount"
-                        type="number"
-                        min="0"
-                        step="any"
-                        inputMode="decimal"
-                        value={amount}
-                        onChange={e => {
-                            const val = e.target.value
-                            setAmount(val === "" ? "" : Math.max(0, Number(val)))
-                        }}
-                        placeholder={direction === "CUP_TO_OTHER"
-                            ? "Introduce la cantidad en pesos cubanos"
-                            : `Introduce la cantidad en ${targetCurrency?.name || "moneda"}`}
-                        className="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-md font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
-                    />
-                </div>
-
                 {/* Selector y botón de swap */}
                 <div className="flex items-center gap-2">
                     <div className="flex-1">
@@ -298,6 +270,35 @@ export default function Calculator() {
                     </div>
                 </div>
 
+                {/* Input de origen */}
+                <div>
+                    <label htmlFor="amount"
+                           className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                        {direction === "CUP_TO_OTHER" ? (
+                            <>Cantidad en <span
+                                className="font-bold text-orange-600 dark:text-orange-400">CUP</span></>
+                        ) : (
+                            <>Cantidad en <span
+                                className="font-bold text-orange-600 dark:text-orange-400">{targetCurrency?.code === "ECU" ? "EUR" : targetCurrency?.code || "Moneda"}</span></>
+                        )}
+                    </label>
+                    <input
+                        id="amount"
+                        type="number"
+                        min="0"
+                        step="any"
+                        inputMode="decimal"
+                        value={amount}
+                        onChange={e => {
+                            const val = e.target.value
+                            setAmount(val === "" ? "" : Math.max(0, Number(val)))
+                        }}
+                        placeholder={direction === "CUP_TO_OTHER"
+                            ? "Introduce la cantidad en Pesos Cubanos"
+                            : `Introduce la cantidad en ${targetCurrency?.name || "moneda"}`}
+                        className="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-md font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+                    />
+                </div>
 
                 {/* Selector de fecha */}
                 <div className="w-full">
@@ -320,13 +321,13 @@ export default function Calculator() {
 
                 {/* Resultado */}
                 <motion.div
-                    key={result !== null ? "result" : "noresult"}
+                    key={result !== "" ? "result" : "noresult"}
                     initial={{opacity: 0, y: 20}}
                     animate={{opacity: 1, y: 0}}
                     transition={{type: "spring", stiffness: 300, damping: 24}}
                     className="flex flex-col items-center justify-center mt-2"
                 >
-                    {result !== null && targetCurrency && (
+                    {result !== "" && targetCurrency && (
                         <div
                             className="flex items-center gap-3 text-2xl md:text-3xl font-bold text-amber-700 dark:text-amber-300">
                             {direction === "CUP_TO_OTHER" ? (
@@ -335,7 +336,7 @@ export default function Calculator() {
                                         <span className="text-3xl">{targetCurrency.icon}</span>
                                     )}
                                     <span>
-                    {result.toLocaleString(undefined, {
+                    {result.toLocaleString('en-US', {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                     })}{" "}
@@ -348,7 +349,7 @@ export default function Calculator() {
                                 <>
                                     <span className="text-3xl">🇨🇺</span>
                                     <span>
-                    {result.toLocaleString(undefined, {
+                    {result.toLocaleString('en-US', {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                     })}{" "}
@@ -359,7 +360,7 @@ export default function Calculator() {
                         </div>
                     )}
 
-                    {rate && result != null && targetCurrency && (
+                    {rate && result != "" && targetCurrency && (
                         <div className="flex flex-col items-center gap-1 mt-3">
                             <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 mt-1">
                                 <CalendarDays className="w-4 h-4"/>
