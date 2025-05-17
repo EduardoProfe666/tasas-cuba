@@ -1,38 +1,39 @@
-import { HistoricalAnalysis } from "@/components/historical-analysis"
-import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
-import {MobileAlert} from "@/components/mobile-alert";
+import {PWAInstallPrompt} from "@/components/pwa-install-prompt"
+import Calculator from "@/components/calculator";
+import Link from "next/link";
+import {ArrowLeft} from "lucide-react";
 import {ConfigButton} from "@/components/config/config-button";
 import type React from "react";
+import type {Metadata} from "next";
 
-export const metadata = {
-  title: "Candela | Análisis Histórico",
-  description: "Análisis histórico y comparativo de las tasas de cambio del peso cubano (CUP) a lo largo del tiempo.",
+export const metadata: Metadata = {
+  title: "Candela | Calculadora Monetaria Antigua",
+  description: "Convierte entre diferentes monedas incluyendo el Peso Cubano (CUP) con tasas actualizadas.",
 }
 
-export default function HistoricalAnalysisPage() {
+export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-      <MobileAlert pageKey="analisis-historico" />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-6">
           <Link
-              href="/"
+              href="/calculadora"
               className="inline-flex items-center text-sm text-slate-600 hover:text-orange-600 dark:text-slate-400 dark:hover:text-orange-400 transition-colors"
           >
             <ArrowLeft className="mr-1 h-4 w-4"/>
-            Volver a inicio
+            Volver a la calculadora actual
           </Link>
         </div>
 
         <header className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-3 text-slate-800 dark:text-slate-100 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-amber-500 dark:from-orange-400 dark:to-amber-300">
-            Análisis Histórico
+          <h1 className="text-3xl md:text-5xl font-bold mb-3 text-slate-800 dark:text-slate-100 bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-amber-500 dark:from-orange-400 dark:to-amber-300">
+            Calculadora Monetaria
           </h1>
+          <p className="text-center text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-4">
+            Convierte y calcula tus monedas al instante con precisión y facilidad.
+          </p>
         </header>
-
-        <HistoricalAnalysis/>
-
+        <Calculator/>
         <footer
             className="mt-16 text-center text-sm text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-8">
           <p>
@@ -60,6 +61,7 @@ export default function HistoricalAnalysisPage() {
           </p>
         </footer>
       </div>
+      <PWAInstallPrompt/>
       <ConfigButton/>
     </main>
   )
