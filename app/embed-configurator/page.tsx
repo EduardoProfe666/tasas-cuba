@@ -6,7 +6,7 @@ import {ConfigButton} from "@/components/config/config-button";
 import React from "react";
 
 export const metadata: Metadata = {
-    title: "Configurador de Widget | Tasas Cuba",
+    title: "Candela | Configurador de Widget",
     description: "Configura y obtén el código para integrar el widget de tasas de cambio en tu sitio web",
 }
 
